@@ -7,12 +7,13 @@ Modern application starter kit:
 * [AngularJS][2]
 * [Express][3]
 * [Grunt][4]
+* [LiveReload][5]
 
 
 Requirements
 ------------
 
-    $ npm install -g grunt express
+    $ npm install -g grunt
 
 
 Installation
@@ -23,15 +24,11 @@ Installation
     $ npm install
 
 
-Development
------------
+Usage
+-----
 
-    $ grunt server
+Start an [Express][3] server with [LiveReload][5]:
 
-Production
-----------
-
-    $ grunt
     $ grunt server
 
 
@@ -39,3 +36,4 @@ Production
 [2]: http://angularjs.org/
 [3]: http://expressjs.com/
 [4]: http://gruntjs.com/
+[5]: http://livereload.com/
