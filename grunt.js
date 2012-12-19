@@ -44,7 +44,7 @@ function init(grunt) {
       }
     },
     watch: {
-      files: ['<config:lint.files>', 'views/*'],
+      files: ['<config:lint.files>', 'public/views/*', 'views/*'],
       tasks: ['lint', 'concat', 'reload']
     },
     open: {
