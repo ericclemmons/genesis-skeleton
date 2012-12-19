@@ -36,8 +36,8 @@ Start an [Express][3] server with [LiveReload][5]:
 Customize
 ---------
 
-- `crossdomain.xml`
-- `humans.txt`
+- `public/crossdomain.xml`
+- `public/humans.txt`
 
 
 [1]: http://html5boilerplate.com/
