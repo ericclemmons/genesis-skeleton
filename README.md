@@ -14,6 +14,7 @@ Requirements
 ------------
 
     $ npm install -g grunt
+    $ npm install -g bower
 
 
 Installation
@@ -30,6 +31,13 @@ Usage
 Start an [Express][3] server with [LiveReload][5]:
 
     $ grunt server
+
+
+Customize
+---------
+
+- `crossdomain.xml`
+- `humans.txt`
 
 
 [1]: http://html5boilerplate.com/

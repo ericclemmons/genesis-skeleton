@@ -1,0 +1,9 @@
+{
+  "name": "app-starter",
+  "version": "0.0.1",
+  "dependencies": {
+    "modernizr": "~2.6.2",
+    "bootstrap": "~2.2.2",
+    "respond": "~1.2.0"
+  }
+}
