@@ -42,7 +42,7 @@ function init(grunt) {
       }
     },
     watch: {
-      files: ['<config:lint.files>', 'views/**/*.jade'],
+      files: ['<config:lint.files>', 'views/*'],
       tasks: 'default reload'
     },
     open: {
