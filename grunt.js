@@ -18,13 +18,14 @@ function init(grunt) {
       files: [
         'routes/**/*.js',
         'test/**/*.js',
-        'public/**/*.js'
+        'public/scripts/**/*.js'
       ]
     },
     concat: {
       dist: {
         src: [
           '<banner:meta.banner>',
+          'public/vendors/**/*.js',
           'public/scripts/**/*.js'
         ],
         dest: 'public/dist/<%= pkg.name %>.js'
@@ -67,6 +68,8 @@ function init(grunt) {
         browser: true
       },
       globals: {
+        angular: true,
+        console: true,
         exports: true,
         module: false
       }
@@ -78,7 +81,7 @@ function init(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint concat');
+  grunt.registerTask('default', 'lint concat min');
 
   // Express server
   grunt.registerTask('express-server', 'Start an express web server', function() {
