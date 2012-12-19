@@ -1,6 +1,16 @@
 {
   "name": "app-starter",
   "version": "0.0.1",
+  "author": {
+    "name": "Eric Clemmons",
+    "email": "eric@smarterspam"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/ericclemmons/app-starter/master/LICENSE"
+    }
+  ],
   "private": false,
   "scripts": {
     "start": "node app"

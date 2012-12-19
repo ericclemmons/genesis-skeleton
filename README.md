@@ -40,6 +40,12 @@ Customize
 - `public/humans.txt`
 
 
+License
+-------
+
+MIT
+
+
 [1]: http://html5boilerplate.com/
 [2]: http://angularjs.org/
 [3]: http://expressjs.com/
