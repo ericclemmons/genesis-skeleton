@@ -4,8 +4,6 @@ var host = 'localhost';
 var port = 8000;
 
 function init(grunt) {
-
-  // Project configuration.
   grunt.initConfig({
     pkg: '<json:package.json>',
     meta: {
@@ -17,21 +15,25 @@ function init(grunt) {
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     lint: {
-      files: ['lib/**/*.js', 'test/**/*.js']
-    },
-    qunit: {
-      files: ['test/**/*.html']
+      files: [
+        'routes/**/*.js',
+        'test/**/*.js',
+        'public/**/*.js'
+      ]
     },
     concat: {
       dist: {
-        src: ['<banner:meta.banner>', '<file_strip_banner:lib/<%= pkg.name %>.js>'],
-        dest: 'dist/<%= pkg.name %>.js'
+        src: [
+          '<banner:meta.banner>',
+          'public/scripts/**/*.js'
+        ],
+        dest: 'public/dist/<%= pkg.name %>.js'
       }
     },
     min: {
       dist: {
         src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
-        dest: 'dist/<%= pkg.name %>.min.js'
+        dest: 'public/dist/<%= pkg.name %>.min.js'
       }
     },
     reload: {
@@ -43,7 +45,7 @@ function init(grunt) {
     },
     watch: {
       files: ['<config:lint.files>', 'views/*'],
-      tasks: 'default reload'
+      tasks: ['lint', 'concat', 'reload']
     },
     open: {
       all: {
@@ -65,7 +67,8 @@ function init(grunt) {
         browser: true
       },
       globals: {
-        jQuery: true
+        exports: true,
+        module: false
       }
     },
     uglify: {},
@@ -75,7 +78,7 @@ function init(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint');
+  grunt.registerTask('default', 'lint concat');
 
   // Express server
   grunt.registerTask('express-server', 'Start an express web server', function() {
@@ -84,7 +87,7 @@ function init(grunt) {
     require('./app');
   });
 
-  grunt.registerTask('server', 'express-server reload open watch');
+  grunt.registerTask('server', 'express-server reload watch');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
 };

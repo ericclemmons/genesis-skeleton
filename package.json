@@ -5,23 +5,22 @@
     "name": "Eric Clemmons",
     "email": "eric@smarterspam"
   },
+  "homepage": "https://github.com/ericclemmons/app-starter",
   "licenses": [
     {
       "type": "MIT",
       "url": "https://raw.github.com/ericclemmons/app-starter/master/LICENSE"
     }
   ],
-  "private": false,
   "scripts": {
     "start": "node app"
   },
   "dependencies": {
     "express": "3.0.4",
-    "ejs": "*",
-    "grunt-bower": "~0.4.2"
+    "ejs": "*"
   },
   "devDependencies": {
-    "grunt-reload": "~0.2.0",
-    "grunt-open": "~0.1.0"
+    "grunt-open": "~0.1.0",
+    "grunt-reload": "~0.2.0"
   }
 }
