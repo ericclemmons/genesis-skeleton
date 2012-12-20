@@ -15,29 +15,38 @@ function init(grunt) {
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     less: {
-      development: {
-        files: {
-          'public/dist/<%= pkg.name %>.css': 'public/styles/**/*.less'
-        }
+      app: {
+        src: 'src/client/styles/**/*.less',
+        dest: 'public/dist/<%= pkg.name %>.css'
       }
     },
     concat: {
-      vendors: {
-        src: 'public/vendors/**/*.js',
-        dest: 'public/dist/vendors.js'
+      lib: {
+        src: 'public/lib/**/*.js',
+        dest: 'public/dist/lib.js'
       },
       app: {
         src: [
           '<banner:meta.banner>',
-          'public/scripts/**/*.js'
+          'src/client/**/*.js'
         ],
         dest: 'public/dist/<%= pkg.name %>.js'
       }
     },
     min: {
-      dist: {
-        src: ['<banner:meta.banner>', '<config:concat.dist.dest>'],
+      lib: {
+        src: ['<config:concat.lib.dest>'],
+        dest: 'public/dist/lib.min.js'
+      },
+      app: {
+        src: ['<banner:meta.banner>', '<config:concat.app.dest>'],
         dest: 'public/dist/<%= pkg.name %>.min.js'
+      }
+    },
+    cssmin: {
+      app: {
+        src: ['<banner:meta.banner>', '<config:less.app.dest>'],
+        dest: 'public/dist/<%= pkg.name %>.min.css'
       }
     },
     reload: {
@@ -56,45 +65,24 @@ function init(grunt) {
         url: 'http://' + host + ':' + port + '/'
       }
     },
-    jshint: {
-      options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        browser: true
-      },
-      globals: {
-        angular: true,
-        console: true,
-        exports: true,
-        module: false
-      }
-    },
-    uglify: {},
     server: {
       port: port + 1
     }
   });
 
   // Default task.
-  grunt.registerTask('default', ['less', 'concat']);
+  grunt.registerTask('default', ['less', 'concat', 'min', 'cssmin']);
 
   // Express server
   grunt.registerTask('express-server', 'Start an express web server', function() {
     process.env.PORT = grunt.config('server.port');
 
-    require('./app');
+    require('./src/server/app');
   });
 
   grunt.registerTask('server', ['default', 'express-server', 'reload', 'watch']);
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
 };

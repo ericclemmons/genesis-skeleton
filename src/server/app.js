@@ -3,15 +3,14 @@
  * Module dependencies.
  */
 
-var express = require('express')
-  , routes = require('./routes')
-  , http = require('http')
-  , path = require('path');
-
-var app = express();
+var express = require('express');
+var routes  = require('./routes');
+var http    = require('http');
+var path    = require('path');
+var app     = express();
 
 app.configure(function(){
-  app.set('package', require('./package.json'));
+  app.set('package', require('../../package.json'));
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
@@ -22,7 +21,7 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use(express.static(path.join(__dirname, '../../public')));
 });
 
 app.configure('development', function(){
