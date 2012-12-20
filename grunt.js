@@ -91,7 +91,7 @@ function init(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint less concat');
+  grunt.registerTask('default', ['lint', 'less', 'concat']);
 
   // Express server
   grunt.registerTask('express-server', 'Start an express web server', function() {
@@ -100,7 +100,7 @@ function init(grunt) {
     require('./app');
   });
 
-  grunt.registerTask('server', 'default express-server reload watch');
+  grunt.registerTask('server', ['default', 'express-server', 'reload', 'watch']);
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
