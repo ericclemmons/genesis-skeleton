@@ -21,13 +21,6 @@ function init(grunt) {
         }
       }
     },
-    lint: {
-      files: [
-        'routes/**/*.js',
-        'test/**/*.js',
-        'public/scripts/**/*.js'
-      ]
-    },
     concat: {
       vendors: {
         src: 'public/vendors/**/*.js',
@@ -55,7 +48,7 @@ function init(grunt) {
       }
     },
     watch: {
-      files: ['<config:lint.files>', 'public/**/*.less', 'public/**/*.js', 'views/*'],
+      files: ['public/**/*.less', 'public/**/*.js', 'views/*'],
       tasks: ['default', 'reload']
     },
     open: {
@@ -91,7 +84,7 @@ function init(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', ['lint', 'less', 'concat']);
+  grunt.registerTask('default', ['less', 'concat']);
 
   // Express server
   grunt.registerTask('express-server', 'Start an express web server', function() {
