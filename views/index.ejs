@@ -9,6 +9,7 @@
         <title><%= title %></title>
         <meta name="description" content="<%= description %>">
         <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.css">
     </head>
     <body ng-app="app">
         <!--[if lt IE 7]>

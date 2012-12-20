@@ -14,6 +14,13 @@ function init(grunt) {
         '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
         ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
+    less: {
+      development: {
+        files: {
+          'public/dist/<%= pkg.name %>.css': 'public/styles/**/*.less'
+        }
+      }
+    },
     lint: {
       files: [
         'routes/**/*.js',
@@ -45,8 +52,8 @@ function init(grunt) {
       }
     },
     watch: {
-      files: ['<config:lint.files>', 'public/views/*', 'views/*'],
-      tasks: ['lint', 'concat', 'reload']
+      files: ['<config:lint.files>', 'public/**/*.less', 'public/**/*.js', 'views/*'],
+      tasks: ['default', 'reload']
     },
     open: {
       all: {
@@ -81,7 +88,7 @@ function init(grunt) {
   });
 
   // Default task.
-  grunt.registerTask('default', 'lint concat min');
+  grunt.registerTask('default', 'lint less concat');
 
   // Express server
   grunt.registerTask('express-server', 'Start an express web server', function() {
@@ -90,7 +97,8 @@ function init(grunt) {
     require('./app');
   });
 
-  grunt.registerTask('server', 'express-server reload watch');
+  grunt.registerTask('server', 'default express-server reload watch');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
 };
