@@ -1,88 +1,119 @@
-module.exports = init;
+/**
+ * Constants
+ */
 
-var host = 'localhost';
-var port = 8000;
+var HTTP_PORT   = 8000;
+var HTTP_HOST   = 'localhost';
+var CLIENT_DIR  = './src/client/';
+var SERVER_DIR  = './src/server/';
+var LIB_DIR     = './public/lib/';
+var DIST_DIR    = './public/dist/';
+var ALL         = '**/*';
+var EJS         = ALL + '.ejs';
+var LESS        = ALL + '.less';
+var JS          = ALL + '.js';
 
-function init(grunt) {
-  grunt.initConfig({
-    pkg: '<json:package.json>',
-    meta: {
-      banner:
-        '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-        '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
-        '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
-    },
-    less: {
-      app: {
-        src: 'src/client/styles/**/*.less',
-        dest: 'public/dist/<%= pkg.name %>.css'
-      }
-    },
-    concat: {
-      lib: {
-        src: 'public/lib/**/*.js',
-        dest: 'public/dist/lib.js'
-      },
-      app: {
-        src: [
-          '<banner:meta.banner>',
-          'src/client/**/*.js'
-        ],
-        dest: 'public/dist/<%= pkg.name %>.js'
-      }
-    },
-    min: {
-      lib: {
-        src: ['<config:concat.lib.dest>'],
-        dest: 'public/dist/lib.min.js'
-      },
-      app: {
-        src: ['<banner:meta.banner>', '<config:concat.app.dest>'],
-        dest: 'public/dist/<%= pkg.name %>.min.js'
-      }
-    },
-    cssmin: {
-      app: {
-        src: ['<banner:meta.banner>', '<config:less.app.dest>'],
-        dest: 'public/dist/<%= pkg.name %>.min.css'
-      }
-    },
-    reload: {
-      port: port,
-      proxy: {
-        host: host,
-        port: port + 1
-      }
-    },
-    watch: {
-      files: ['public/**/*.less', 'public/**/*.js', 'views/*'],
-      tasks: ['default', 'reload']
-    },
-    open: {
-      all: {
-        url: 'http://' + host + ':' + port + '/'
-      }
-    },
-    server: {
-      port: port + 1
-    }
-  });
+module.exports = function(grunt) {
 
-  // Default task.
-  grunt.registerTask('default', ['less', 'concat', 'min', 'cssmin']);
+  var _ = grunt.utils._;
 
-  // Express server
-  grunt.registerTask('express-server', 'Start an express web server', function() {
-    process.env.PORT = grunt.config('server.port');
+  /**
+   * Dependencies
+   */
 
-    require('./src/server/app');
-  });
-
-  grunt.registerTask('server', ['default', 'express-server', 'reload', 'watch']);
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
+
+  /**
+   * Tasks
+   */
+
+  grunt.registerTask('default',         ['less', 'concat', 'min', 'cssmin']);
+  grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
+  grunt.registerTask('express-server',  'Start an express web server', function() {
+    process.env.PORT = grunt.config('server.port');
+
+    return require(SERVER_DIR + '/app');
+  });
+
+  /**
+   * Configuration
+   */
+
+  grunt.initConfig({
+
+    // Common
+    pkg       : '<json:package.json>',
+    meta      : {
+      banner  : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - '                   +
+                '<%= grunt.template.today("yyyy-mm-dd") %>\n'                                 +
+                '<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>'                       +
+                '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+                ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+    },
+    watch:    {
+      files   : [SERVER_DIR + EJS, SERVER_DIR + JS, CLIENT_DIR + LESS, CLIENT_DIR + JS],
+      tasks   : ['default', 'reload']
+    },
+
+    // Compilation
+    less:     {
+      app:    {
+        src   : CLIENT_DIR + LESS,
+        dest  : DIST_DIR + '<%= pkg.name %>.css'
+      }
+    },
+
+    // Concatenation
+    concat:   {
+      lib:    {
+        src   : LIB_DIR + JS,
+        dest  : DIST_DIR + 'lib.js'
+      },
+      app:    {
+        src   : ['<banner:meta.banner>', CLIENT_DIR + JS],
+        dest  : DIST_DIR + '<%= pkg.name %>.js'
+      }
+    },
+
+    // Minification
+    min: {
+      lib:    {
+        src   : ['<config:concat.lib.dest>'],
+        dest  : DIST_DIR + 'lib.min.js'
+      },
+      app:    {
+        src   : ['<banner:meta.banner>', '<config:concat.app.dest>'],
+        dest  : DIST_DIR + '<%= pkg.name %>.min.js'
+      }
+    },
+    cssmin:   {
+      app:    {
+        src   : ['<banner:meta.banner>', '<config:less.app.dest>'],
+        dest  : DIST_DIR + '<%= pkg.name %>.min.css'
+      }
+    },
+
+    // Live-Reload Reverse-Proxy Server
+    open:     {
+      dev:    {
+        url   : 'http://' + HTTP_HOST + ':' + HTTP_PORT + '/'
+      }
+    },
+    reload:   {
+      port    : HTTP_PORT,    // Browser-targeted port
+
+      proxy:  {
+        host  : HTTP_HOST,    // Viewing port
+        port  : HTTP_PORT + 1 // Source port
+      }
+    },
+    server: {
+      port    : HTTP_PORT + 1 // Source port
+    }
+
+  });
+
 };
