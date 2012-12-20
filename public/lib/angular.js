@@ -1,1 +1,0 @@
-../../components/angular/angular.js

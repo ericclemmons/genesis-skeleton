@@ -6,12 +6,17 @@ var HTTP_PORT   = 8000;
 var HTTP_HOST   = 'localhost';
 var CLIENT_DIR  = './src/client/';
 var SERVER_DIR  = './src/server/';
-var LIB_DIR     = './public/lib/';
 var DIST_DIR    = './public/dist/';
-var ALL         = '**/*';
-var EJS         = ALL + '.ejs';
-var LESS        = ALL + '.less';
-var JS          = ALL + '.js';
+var EJS         = '**/*.ejs';
+var LESS        = '**/*.less';
+var JS          = '**/*.js';
+
+// Paths/Patterns for dependencies
+var LIBS = [
+  './components/angular/**/*.js',
+  './components/modernizr/modernizr.js',
+  './components/respond/respond.src.js',
+];
 
 module.exports = function(grunt) {
 
@@ -69,7 +74,7 @@ module.exports = function(grunt) {
     // Concatenation
     concat:   {
       lib:    {
-        src   : LIB_DIR + JS,
+        src   : LIBS,
         dest  : DIST_DIR + 'lib.js'
       },
       app:    {
