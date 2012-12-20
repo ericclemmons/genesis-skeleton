@@ -29,10 +29,13 @@ function init(grunt) {
       ]
     },
     concat: {
-      dist: {
+      vendors: {
+        src: 'public/vendors/**/*.js',
+        dest: 'public/dist/vendors.js'
+      },
+      app: {
         src: [
           '<banner:meta.banner>',
-          'public/vendors/**/*.js',
           'public/scripts/**/*.js'
         ],
         dest: 'public/dist/<%= pkg.name %>.js'

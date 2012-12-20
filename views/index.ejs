@@ -18,6 +18,7 @@
 
         <div class="container" ng-view></div>
 
+        <script src="dist/vendors<% if ('production' == settings.env) { %>.min<% } %>.js"></script>
         <script src="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.js"></script>
 
         <script>
