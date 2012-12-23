@@ -43,17 +43,17 @@ Customize
 Deployment (with [Heroku][7])
 ------------------------
 
-1. Create the server
+1 - Create the server
 
     $ heroku create
     $ heroku config:add NODE_ENV=production
     $ heroku keys:add ~/.ssh/id_rsa.pub
 
-2. Deploy
+2 - Deploy
 
     $ git push heroku master
 
-3. Profit
+3 - Profit!
 
     $ heroku open
 
