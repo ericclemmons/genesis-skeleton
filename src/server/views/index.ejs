@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.css">
     </head>
-    <body ng-app="app">
+    <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
@@ -20,6 +20,10 @@
 
         <script src="dist/lib<% if ('production' == settings.env) { %>.min<% } %>.js"></script>
         <script src="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.js"></script>
+
+        <script>
+            angular.bootstrap(document.body, ['app']);
+        </script>
 
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
