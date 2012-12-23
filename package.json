@@ -12,6 +12,10 @@
       "url": "https://raw.github.com/ericclemmons/app-starter/master/LICENSE"
     }
   ],
+  "engines": {
+    "node": "0.8.x",
+    "npm":  "1.1.x"
+  },
   "scripts": {
     "start": "node src/server/app"
   },
