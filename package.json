@@ -14,14 +14,16 @@
   ],
   "engines": {
     "node": "0.8.x",
-    "npm":  "1.1.x"
+    "npm": "1.1.x"
   },
   "scripts": {
-    "start": "node src/server/app"
+    "start": "node src/server/app",
+    "postinstall": "./node_modules/.bin/grunt"
   },
   "dependencies": {
     "express": "3.0.4",
-    "ejs": "*"
+    "ejs": "*",
+    "grunt": "~0.3.17"
   },
   "devDependencies": {
     "grunt-contrib-less": "~0.3.2",
