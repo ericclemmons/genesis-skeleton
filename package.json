@@ -18,9 +18,10 @@
   },
   "scripts": {
     "start": "node src/server/app",
-    "postinstall": "./node_modules/.bin/grunt"
+    "install": "bower install && grunt"
   },
   "dependencies": {
+    "bower": "~0.6.8",
     "express": "3.0.4",
     "ejs": "*",
     "grunt": "~0.3.17",
