@@ -37,8 +37,8 @@ Start an [Express][3] server with [LiveReload][5]:
 Customize
 ---------
 
-- `public/crossdomain.xml`
-- `public/humans.txt`
+- `src/client/crossdomain.xml`
+- `src/client/humans.txt`
 
 
 Deployment (with [Heroku][7])

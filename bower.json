@@ -4,6 +4,7 @@
   "dependencies": {
     "modernizr": "~2.6.2",
     "bootstrap": "~2.2.2",
-    "respond": "~1.2.0"
+    "respond": "~1.2.0",
+    "github-fork-ribbon-css": "git://github.com/simonwhitaker/github-fork-ribbon-css.git"
   }
 }

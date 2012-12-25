@@ -5,11 +5,11 @@
 var HTTP_PORT   = 8000;
 var HTTP_HOST   = 'localhost';
 var CLIENT_DIR  = './src/client/';
+var DIST_DIR    = './src/client/dist/';
 var SERVER_DIR  = './src/server/';
-var DIST_DIR    = './public/dist/';
-var EJS         = '**/*.ejs';
-var LESS        = '**/*.less';
-var JS          = '**/*.js';
+var EJS         = 'views/**/*.ejs';
+var LESS        = 'styles/**/*.less';
+var JS          = 'scripts/**/*.js';
 
 // Paths/Patterns for dependencies
 var LIBS = [
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     // Compilation
     less:     {
       app:    {
-        src   : CLIENT_DIR + LESS,
+        src   : CLIENT_DIR + 'styles/<%= pkg.name %>.less',
         dest  : DIST_DIR + '<%= pkg.name %>.css'
       }
     },
