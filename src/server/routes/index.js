@@ -4,17 +4,9 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', {
-    title: 'App Starter',
-    author: 'Eric Clemmons',
-    description: 'Modern application starter - H5BP + Angular + Express + Grunt'
-  });
+  res.render('index');
 };
 
 exports.view = function(req, res){
-  res.render(req.params[0], {
-    title: 'App Starter',
-    author: 'Eric Clemmons',
-    description: 'Modern application starter - H5BP + Angular + Express + Grunt'
-  });
+  res.render(req.params[0]);
 };

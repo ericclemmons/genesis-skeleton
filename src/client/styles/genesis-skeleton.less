@@ -1,0 +1,90 @@
+// Bloat-city, but hey, you'll fit in with thousands of other sites!
+@import "../../../components/bootstrap/less/bootstrap.less";
+@import "../../../components/bootstrap/less/responsive.less";
+
+@fontMultiplier: 2;
+
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Wire One', sans-serif;
+
+}
+
+em {
+  font-style: normal;
+  color: @orange;
+}
+
+h1,
+h2,
+h3 { line-height: @baseLineHeight * 2 * @fontMultiplier; }
+
+h1 { font-size: @baseFontSize * 2.75 * @fontMultiplier; } // ~38px
+h2 { font-size: @baseFontSize * 2.25 * @fontMultiplier; } // ~32px
+h3 { font-size: @baseFontSize * 1.75 * @fontMultiplier; } // ~24px
+h4 { font-size: @baseFontSize * 1.25 * @fontMultiplier; } // ~18px
+h5 { font-size: @baseFontSize * @fontMultiplier; }
+h6 { font-size: @baseFontSize * 0.85 * @fontMultiplier; } // ~12px
+
+h1 small { font-size: @baseFontSize * 1.75; } // ~24px
+h2 small { font-size: @baseFontSize * 1.25; } // ~18px
+h3 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
+h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
+
+
+.masthead h3 {
+  line-height: @baseFontSize * @fontMultiplier;
+}
+
+.container-narrow {
+  margin: 0 auto;
+  max-width: 700px;
+
+  hr {
+    margin: 30px 0;
+  }
+}
+
+.jumbotron {
+  margin: 60px 0;
+  text-align: center;
+
+  h1 {
+    font-size: @baseFontSize * 8;
+    line-height: 1;
+  }
+
+  .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+  }
+}
+
+.marketing {
+  margin: 60px 0;
+
+  p + h4 {
+  margin-top: 28px;
+  }
+}
+
+#quick-start ol {
+  counter-reset: item;
+  list-style-type: none;
+  margin-left: 0;
+
+  li:before {
+    content: counter(item, decimal);
+    counter-increment: item;
+    font-size: @baseFontSize;
+    margin-right: @baseLineHeight / 2;
+  }
+
+  li {
+    margin-bottom: @baseLineHeight / 2;
+  }
+}

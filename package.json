@@ -1,15 +1,17 @@
 {
-  "name": "app-starter",
+  "title": "Genesis Skeleton",
+  "name": "genesis-skeleton",
+  "description": "Modern application skeleton - HTML5 Boilerplate + Angular + Express + Grunt + LiveReload + Bootstrap + Bower",
   "version": "0.0.1",
   "author": {
     "name": "Eric Clemmons",
     "email": "eric@smarterspam"
   },
-  "homepage": "https://github.com/ericclemmons/app-starter",
+  "homepage": "https://github.com/ericclemmons/genesis-skeleton",
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://raw.github.com/ericclemmons/app-starter/master/LICENSE"
+      "url": "https://raw.github.com/ericclemmons/genesis-skeleton/master/LICENSE"
     }
   ],
   "engines": {

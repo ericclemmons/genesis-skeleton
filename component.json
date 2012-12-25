@@ -1,10 +1,9 @@
 {
-  "name": "app-starter",
+  "name": "genesis-skeleton",
   "version": "0.0.1",
   "dependencies": {
     "modernizr": "~2.6.2",
     "bootstrap": "~2.2.2",
-    "respond": "~1.2.0",
-    "angular": "latest"
+    "respond": "~1.2.0"
   }
 }

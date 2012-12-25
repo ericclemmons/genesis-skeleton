@@ -5,22 +5,32 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title><%= title %></title>
-        <meta name="description" content="<%= description %>">
-        <meta name="viewport" content="width=device-width">
+        <title><%= settings.package.title %></title>
+
+        <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1">
+        <meta name="viewport"               content="width=device-width">
+        <meta name="description"            content="<%= settings.package.description %>">
+        <meta name="author"                 content="<%= settings.package.author.name %>">
+
         <link rel="stylesheet" href="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.css">
+        <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="container" ng-view></div>
+        <div class="container-narrow" ng-view></div>
 
+        <!-- AngularJS CDN -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+
+        <!-- App Components -->
         <script src="dist/lib<% if ('production' == settings.env) { %>.min<% } %>.js"></script>
-        <script src="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.js"></script>
 
+        <!-- App -->
+        <script src="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.js"></script>
         <script>
             angular.bootstrap(document.body, ['app']);
         </script>

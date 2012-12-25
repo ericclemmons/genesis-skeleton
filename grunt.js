@@ -13,7 +13,6 @@ var JS          = '**/*.js';
 
 // Paths/Patterns for dependencies
 var LIBS = [
-  './components/angular/**/*.js',
   './components/modernizr/modernizr.js',
   './components/respond/respond.src.js',
 ];

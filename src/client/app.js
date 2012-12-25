@@ -1,5 +1,7 @@
 angular
-  .module('app', [])
+  .module('app', [
+    'ngResource'
+  ])
   .config(['$routeProvider', function($router) {
     $router.when('/', {
       controller: 'HomeController',

@@ -1,7 +1,7 @@
-App Starter
-===========
+Genesis Skeleton
+================
 
-Modern application starter kit:
+Modern application skeleton:
 
 * [HTML5 Boilerplate][1]
 * [AngularJS][2]
@@ -9,6 +9,7 @@ Modern application starter kit:
 * [Grunt][4]
 * [LiveReload][5]
 * [Bootstrap][6]
+* [Bower][8]
 
 
 Requirements
@@ -20,8 +21,8 @@ Requirements
 Installation
 ------------
 
-    $ git clone git@github.com:ericclemmons/app-starter.git
-    $ cd app-starter
+    $ git clone git@github.com:ericclemmons/genesis-skeleton.git my-project
+    $ cd my-project
     $ npm install --dev
 
 
@@ -71,3 +72,4 @@ MIT
 [5]: http://livereload.com/
 [6]: http://twitter.github.com/bootstrap/
 [7]: https://toolbelt.heroku.com/
+[8]: http://twitter.github.com/bower/

@@ -1,9 +1,129 @@
-<div class="hero-unit">
-    <h1><%= title %></h1>
+<div class="masthead">
+  <ul class="nav nav-pills pull-right">
+    <li class="active"><a>Home</a></li>
+    <li><a>Get Started</a></li>
+    <li><a>Technology</a></li>
+  </ul>
 
-    Well, {{ message }} there!
-
-    <p><%= description %></p>
+  <h3 class="muted">
+    <%= settings.package.title %>
+  </h3>
 </div>
 
+<hr />
+
+<div class="jumbotron">
+  <h1>Zero to Live in <em>minutes</em>.</h1>
+
+  <p class="muted">
+    Hit the ground running with a working, deployable site.
+  </p>
+
+  <a href="#get-started" class="btn btn-primary">Get Started</a>
+</div>
+
+<hr />
+
+<div id="get-started">
+  <h3>Get Started in <em>5 Easy Steps</em></h3>
+
+  <ol>
+    <li>
+      <a href="https://github.com/ericclemmons/genesis-skeleton/archive/master.zip" class="btn btn-small"><strong>Download</strong></a>
+      or
+      <code>git clone git://github.com/ericclemmons/genesis-skeleton.git</code>
+    </li>
+    <li>
+      <strong>Install</strong> dependencies: <code>npm install --dev</code>
+    </li>
+    <li>
+      <strong>Preview</strong> your changes <em>live</em>: <code>grunt server</code>
+    </li>
+    <li>
+      <strong>Create</strong> a Heroku server: <code>heroku create</code>
+    </li>
+    <li>
+      <strong>Launch</strong> your app! <code>git push heroku master</code>
+    </li>
+  </ol>
+</div>
+
+<hr />
+
+<div id="technology">
+  <h3>Technology</h3>
+
+  <div class="row-fluid">
+    <div class="span2">
+      <h4 class="muted pull-right">Server</h4>
+    </div>
+    <div class="span10">
+      <div class="row-fluid">
+        <div class="span6">
+          <h4><a href="http://expressjs.com/">Express</a></h4>
+          <p>Powered by the de-facto node application framework with a sensible folder structure.</p>
+        </div>
+        <div class="span6">
+          <h4><a href="https://toolbelt.heroku.com/">Heroku</a> <small>Optional</small></h4>
+          <p>See your app live in minutes with a simple <code>git push</code>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span2">
+      <h4 class="muted pull-right">Browser</h4>
+    </div>
+    <div class="span10">
+      <div class="row-fluid">
+        <div class="span6">
+          <h4><a href="http://html5boilerplate.com/">HTML5 Boilerplate</a></h4>
+          <p>
+            Lean, mobile-friendly HTML template with Google Analytics,
+            <a href="http://modernizr.com/" title="Modernizr">Modernizr</a>
+            and <a href="https://github.com/scottjehl/Respond" title="Respond.js">Respond.js</a>
+          </p>
+        </div>
+        <div class="span6">
+          <h4><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> <small>Optional</small></h4>
+          <p>Use as much or as little as you'd like to kickstart your app's design.</p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <h4><a href="http://angularjs.org/">AngularJS</a></h4>
+          <p>Enhance HTML with data-binding, new functionality, and a service-oriented MVC architecture.</p>
+        </div>
+        <div class="span6">
+          <h4><a href="http://livereload.com/">LiveReload</a></h4>
+          <p>See your changes instantly upon save.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+    <div class="span2">
+      <h4 class="muted pull-right">Tooling</h4>
+    </div>
+    <div class="span5">
+      <h4><a href="http://gruntjs.com/">Grunt</a></h4>
+      <p>Serve, watch, reload, &amp; compile your app's resources by running <code>grunt server</code>.</p>
+    </div>
+    <div class="span5">
+      <h4><a href="http://twitter.github.com/bower/">Bower</a> <small>Optional</small></h4>
+      <p>Simplify management of browser dependencies.  Compiled &amp; minified.</p>
+    </div>
+  </div>
+
+</div>
+
+<hr />
+
+<footer>
+  <p class="muted pull-right">
+    &copy; <%= new Date().getFullYear() %> <%= settings.package.title %>
+  </p>
+</footer>
 
