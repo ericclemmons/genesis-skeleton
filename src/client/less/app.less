@@ -1,17 +1,60 @@
-// Bloat-city, but hey, you'll fit in with thousands of other sites!
-@import "../components/bootstrap/less/bootstrap.less";
-@import "../components/bootstrap/less/responsive.less";
+// Vendor styles
+@import "lib.less";
+
+// Depencies
+@import "../lib/bootstrap/less/variables.less";
+
+.github-fork-ribbon-wrapper {
+  pointer-events:none;
+}
 
 @fontMultiplier: 2;
 
-body {
-  padding-top: 20px;
-  padding-bottom: 40px;
+#app {
+  background: @gray url("../img/background.jpg") no-repeat top center fixed;
+  background-size: contain;
+
+  .wrapper {
+    background: transparent url("../img/overlay-dot.png") fixed;
+  }
+}
+
+#about h3 {
+  display: none;
+}
+
+header {
+  padding: @baseLineHeight 0;
+
+  a:hover {
+    color: lighten(@linkColor, 66%);
+  }
+}
+
+section {
+  background: @white;
+  padding: @baseLineHeight 0;
+  border-bottom: 1px solid @grayLighter;
+}
+
+footer {
+  box-shadow: 0 (@baseFontSize / 3) (@baseFontSize) rgba(0, 0, 0, 0.5) inset;
+  padding: @baseLineHeight 0;
+
+  p {
+    text-align: center;
+    margin: 0;
+    color: @grayLighter;
+  }
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Wire One', sans-serif;
+  margin: 0;
+}
 
+h3, h4 {
+  margin-bottom: @baseLineHeight;
 }
 
 em {
@@ -50,11 +93,13 @@ h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
 }
 
 .jumbotron {
-  margin: 60px 0;
   text-align: center;
 
   h1 {
+    margin: @baseLineHeight * 3 0 @baseLineHeight;
     font-size: @baseFontSize * 8;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 1);
+    color: @white;
     line-height: 1;
   }
 
@@ -88,3 +133,25 @@ h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
     margin-bottom: @baseLineHeight / 2;
   }
 }
+
+
+#technology .row-fluid {
+  margin-bottom: @baseLineHeight / 2;
+}
+
+
+.nav-pills > li > a {
+  .border-radius(0);
+
+  &:hover {
+    background-color: transparent;
+    border-bottom: 3px solid @linkColor;
+  }
+}
+
+.nav-pills > .active > a,
+.nav-pills > .active > a:hover {
+  background: transparent;
+  border-bottom: 3px solid @orange;
+}
+

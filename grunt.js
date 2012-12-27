@@ -8,13 +8,13 @@ var CLIENT_DIR  = './src/client/';
 var DIST_DIR    = './src/client/dist/';
 var SERVER_DIR  = './src/server/';
 var EJS         = 'views/**/*.ejs';
-var LESS        = 'styles/**/*.less';
-var JS          = 'scripts/**/*.js';
+var LESS        = 'less/**/*.less';
+var JS          = 'js/**/*.js';
 
 // Paths/Patterns for dependencies
 var LIBS = [
-  './components/modernizr/modernizr.js',
-  './components/respond/respond.src.js',
+  CLIENT_DIR + 'lib/angular-1.0.3/angular.js',
+  CLIENT_DIR + 'lib/angular-1.0.3/angular-resource.js',
 ];
 
 module.exports = function(grunt) {
@@ -65,7 +65,7 @@ module.exports = function(grunt) {
     // Compilation
     less:     {
       app:    {
-        src   : CLIENT_DIR + 'styles/<%= pkg.name %>.less',
+        src   : CLIENT_DIR + 'less/app.less',
         dest  : DIST_DIR + '<%= pkg.name %>.css'
       }
     },

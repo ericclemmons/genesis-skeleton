@@ -1,4 +1,6 @@
+.DS_STORE
 components
 dist
+lib
 node_modules
 npm-debug.log

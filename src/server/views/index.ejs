@@ -20,11 +20,9 @@
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
 
-        <div class="container-narrow" ng-view></div>
-
-        <!-- AngularJS CDN -->
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+        <div id="app">
+            <div class="wrapper" ng-view></div>
+        </div>
 
         <!-- App Components -->
         <script src="dist/lib<% if ('production' == settings.env) { %>.min<% } %>.js"></script>
