@@ -69,8 +69,7 @@ module.exports = function(grunt) {
       all:      {
         files   : ['<%= dirs.server + files.views %>'
                   ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.client + files.js %>'
-                  ,'<%= dirs.client + files.less %>'],
+                  ,'<%= dirs.web %>'],
         tasks   : ['default', 'reload'],
         options : { interrupt: true }
       }
