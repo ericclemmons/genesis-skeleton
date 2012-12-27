@@ -21,7 +21,7 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, '../client')));
+  app.use(express.static(path.join(__dirname, '../../public')));
 });
 
 app.configure('development', function(){

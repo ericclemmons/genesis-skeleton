@@ -15,7 +15,7 @@ Modern application skeleton:
 Requirements
 ------------
 
-    $ npm install -g grunt
+    $ npm install -g grunt-cli
 
 
 Installation

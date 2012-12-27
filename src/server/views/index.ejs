@@ -12,7 +12,7 @@
         <meta name="description"            content="<%= settings.package.description %>">
         <meta name="author"                 content="<%= settings.package.author.name %>">
 
-        <link rel="stylesheet" href="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.css">
+        <link rel="stylesheet" href="build/css/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.css?v=<%= settings.package.version %>">
         <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -24,11 +24,7 @@
             <div class="wrapper" ng-view></div>
         </div>
 
-        <!-- App Components -->
-        <script src="dist/lib<% if ('production' == settings.env) { %>.min<% } %>.js"></script>
-
-        <!-- App -->
-        <script src="dist/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.js"></script>
+        <script src="build/js/<%= settings.package.name %><% if ('production' == settings.env) { %>.min<% } %>.js?v=<%= settings.package.version %>"></script>
         <script>
             angular.bootstrap(document.body, ['app']);
         </script>

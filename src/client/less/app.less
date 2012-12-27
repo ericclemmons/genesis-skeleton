@@ -1,8 +1,46 @@
-// Vendor styles
-@import "lib.less";
+/**
+ * Bootstrap
+ */
 
-// Depencies
-@import "../lib/bootstrap/less/variables.less";
+// CSS Reset
+@import "../../../components/bootstrap/less/reset.less";
+
+// Core variables and mixins
+@import "../../../components/bootstrap/less/variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "../../../components/bootstrap/less/mixins.less";
+
+// Grid system and page structure
+@import "../../../components/bootstrap/less/scaffolding.less";
+@import "../../../components/bootstrap/less/grid.less";
+@import "../../../components/bootstrap/less/layouts.less";
+
+// Base CSS
+@import "../../../components/bootstrap/less/type.less";
+@import "../../../components/bootstrap/less/code.less";
+
+// Components: common
+@import "../../../components/bootstrap/less/sprites.less";
+
+// Components: Buttons & Alerts
+@import "../../../components/bootstrap/less/buttons.less";
+
+// Components: Nav
+@import "../../../components/bootstrap/less/navs.less";
+
+// Utility classes
+@import "../../../components/bootstrap/less/utilities.less"; // Has to be last to override when necessary
+
+// Responsive
+@import "../../../components/bootstrap/less/responsive.less";
+
+/**
+ * Github ribbon
+ */
+
+@import "../../../components/github-fork-ribbon-css/gh-fork-ribbon.css";
+
+// Dependencies
+@import "../../../components/bootstrap/less/variables.less";
 
 .github-fork-ribbon-wrapper {
   pointer-events: visiblePainted;

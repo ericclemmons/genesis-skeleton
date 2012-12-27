@@ -26,12 +26,20 @@
     "bower": "~0.6.8",
     "express": "3.0.4",
     "ejs": "*",
-    "grunt": "~0.3.17",
+    "grunt": "~0.4.0",
     "grunt-contrib-less": "~0.3.2",
-    "grunt-css": "~0.3.2"
+    "grunt-css": "~0.5.1",
+    "grunt-smushit": "~0.3.8",
+    "grunt-contrib-uglify": "~0.1.0"
   },
   "devDependencies": {
     "grunt-open": "~0.1.0",
-    "grunt-reload": "~0.2.0"
+    "grunt-reload": "~0.2.0",
+    "grunt-contrib-concat": "~0.1.1",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-watch": "~0.1.4",
+    "grunt-contrib-imagemin": "~0.1.0",
+    "grunt-contrib-copy": "~0.3.2",
+    "grunt-contrib-clean": "~0.4.0a"
   }
 }
