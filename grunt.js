@@ -1,37 +1,6 @@
 module.exports = function(grunt) {
 
   /**
-   * Dependencies
-   */
-
-  grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-css');
-  grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-reload');
-  grunt.loadNpmTasks('grunt-smushit');
-
-  /**
-   * Tasks
-   */
-
-  grunt.registerTask('default',         ['less', 'concat', 'copy']);
-  grunt.registerTask('build',           ['clean','default', 'minify']);
-  grunt.registerTask('minify',          ['cssmin', 'uglify', 'smushit'])
-  grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
-
-  grunt.registerTask('express-server',  'Start an express web server', function() {
-    process.env.PORT = grunt.config.get('server.port');
-
-    return require(grunt.config.get('dirs.server') + '/app');
-  });
-
-  /**
    * Configuration
    */
 
@@ -62,14 +31,13 @@ module.exports = function(grunt) {
                   '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
                   ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
-    clean:      {
-      build:    '<%= dirs.build %>'
-    },
+    clean:      ['<%= dirs.build %>'],
     watch:      {
       all:      {
         files   : ['<%= dirs.server + files.views %>'
                   ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.web %>'],
+                  ,'<%= dirs.client + files.js %>'
+                  ,'<%= dirs.client + files.less %>'],
         tasks   : ['default', 'reload'],
         options : { interrupt: true }
       }
@@ -100,11 +68,9 @@ module.exports = function(grunt) {
       }
     },
     concat:     {
-      options:  {
-        banner  : '<%= meta.banner %>'
-      },
       all:      {
-        src     : ['<%= dirs.lib %>/angular-1.0.3/angular.js'
+        src     : ['<banner:meta.banner>'
+                  ,'<%= dirs.lib %>/angular-1.0.3/angular.js'
                   ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'
                   ,'<%= dirs.client + files.js %>'],
         dest    : '<%= dirs.build %>/js/<%= pkg.name %>.js'
@@ -113,11 +79,8 @@ module.exports = function(grunt) {
 
     // Minification
     cssmin:     {
-      options:  {
-        banner  : '<%= meta.banner %>',
-      },
       all:      {
-        src     : '<%= less.app.dest %>',
+        src     : ['<banner:meta.banner>', '<%= less.app.dest %>'],
         dest    : '<%= dirs.build %>/css/<%= pkg.name %>.min.css'
       }
     },
@@ -126,12 +89,9 @@ module.exports = function(grunt) {
         src     : '<%= dirs.build %>/img'
       }
     },
-    uglify:     {
-      options:  {
-        banner  : '<%= meta.banner %>'
-      },
+    min:     {
       app:      {
-        src     : ['<%= concat.all.dest %>'],
+        src     : ['<banner:meta.banner>', '<%= concat.all.dest %>'],
         dest    : '<%= dirs.build %>/js/<%= pkg.name %>.min.js'
       }
     },
@@ -154,6 +114,33 @@ module.exports = function(grunt) {
       port      : 8001          // Source port
     }
 
+  });
+
+  /**
+   * Dependencies
+   */
+
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-css');
+  grunt.loadNpmTasks('grunt-open');
+  grunt.loadNpmTasks('grunt-reload');
+  grunt.loadNpmTasks('grunt-smushit');
+
+  /**
+   * Tasks
+   */
+
+  grunt.registerTask('default',         ['less', 'concat', 'copy']);
+  grunt.registerTask('build',           ['clean','default', 'minify']);
+  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit'])
+  grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
+
+  grunt.registerTask('express-server',  'Start an express web server', function() {
+    process.env.PORT = grunt.config.get('server.port');
+
+    return require(grunt.config.get('dirs.server') + '/app');
   });
 
 };
