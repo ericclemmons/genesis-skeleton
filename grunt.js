@@ -72,6 +72,7 @@ module.exports = function(grunt) {
         src     : ['<banner:meta.banner>'
                   ,'<%= dirs.lib %>/angular-1.0.3/angular.js'
                   ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'
+                  ,'<%= dirs.client %>/js/app.js'
                   ,'<%= dirs.client + files.js %>'],
         dest    : '<%= dirs.build %>/js/<%= pkg.name %>.js'
       }
