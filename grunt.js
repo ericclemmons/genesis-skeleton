@@ -47,8 +47,8 @@ module.exports = function(grunt) {
     less:       {
       app:      {
         src     : ['<%= dirs.lib %>/github-fork-ribbon-css/gh-fork-ribbon.css'
-                  ,'<%= dirs.client + files.less %>'],
-        dest    : '<%= dirs.build %>css/<%= pkg.name %>.css'
+                  ,'<%= dirs.client %>/less/app.less'],
+        dest    : '<%= dirs.build %>/css/<%= pkg.name %>.css'
       }
     },
 
