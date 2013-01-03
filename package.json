@@ -15,26 +15,23 @@
     }
   ],
   "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
+    "node": ">=0.8.0"
   },
   "scripts": {
     "start": "node src/server/app",
     "install": "bower install && ./node_modules/.bin/grunt build"
   },
   "dependencies": {
-    "bower": "~0.6.8",
-    "express": "3.0.4",
+    "bower": "0.6.8",
     "ejs": "*",
-    "grunt": "~0.3.17",
-    "grunt-contrib-copy": "~0.3.2",
-    "grunt-contrib-less": "~0.3.2",
-    "grunt-contrib-clean": "~0.3.0",
-    "grunt-css": "~0.3.2",
-    "grunt-smushit": "~0.3.8"
-  },
-  "devDependencies": {
-    "grunt-open": "~0.1.0",
-    "grunt-reload": "~0.2.0"
+    "express": "3.0.5",
+    "grunt": "0.3.17",
+    "grunt-css": "0.3.2",
+    "grunt-contrib-copy": "0.3.2",
+    "grunt-contrib-less": "0.3.2",
+    "grunt-contrib-clean": "0.3.0",
+    "grunt-open": "0.1.0",
+    "grunt-reload": "0.2.0",
+    "grunt-smushit": "0.3.8"
   }
 }

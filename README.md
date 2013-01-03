@@ -23,7 +23,7 @@ Installation
 
     $ git clone git@github.com:ericclemmons/genesis-skeleton.git my-project
     $ cd my-project
-    $ npm install --dev
+    $ npm install
 
 
 Usage
