@@ -7,6 +7,7 @@ var express = require('express');
 var routes  = require('./routes');
 var http    = require('http');
 var path    = require('path');
+var gzippo  = require('gzippo');
 var app     = express();
 
 app.configure(function(){
@@ -21,7 +22,8 @@ app.configure(function(){
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
   app.use(app.router);
-  app.use(express.static(path.join(__dirname, '../../public')));
+  app.use(gzippo.staticGzip(path.join(__dirname, '../../public')));
+  app.use(gzippo.compress());
 });
 
 app.configure('development', function(){
