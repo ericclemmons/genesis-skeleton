@@ -25,29 +25,34 @@ module.exports = function(grunt) {
     // Common
     pkg         : grunt.file.readJSON('package.json'),
     meta        : {
-      banner    : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - '                   +
-                  '<%= grunt.template.today("yyyy-mm-dd") %>\\n'                                 +
-                  '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>'                       +
+      banner    : '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+                  '<%= grunt.template.today("yyyy-mm-dd") %>\\n' +
+                  '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
                   '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
                   ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
     clean:      ['<%= dirs.build %>'],
     watch:      {
       all:      {
-        files   : ['<%= dirs.server + files.views %>'
-                  ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.client + files.js %>'
-                  ,'<%= dirs.client + files.less %>'],
-        tasks   : ['default', 'reload'],
+        files   : [ '<%= dirs.server + "**/*" %>',
+                    '<%= dirs.client + "**/*" %>'],
+        tasks   : ['default', 'express-server', 'reload'],
         options : { interrupt: true }
       }
+    },
+
+    // Code validation
+    lint:       {
+      files     : [ 'grunt.js',
+                    '<%= dirs.server + "**/*.js" %>',
+                    '<%= dirs.client + "**/*.js" %>']
     },
 
     // Compilation
     less:       {
       app:      {
-        src     : ['<%= dirs.lib %>/github-fork-ribbon-css/gh-fork-ribbon.css'
-                  ,'<%= dirs.client %>/less/app.less'],
+        src     : [ '<%= dirs.lib %>/github-fork-ribbon-css/gh-fork-ribbon.css',
+                    '<%= dirs.client %>/less/app.less'],
         dest    : '<%= dirs.build %>/css/<%= pkg.name %>.css'
       }
     },
@@ -69,11 +74,11 @@ module.exports = function(grunt) {
     },
     concat:     {
       all:      {
-        src     : ['<banner:meta.banner>'
-                  ,'<%= dirs.lib %>/angular-1.0.3/angular.js'
-                  ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'
-                  ,'<%= dirs.client %>/js/app.js'
-                  ,'<%= dirs.client + files.js %>'],
+        src     : [ '<banner:meta.banner>',
+                    '<%= dirs.lib %>/angular-1.0.3/angular.js',
+                    '<%= dirs.lib %>/angular-1.0.3/angular-resource.js',
+                    '<%= dirs.client %>/js/app.js',
+                    '<%= dirs.client + files.js %>'],
         dest    : '<%= dirs.build %>/js/<%= pkg.name %>.js'
       }
     },
@@ -133,9 +138,9 @@ module.exports = function(grunt) {
    * Tasks
    */
 
-  grunt.registerTask('default',         ['less', 'concat', 'copy']);
+  grunt.registerTask('default',         ['lint', 'less', 'concat', 'copy']);
   grunt.registerTask('build',           ['clean','default', 'minify']);
-  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit'])
+  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
 
   grunt.registerTask('express-server',  'Start an express web server', function() {
