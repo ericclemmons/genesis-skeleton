@@ -38,9 +38,9 @@ module.exports = function(grunt) {
     clean:      ['<%= dirs.build %>'],
     watch:      {
       all:      {
-        tasks   : ['default', 'reload'],
         files   : ['<%= dirs.server + files.all %>'
                   ,'<%= dirs.client + files.all %>'],
+        tasks   : ['default', 'express-server', 'reload'],
         options : { interrupt: true }
       }
     },
