@@ -1,3 +1,6 @@
+// Store server between live reloads to close/restart express
+var server = null;
+
 module.exports = function(grunt) {
 
   /**
@@ -151,9 +154,25 @@ module.exports = function(grunt) {
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
 
   grunt.registerTask('express-server',  'Start an express web server', function() {
-    process.env.PORT = grunt.config.get('server.port');
+    // Close pre-existing server
+    if (server) {
+      try {
+        server.close();
+        console.log("Closed existing Express server");
+      } catch (e) {}
 
-    return require(grunt.config.get('dirs.server') + '/app');
+      delete server;
+    }
+
+    // Clear require cache
+    for (var key in require.cache) {
+      if (require.cache[key]) {
+        delete require.cache[key];
+      }
+    }
+
+    process.env.PORT  = grunt.config.get('server.port');
+    server            = require(grunt.config.get('dirs.server') + '/server');
   });
 
 };
