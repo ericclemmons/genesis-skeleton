@@ -5,14 +5,14 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>{{ settings.package.title }}</title>
+        <title>{{ package.title }}</title>
 
         <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1">
         <meta name="viewport"               content="width=device-width">
-        <meta name="description"            content="{{ settings.package.description }}">
-        <meta name="author"                 content="{{ settings.package.author.name }}">
+        <meta name="description"            content="{{ package.description }}">
+        <meta name="author"                 content="{{ package.author.name }}">
 
-        <link rel="stylesheet" href="build/css/{{ settings.package.name }}{% if ('production' == settings.env) %}.min{% endif %}.css?v={{ settings.package.version }}">
+        <link rel="stylesheet" href="build/css/{{ package.name }}{% if ('production' == settings.env) %}.min{% endif %}.css?v={{ package.version }}">
         <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <script src="build/js/{{ settings.package.name }}{% if ('production' == settings.env) %}.min{% endif %}.js?v={{ settings.package.version }}"></script>
+        <script src="build/js/{{ package.name }}{% if ('production' == settings.env) %}.min{% endif %}.js?v={{ package.version }}"></script>
         <script>
             angular.bootstrap(document.body, ['app']);
         </script>
