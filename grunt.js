@@ -148,7 +148,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default',         ['lint', 'less', 'concat', 'copy']);
   grunt.registerTask('build',           ['clean','default', 'minify']);
-  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit'])
+  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
 
   grunt.registerTask('express-server',  'Start an express web server', function() {
