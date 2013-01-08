@@ -17,7 +17,7 @@ module.exports = function(grunt) {
 
     files: {
       img       : 'img/**/*',
-      js        : 'js/**/*.js',
+      js        : '**/*.js',
       less      : 'less/**/*.less',
       views     : 'views/**/*'
     },
@@ -40,6 +40,19 @@ module.exports = function(grunt) {
                   ,'<%= dirs.client + files.less %>'],
         tasks   : ['default', 'reload'],
         options : { interrupt: true }
+      }
+    },
+
+    // Code validation
+    lint:       {
+      files     : ['grunt.js'
+                  ,'<%= dirs.server + files.js %>'
+                  ,'<%= dirs.client + files.js %>']
+    },
+    jshint:     {
+      options:  {
+        es5:      true,
+        laxcomma: true
       }
     },
 
@@ -133,9 +146,9 @@ module.exports = function(grunt) {
    * Tasks
    */
 
-  grunt.registerTask('default',         ['less', 'concat', 'copy']);
+  grunt.registerTask('default',         ['lint', 'less', 'concat', 'copy']);
   grunt.registerTask('build',           ['clean','default', 'minify']);
-  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit'])
+  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
 
   grunt.registerTask('express-server',  'Start an express web server', function() {
