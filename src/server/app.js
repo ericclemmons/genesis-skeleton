@@ -9,7 +9,7 @@ var path    = require('path');
 var gzippo  = require('gzippo');
 var app     = module.exports = express();
 
-app.set('package', require('../../package.json'));
+app.locals.package = require('../../package.json');
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'twig');
