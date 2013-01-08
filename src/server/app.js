@@ -5,10 +5,9 @@
 
 var express = require('express');
 var routes  = require('./routes');
-var http    = require('http');
 var path    = require('path');
 var gzippo  = require('gzippo');
-var app     = express();
+var app     = module.exports = express();
 
 app.configure(function(){
   app.set('package', require('../../package.json'));
@@ -32,7 +31,3 @@ app.configure('development', function(){
 
 app.get('/', routes.index);
 app.get('/views/*.html', routes.view);
-
-http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
-});
