@@ -8,6 +8,7 @@
     "email": "eric@smarterspam"
   },
   "homepage": "https://github.com/ericclemmons/genesis-skeleton",
+  "bugs": "https://github.com/ericclemmons/genesis-skeleton/issues",
   "licenses": [
     {
       "type": "MIT",
