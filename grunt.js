@@ -161,7 +161,7 @@ module.exports = function(grunt) {
         console.log("Closed existing Express server");
       } catch (e) {}
 
-      delete server;
+      server = null;
     }
 
     // Clear require cache
