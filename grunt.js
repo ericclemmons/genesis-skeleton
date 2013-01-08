@@ -16,6 +16,7 @@ module.exports = function(grunt) {
     },
 
     files: {
+      all       : '**/*',
       img       : 'img/**/*',
       js        : '**/*.js',
       less      : 'less/**/*.less',
@@ -34,11 +35,9 @@ module.exports = function(grunt) {
     clean:      ['<%= dirs.build %>'],
     watch:      {
       all:      {
-        files   : ['<%= dirs.server + files.views %>'
-                  ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.client + files.js %>'
-                  ,'<%= dirs.client + files.less %>'],
         tasks   : ['default', 'reload'],
+        files   : ['<%= dirs.server + files.all %>'
+                  ,'<%= dirs.client + files.all %>'],
         options : { interrupt: true }
       }
     },
