@@ -24,7 +24,6 @@
   },
   "dependencies": {
     "bower": "0.6.8",
-    "ejs": "*",
     "express": "3.0.5",
     "grunt": "0.3.17",
     "grunt-css": "0.3.2",
@@ -34,6 +33,7 @@
     "grunt-open": "0.1.0",
     "grunt-reload": "0.2.0",
     "grunt-smushit": "0.3.8",
-    "gzippo": "0.2.0"
+    "gzippo": "0.2.0",
+    "twig": "~0.4.6"
   }
 }
