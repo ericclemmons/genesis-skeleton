@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "node src/server/server",
-    "install": "bower install && ./node_modules/.bin/grunt build"
+    "install": "bower install && ./node_modules/.bin/grunt build",
+    "test": "./node_modules/.bin/grunt build"
   },
   "dependencies": {
     "bower": "0.6.8",
