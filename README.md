@@ -1,4 +1,4 @@
-Genesis Skeleton
+Genesis Skeleton [![Build Status](https://travis-ci.org/ericclemmons/genesis-skeleton.png)](https://travis-ci.org/ericclemmons/genesis-skeleton)
 ================
 
 Modern application skeleton:
