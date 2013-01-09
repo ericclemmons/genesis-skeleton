@@ -23,7 +23,7 @@ module.exports = function(grunt) {
       img       : 'img/**/*',
       js        : '**/*.js',
       less      : 'less/**/*.less',
-      views     : 'views/**/*'
+      html      : '**/*.html'
     },
 
     // Common
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
       app:      {
         src     : ['<%= dirs.lib %>/github-fork-ribbon-css/gh-fork-ribbon.css'
                   ,'<%= dirs.client %>/less/app.less'],
-        dest    : '<%= dirs.build %>/css/<%= pkg.name %>.css'
+        dest    : '<%= dirs.build %>/css/app.css'
       }
     },
 
@@ -82,22 +82,40 @@ module.exports = function(grunt) {
         files   : { '<%= dirs.build %>img/': '<%= dirs.lib %>/bootstrap/<%= files.img %>' }
       }
     },
+    ngtemplates:{
+      app:      {
+        options : {
+          base  : '<%= dirs.client %>'
+        },
+        src     : ['<%= dirs.client + files.html %>'],
+        dest    : '<%= dirs.build %>/js/templates.js'
+      }
+    },
     concat:     {
+      angular:  {
+        src     : ['<%= dirs.lib %>/angular-1.0.3/angular.js'
+                  ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'],
+        dest    : '<%= dirs.build %>/js/lib/angular.js'
+      },
+      app:      {
+        src     : ['<banner:meta.banner>'
+                  ,'<%= dirs.client + files.js %>'
+                  ,'<%= ngtemplates.app.dest %>'],
+        dest    : '<%= dirs.build %>/js/app.js'
+      },
       all:      {
         src     : ['<banner:meta.banner>'
-                  ,'<%= dirs.lib %>/angular-1.0.3/angular.js'
-                  ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'
-                  ,'<%= dirs.client %>/js/app.js'
-                  ,'<%= dirs.client + files.js %>'],
-        dest    : '<%= dirs.build %>/js/<%= pkg.name %>.js'
+                  ,'<%= concat.angular.dest %>'
+                  ,'<%= concat.app.dest %>'],
+        dest    : '<%= dirs.build %>/js/all.js'
       }
     },
 
     // Minification
     cssmin:     {
-      all:      {
+      app:      {
         src     : ['<banner:meta.banner>', '<%= less.app.dest %>'],
-        dest    : '<%= dirs.build %>/css/<%= pkg.name %>.min.css'
+        dest    : '<%= less.app.dest.replace(".css", ".min.css") %>'
       }
     },
     smushit:    {
@@ -106,9 +124,17 @@ module.exports = function(grunt) {
       }
     },
     min:     {
+      angular:  {
+        src     : '<%= concat.angular.dest %>',
+        dest    : '<%= concat.angular.dest.replace(".js", ".min.js") %>'
+      },
       app:      {
+        src     : ['<banner:meta.banner>', '<%= concat.app.dest %>'],
+        dest    : '<%= concat.app.dest.replace(".js", ".min.js") %>'
+      },
+      all:      {
         src     : ['<banner:meta.banner>', '<%= concat.all.dest %>'],
-        dest    : '<%= dirs.build %>/js/<%= pkg.name %>.min.js'
+        dest    : '<%= concat.all.dest.replace(".js", ".min.js") %>'
       }
     },
 
@@ -136,6 +162,7 @@ module.exports = function(grunt) {
    * Dependencies
    */
 
+  grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -148,8 +175,9 @@ module.exports = function(grunt) {
    * Tasks
    */
 
-  grunt.registerTask('default',         ['lint', 'less', 'concat', 'copy']);
-  grunt.registerTask('build',           ['clean','default', 'minify']);
+  grunt.registerTask('default',         ['lint', 'compile', 'concat', 'copy']);
+  grunt.registerTask('compile',         ['less', 'ngtemplates']);
+  grunt.registerTask('build',           ['clean', 'default', 'minify']);
   grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
 
