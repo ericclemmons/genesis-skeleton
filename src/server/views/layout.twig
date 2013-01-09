@@ -12,7 +12,7 @@
         <meta name="description"            content="{{ package.description }}">
         <meta name="author"                 content="{{ package.author.name }}">
 
-        <link rel="stylesheet" href="build/css/{{ package.name }}{% if ('production' == settings.env) %}.min{% endif %}.css?v={{ package.version }}">
+        <link rel="stylesheet" href="build/css/app{% if ('production' == settings.env) %}.min{% endif %}.css?v={{ package.version }}">
         <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -26,11 +26,18 @@
             </div>
         </div>
 
-        <script src="build/js/{{ package.name }}{% if ('production' == settings.env) %}.min{% endif %}.js?v={{ package.version }}"></script>
+        <!-- Angular, CDN preferred -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+        <script>window.angular || document.write('<script src="build/js/lib/angular.min.js"><\/script>')</script>
+
+        <!-- App -->
+        <script src="build/js/app{% if ('production' == settings.env) %}.min{% endif %}.js?v={{ package.version }}"></script>
         <script>
             angular.bootstrap(document.body, ['app']);
         </script>
 
+        <!-- Google Analytics -->
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];

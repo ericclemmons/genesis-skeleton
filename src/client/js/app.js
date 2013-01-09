@@ -1,5 +1,6 @@
 angular
   .module('app', [
+    'app.templates',
     'ngResource'
   ])
   .config(['$routeProvider', function($router) {
