@@ -3,46 +3,72 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <title>{{ package.title }}</title>
+  <head>
+    <meta charset="utf-8">
+    <title>{{ package.title }}</title>
 
-        <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1">
-        <meta name="viewport"               content="width=device-width">
-        <meta name="description"            content="{{ package.description }}">
-        <meta name="author"                 content="{{ package.author.name }}">
+    <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1">
+    <meta name="viewport"               content="width=device-width">
+    <meta name="description"            content="{{ package.description }}">
+    <meta name="author"                 content="{{ package.author.name }}">
 
-        <link rel="stylesheet" href="build/css/app{% if ('production' == settings.env) %}.min{% endif %}.css?v={{ package.version }}">
-        <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
+    <link rel="stylesheet" href="/build/css/app{% if ('production' == settings.env) %}.min{% endif %}.css?v={{ package.version }}">
+    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
 
-        <div id="app">
-            <div class="wrapper">
-                {% block content %}{% endblock %}
+    <div id="app">
+      <div class="wrapper">
+
+          <header>
+            <div class="container-narrow">
+              <div class="github-fork-ribbon-wrapper right">
+                <div class="github-fork-ribbon">
+                    <a href="https://github.com/ericclemmons/genesis-skeleton">Fork me on GitHub</a>
+                </div>
+              </div>
+
+              <div class="masthead">
+                <ul class="nav nav-pills pull-right">
+                  <li class="active"><a href="/">Home</a></li>
+                  <li><a href="/">Get Started</a></li>
+                  <li><a href="/docs/">Docs</a></li>
+                </ul>
+
+                <h3 class="muted">Genesis Skeleton</h3>
+              </div>
+
+              <div class="jumbotron">
+                <h1>Zero to Live in <em>minutes</em>.</h1>
+              </div>
             </div>
-        </div>
+          </header>
 
-        <!-- Angular, CDN preferred -->
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
-        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
-        <script>window.angular || document.write('<script src="build/js/lib/angular.min.js"><\/script>')</script>
+          <div id="content">
+            {% block content %}{% endblock %}
+          </div>
 
-        <!-- App -->
-        <script src="build/js/app{% if ('production' == settings.env) %}.min{% endif %}.js?v={{ package.version }}"></script>
-        <script>
-            angular.bootstrap(document.body, ['app']);
-        </script>
+          <footer>
+            <div class="container-narrow">
+              <p>
+                &copy; 2013 Genesis Skeleton
+              </p>
+            </div>
+          </footer>
+      </div>
+    </div>
 
-        <!-- Google Analytics -->
-        <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
-        </script>
-    </body>
+    {% block scripts %}{% endblock %}
+
+    <!-- Google Analytics -->
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  </body>
 </html>
