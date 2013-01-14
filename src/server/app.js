@@ -6,7 +6,6 @@
 var express = require('express');
 var docs    = require('./lib/docs');
 var path    = require('path');
-var gzippo  = require('gzippo');
 var app     = module.exports = express();
 
 app.locals.package = require('../../package.json');
@@ -20,8 +19,8 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(docs);
 app.use(app.router);
-app.use(gzippo.staticGzip(path.join(__dirname, '../../public')));
-app.use(gzippo.compress());
+app.use(express.compress());
+app.use(express.static(path.join(__dirname, '../../public')));
 
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
