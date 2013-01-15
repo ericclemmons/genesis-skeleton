@@ -145,15 +145,11 @@ module.exports = function(grunt) {
       }
     },
     reload:     {
-      port      : 8000,         // Browser-targeted port
-
-      proxy:    {
-        host    : 'localhost',  // Viewing port
-        port    : 8001          // Source port
-      }
+      port      : 35729,        // LiveReload default
+      liveReload: {}
     },
     server:     {
-      port      : 8001          // Source port
+      port      : 8000
     }
 
   });
