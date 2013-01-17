@@ -9,11 +9,11 @@ twig.extendFilter('unminify', function(path){
   return path;
 });
 
-exports.allow = function(app) {
+module.exports = function(app) {
   // Sets session variable "debug" based on query ?debug=
   function environmentQuery(req, res){
     if (req.query.hasOwnProperty('debug')) {
-      req.session.debug = ('yes|on|true|1').split('|').indexOf(req.query.debug) !== -1;
+      req.session.debug = ['yes', 'on', 'true', '1'].indexOf(req.query.debug.toLowerCase()) !== -1;
       if (req.query.debug === 'null') {
         delete req.session.debug;
       }

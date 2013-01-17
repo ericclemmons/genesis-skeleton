@@ -18,7 +18,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
-app.use(unminify.allow(app));
+app.use(unminify(app));
 app.use(docs);
 app.use(app.router);
 app.use(express.compress());
