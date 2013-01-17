@@ -3,11 +3,11 @@
  * Module dependencies.
  */
 
-var express = require('express');
-var docs    = require('./lib/docs');
-var env     = require('./lib/env');
-var path    = require('path');
-var app     = module.exports = express();
+var express   = require('express');
+var docs      = require('./lib/docs');
+var unminify  = require('./lib/unminify');
+var path      = require('path');
+var app       = module.exports = express();
 
 app.locals.package = require('../../package.json');
 app.set('port', process.env.PORT || 3000);
@@ -16,9 +16,9 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
-app.use(express.cookieParser('your secret here'));
-app.use(express.session());
-app.use(env(app));
+app.use(express.cookieParser('change this value to something unique'));
+app.use(express.cookieSession());
+app.use(unminify.allow(app));
 app.use(docs);
 app.use(app.router);
 app.use(express.compress());
