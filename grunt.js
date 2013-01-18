@@ -142,12 +142,16 @@ module.exports = function(grunt) {
       }
     },
     reload:     {
-      port      : 35729,        // LiveReload default
-      liveReload: {}
+      port      : process.env.PORT || 3000, // Browser-targeted port
+
+      proxy:    {
+        host    : 'localhost',
+        port    : 3001 // Source port
+      }
     },
     server:     {
       script    : '<%= dirs.server %>/server.js',
-      port      : process.env.PORT || 3000
+      port      : 3001 // Source Port
     }
 
   });
