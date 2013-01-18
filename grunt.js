@@ -1,6 +1,3 @@
-// Store server between live reloads to close/restart express
-var server = null;
-
 module.exports = function(grunt) {
 
   /**
@@ -11,11 +8,11 @@ module.exports = function(grunt) {
 
     // Constants
     dirs: {
-      client    : './src/client/',
-      lib       : './components/',
-      server    : './src/server/',
-      web       : './public/',
-      build     : './public/build/'
+      client    : __dirname + '/src/client/',
+      lib       : __dirname + '/components/',
+      server    : __dirname + '/src/server/',
+      web       : __dirname + '/public/',
+      build     : __dirname + '/public/build/'
     },
 
     files: {
@@ -149,6 +146,7 @@ module.exports = function(grunt) {
       liveReload: {}
     },
     server:     {
+      script    : '<%= dirs.server %>/server.js',
       port      : process.env.PORT || 3000
     }
 
@@ -168,6 +166,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-smushit');
 
   /**
+   * Custom tasks
+   */
+
+  grunt.loadTasks('tasks');
+
+  /**
    * Tasks
    */
 
@@ -176,27 +180,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build',           ['clean', 'default', 'minify']);
   grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
-
-  grunt.registerTask('express-server',  'Start an express web server', function() {
-    // Close pre-existing server
-    if (server) {
-      try {
-        server.close();
-        console.log("Closed existing Express server");
-      } catch (e) {}
-
-      server = null;
-    }
-
-    // Clear require cache
-    for (var key in require.cache) {
-      if (require.cache[key]) {
-        delete require.cache[key];
-      }
-    }
-
-    process.env.PORT  = grunt.config.get('server.port');
-    server            = require(grunt.config.get('dirs.server') + '/server');
-  });
 
 };
