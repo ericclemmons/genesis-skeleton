@@ -141,7 +141,7 @@ module.exports = function(grunt) {
     // Live-Reload Reverse-Proxy Server
     open:       {
       dev:      {
-        url     : 'http://localhost:8000/'
+        url     : 'http://localhost:' + (process.env.PORT || 3000) + '/'
       }
     },
     reload:     {
@@ -149,7 +149,7 @@ module.exports = function(grunt) {
       liveReload: {}
     },
     server:     {
-      port      : 8000
+      port      : process.env.PORT || 3000
     }
 
   });
