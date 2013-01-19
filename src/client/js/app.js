@@ -1,11 +1,17 @@
 angular
   .module('app', [
+    'app.controllers',
+    'app.directives',
+    'app.services',
     'app.templates',
-    'ngResource'
+    'ngResource',
+    '$strap.directives'
   ])
-  .config(['$routeProvider', function($router) {
+  .config(['$locationProvider', '$routeProvider', function($location, $router) {
+    $location.html5Mode(true);
+
     $router.when('/', {
-      controller: 'HomeController',
+      controller: 'HomeCtrl',
       templateUrl: 'views/home.html'
     });
   }])

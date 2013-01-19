@@ -21,44 +21,16 @@
     <![endif]-->
 
     <div id="app">
-      <div class="wrapper">
+      <nav ng-include="'views/nav.html'"></nav>
+      <header ng-include="'views/header.html'"></header>
 
-          <header>
-            <div class="container-narrow">
-              <div class="github-fork-ribbon-wrapper right">
-                <div class="github-fork-ribbon">
-                    <a href="https://github.com/ericclemmons/genesis-skeleton">Fork me on GitHub</a>
-                </div>
-              </div>
+      <section id="content">
+        {% block content %}{% endblock %}
+      </section>
 
-              <div class="masthead">
-                <ul class="nav nav-pills pull-right">
-                  <li class="active"><a href="/">Home</a></li>
-                  <li><a href="/">Get Started</a></li>
-                  <li><a href="/docs/">Docs</a></li>
-                </ul>
-
-                <h3 class="muted">Genesis Skeleton</h3>
-              </div>
-
-              <div class="jumbotron">
-                <h1>Zero to Live in <em>minutes</em>.</h1>
-              </div>
-            </div>
-          </header>
-
-          <div id="content">
-            {% block content %}{% endblock %}
-          </div>
-
-          <footer>
-            <div class="container-narrow">
-              <p>
-                &copy; 2013 Genesis Skeleton
-              </p>
-            </div>
-          </footer>
-      </div>
+      <footer class="container-narrow">
+        <p>&copy; 2013 Genesis Skeleton</p>
+      </footer>
     </div>
 
     {% block scripts %}{% endblock %}
