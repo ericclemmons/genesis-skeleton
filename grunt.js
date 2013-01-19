@@ -100,7 +100,8 @@ module.exports = function(grunt) {
     concat:     {
       angular:  {
         src     : ['<%= dirs.lib %>/angular-1.0.3/angular.js'
-                  ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'],
+                  ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'
+                  ,'<%= dirs.lib %>/angular-strap/dist/angular-strap.js'],
         dest    : '<%= dirs.build %>/js/lib/angular.js'
       },
       app:      {

@@ -5,7 +5,7 @@
     "modernizr": "~2.6.2",
     "bootstrap": "~2.2.2",
     "respond": "~1.2.0",
-    "github-fork-ribbon-css": "git://github.com/simonwhitaker/github-fork-ribbon-css.git",
-    "angular-1.0.3": "http://code.angularjs.org/1.0.3/angular-1.0.3.zip"
+    "angular-1.0.3": "http://code.angularjs.org/1.0.3/angular-1.0.3.zip",
+    "angular-strap": "~0.6.2"
   }
 }
