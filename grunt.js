@@ -63,6 +63,15 @@ module.exports = function(grunt) {
         dest    : '<%= dirs.build %>/css/app.css'
       }
     },
+    requirejs:  {
+      compile:  {
+        options:{
+          cssIn : '<%= less.app.dest %>',
+          out   : '<%= less.app.dest %>'
+        }
+      }
+    },
+
 
     // Concatenation
     copy:       {
@@ -120,7 +129,7 @@ module.exports = function(grunt) {
         src     : '<%= dirs.build %>/img'
       }
     },
-    min:     {
+    min:        {
       angular:  {
         src     : '<%= concat.angular.dest %>',
         dest    : '<%= concat.angular.dest.replace(".js", ".min.js") %>'
@@ -164,6 +173,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
@@ -180,7 +190,7 @@ module.exports = function(grunt) {
    */
 
   grunt.registerTask('default',         ['lint', 'compile', 'concat', 'copy']);
-  grunt.registerTask('compile',         ['less', 'ngtemplates']);
+  grunt.registerTask('compile',         ['less', 'requirejs', 'ngtemplates']);
   grunt.registerTask('build',           ['clean', 'default', 'minify']);
   grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
   grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
