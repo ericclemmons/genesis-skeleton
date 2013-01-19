@@ -191,10 +191,10 @@ module.exports = function(grunt) {
    * Tasks
    */
 
-  grunt.registerTask('default',         ['lint', 'compile', 'concat', 'copy']);
-  grunt.registerTask('compile',         ['less', 'requirejs', 'ngtemplates']);
-  grunt.registerTask('build',           ['clean', 'default', 'minify']);
-  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
-  grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
+  grunt.registerTask('default', ['lint', 'compile', 'concat', 'copy']);
+  grunt.registerTask('compile', ['less', 'requirejs', 'ngtemplates']);
+  grunt.registerTask('build',   ['clean', 'default', 'minify']);
+  grunt.registerTask('minify',  ['cssmin', 'min', 'smushit']);
+  grunt.registerTask('server',  ['default', 'express-server', 'reload', 'open', 'watch']);
 
 };
