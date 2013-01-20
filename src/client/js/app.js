@@ -10,9 +10,15 @@ angular
   .config(['$locationProvider', '$routeProvider', function($location, $router) {
     $location.html5Mode(true);
 
-    $router.when('/', {
-      controller: 'HomeCtrl',
-      templateUrl: 'views/home.html'
-    });
+    $router
+      .when('/', {
+        controller: 'HomeController',
+        templateUrl: 'views/home.html'
+      })
+      .otherwise({
+        controller: 'ErrorController',
+        templateUrl: 'views/not-found.html'
+      })
+    ;
   }])
 ;

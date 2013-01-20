@@ -4,7 +4,6 @@
  */
 
 var express   = require('express');
-var docs      = require('./lib/docs');
 var unminify  = require('./lib/unminify');
 var path      = require('path');
 var app       = module.exports = express();
@@ -19,15 +18,14 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
 app.use(unminify(app));
-app.use(docs);
+app.use(express.static(path.join(__dirname, '../../public')));
 app.use(app.router);
 app.use(express.compress());
-app.use(express.static(path.join(__dirname, '../../public')));
 
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', function(req, res) {
+app.get('*', function(req, res) {
   res.render('index.twig');
 });
