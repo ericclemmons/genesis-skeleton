@@ -33,6 +33,17 @@ body {
   display: none;
 }
 
+#features {
+  h4 {
+    color: @orange;
+  }
+
+  i {
+    position: relative;
+    top: @baseFontSize * 1.25 * @fontMultiplier / 2 - 7;
+  }
+}
+
 header {
   text-align: center;
   padding: @baseLineHeight 0;
@@ -47,7 +58,8 @@ section {
   padding: @baseLineHeight 0;
   border-bottom: 1px solid @grayLighter;
 
-  &:only-child {
+  &:only-child,
+  &:last-child {
     border-bottom: none;
   }
 }
@@ -92,7 +104,7 @@ h6 { font-size: @baseFontSize * 0.85 * @fontMultiplier; } // ~12px
 h1 small { font-size: @baseFontSize * 1.75; } // ~24px
 h2 small { font-size: @baseFontSize * 1.25; } // ~18px
 h3 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
-h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
+h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; line-height: 0; }
 
 
 h1 {
