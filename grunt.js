@@ -38,7 +38,7 @@ module.exports = function(grunt) {
         files   : ['grunt.js'
                   ,'<%= dirs.server + files.all %>'
                   ,'<%= dirs.client + files.all %>'],
-        tasks   : ['default', 'express-server', 'reload'],
+        tasks   : ['lint', 'compile', 'concat:app', 'copy:app', 'express-server', 'reload'],
         options : { interrupt: true }
       }
     },
