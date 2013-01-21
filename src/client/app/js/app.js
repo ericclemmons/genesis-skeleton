@@ -12,6 +12,9 @@ angular
 
     $router
       .when('/', {
+        redirectTo: '/home'
+      })
+      .when('/home', {
         controller: 'HomeController',
         templateUrl: 'views/home.html'
       })
