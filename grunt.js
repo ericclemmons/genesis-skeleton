@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     // Constants
     dirs: {
       client    : __dirname + '/src/client/',
-      lib       : __dirname + '/components/',
+      lib       : __dirname + '/src/client/components/',
       server    : __dirname + '/src/server/',
       web       : __dirname + '/public/',
       build     : __dirname + '/public/build/'
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
       },
       lib:      {
         options : {
-          cwd   : '<%= dirs.client %>/components'
+          cwd   : '<%= dirs.lib %>'
         },
         files   : { '<%= dirs.build %>/img/': '<%= dirs.lib %>/bootstrap/<%= files.img %>' }
       }
