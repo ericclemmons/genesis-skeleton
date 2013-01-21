@@ -1,6 +1,6 @@
 angular
   .module('app.controllers.error', [])
-  .controller('ErrorController', [
+  .controller('app.controllers.error', [
     '$scope',
     '$location',
     function($scope, $location) {

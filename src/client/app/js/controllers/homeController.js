@@ -1,5 +1,5 @@
 angular.module('app.controllers.home', [])
-  .controller('HomeController', [
+  .controller('app.controllers.home', [
     '$scope',
     function($scope) {
     }

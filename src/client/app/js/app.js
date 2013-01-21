@@ -2,10 +2,7 @@ angular
   .module('app', [
     'app.controllers',
     'app.directives',
-    'app.services',
-    'app.templates',
-    'ngResource',
-    '$strap.directives'
+    'app.templates'
   ])
   .config(['$locationProvider', '$routeProvider', function($location, $router) {
     $location.html5Mode(true);
@@ -15,11 +12,11 @@ angular
         redirectTo: '/home'
       })
       .when('/home', {
-        controller: 'HomeController',
+        controller: 'app.controllers.home',
         templateUrl: 'views/home.html'
       })
       .otherwise({
-        controller: 'ErrorController',
+        controller: 'app.controllers.error',
         templateUrl: 'views/not-found.html'
       })
     ;

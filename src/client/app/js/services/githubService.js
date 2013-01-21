@@ -1,8 +1,8 @@
 angular
-  .module('app.services.githubApi', [
+  .module('app.services.github', [
     'ngResource'
   ])
-  .factory('githubApi', ['$resource', function($resource) {
+  .factory('app.services.github', ['$resource', function($resource) {
 
     var api = $resource('https://api.github.com/repos/:owner/:repo/:section', {
       owner:        'ericclemmons',
