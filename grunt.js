@@ -37,7 +37,7 @@ module.exports = function(grunt) {
       all:      {
         files   : ['grunt.js'
                   ,'<%= dirs.server + files.all %>'
-                  ,'<%= dirs.client + files.all %>'],
+                  ,'<%= dirs.client %>/app/<%= files.all %>'],
         tasks   : ['lint', 'compile', 'concat:app', 'copy:app', 'express-server', 'reload'],
         options : { interrupt: true }
       }
@@ -47,7 +47,7 @@ module.exports = function(grunt) {
     lint:       {
       files     : ['grunt.js'
                   ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.client + files.js %>']
+                  ,'<%= dirs.client %>/app/<%= files.js %>']
     },
     jshint:     {
       options:  {
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
     less:       {
       app:      {
         src     : ['<%= dirs.lib %>/github-fork-ribbon-css/gh-fork-ribbon.css'
-                  ,'<%= dirs.client %>/less/app.less'],
+                  ,'<%= dirs.client %>/app/less/app.less'],
         dest    : '<%= dirs.build %>/css/app.css'
       }
     },
@@ -78,23 +78,23 @@ module.exports = function(grunt) {
     copy:       {
       app:      {
         options : {
-          cwd   : '<%= dirs.client %>'
+          cwd   : '<%= dirs.client %>/app'
         },
-        files   : { '<%= dirs.build %>img/': '<%= dirs.client + files.img %>' }
+        files   : { '<%= dirs.build %>img/': '<%= dirs.client %>/app/<%= files.img %>' }
       },
       lib:      {
         options : {
-          cwd   : '<%= dirs.client %>'
+          cwd   : '<%= dirs.client %>/components'
         },
-        files   : { '<%= dirs.build %>img/': '<%= dirs.lib %>/bootstrap/<%= files.img %>' }
+        files   : { '<%= dirs.build %>/img/': '<%= dirs.lib %>/bootstrap/<%= files.img %>' }
       }
     },
     ngtemplates:{
       app:      {
         options : {
-          base  : '<%= dirs.client %>'
+          base  : '<%= dirs.client %>/app'
         },
-        src     : ['<%= dirs.client + files.html %>'],
+        src     : ['<%= dirs.client %>/app/<%= files.html %>'],
         dest    : '<%= dirs.build %>/js/templates.js'
       }
     },
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
       },
       app:      {
         src     : ['<banner:meta.banner>'
-                  ,'<%= dirs.client + files.js %>'
+                  ,'<%= dirs.client %>/app/<%= files.js %>'
                   ,'<%= ngtemplates.app.dest %>'],
         dest    : '<%= dirs.build %>/js/app.js'
       },
