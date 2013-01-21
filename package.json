@@ -20,8 +20,8 @@
     "npm": "1.1.x"
   },
   "scripts": {
-    "start": "node src/server/server",
-    "install": "bower install && ./node_modules/.bin/grunt build",
+    "start": "./node_modules/.bin/grunt build && node src/server/server",
+    "install": "bower install",
     "test": "./node_modules/.bin/grunt build"
   },
   "dependencies": {
