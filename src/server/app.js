@@ -18,9 +18,9 @@ app.use(express.methodOverride());
 app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
 app.use(unminify(app));
+app.use(express.compress());
 app.use(express.static(path.join(__dirname, '../../public')));
 app.use(app.router);
-app.use(express.compress());
 
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
