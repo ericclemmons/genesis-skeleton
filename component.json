@@ -4,7 +4,6 @@
   "dependencies": {
     "modernizr": "~2.6.2",
     "bootstrap": "~2.2.2",
-    "respond": "~1.2.0",
     "angular-strap": "~0.6.2"
   }
 }
