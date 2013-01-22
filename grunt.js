@@ -36,6 +36,7 @@ module.exports = function(grunt) {
     watch:      {
       all:      {
         files   : ['grunt.js'
+                  ,'<%= dirs.public + files.all %>'
                   ,'<%= dirs.server + files.all %>'
                   ,'<%= dirs.client %>/app/<%= files.all %>'],
         tasks   : ['lint', 'compile', 'concat:app', 'copy:public', 'copy:app', 'express-server', 'reload'],
