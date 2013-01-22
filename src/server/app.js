@@ -18,7 +18,6 @@ app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
 app.use(unminify(app));
 app.use(express.static(path.join(__dirname, '../../dist')));
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.compress());
 app.use(app.router);
 
