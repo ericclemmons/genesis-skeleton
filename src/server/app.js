@@ -4,7 +4,6 @@
  */
 
 var express   = require('express');
-var unminify  = require('./lib/unminify');
 var path      = require('path');
 var app       = module.exports = express();
 
@@ -16,7 +15,6 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
-app.use(unminify(app));
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(express.compress());
 app.use(app.router);

@@ -37,7 +37,6 @@
     "grunt-open": "0.1.0",
     "grunt-reload": "0.2.0",
     "grunt-smushit": "0.3.8",
-    "grunt-usemin": "~0.1.2",
-    "twig": "~0.5.3"
+    "grunt-usemin": "~0.1.2"
   }
 }
