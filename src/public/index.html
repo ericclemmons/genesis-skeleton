@@ -12,8 +12,11 @@
     <meta name="description"            content="{{ package.description }}">
     <meta name="author"                 content="{{ package.author.name }}">
 
-    <link rel="stylesheet" href="{{ "/build/css/app.min.css" | unminify }}?v={{ package.version }}">
     <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+
+    <!-- build:css css/app.min.css -->
+    <link rel="stylesheet" href="css/app.css">
+    <!-- endbuild -->
   </head>
   <body>
     <!--[if lt IE 7]>
@@ -21,47 +24,30 @@
     <![endif]-->
 
     <div id="app">
-      <div class="wrapper">
+      <nav ng-include="'views/nav.html'"></nav>
+      <header ng-include="'views/header.html'"></header>
 
-          <header>
-            <div class="container-narrow">
-              <div class="github-fork-ribbon-wrapper right">
-                <div class="github-fork-ribbon">
-                    <a href="https://github.com/ericclemmons/genesis-skeleton">Fork me on GitHub</a>
-                </div>
-              </div>
+      <section id="content" ng-view></section>
 
-              <div class="masthead">
-                <ul class="nav nav-pills pull-right">
-                  <li class="active"><a href="/">Home</a></li>
-                  <li><a href="/">Get Started</a></li>
-                  <li><a href="/docs/">Docs</a></li>
-                </ul>
-
-                <h3 class="muted">Genesis Skeleton</h3>
-              </div>
-
-              <div class="jumbotron">
-                <h1>Zero to Live in <em>minutes</em>.</h1>
-              </div>
-            </div>
-          </header>
-
-          <div id="content">
-            {% block content %}{% endblock %}
-          </div>
-
-          <footer>
-            <div class="container-narrow">
-              <p>
-                &copy; 2013 Genesis Skeleton
-              </p>
-            </div>
-          </footer>
-      </div>
+      <footer>
+        <p>&copy; 2013 {{ package.title }}</p>
+      </footer>
     </div>
 
-    {% block scripts %}{% endblock %}
+    <!-- CDN Libraries -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.2.2/bootstrap.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.3/angular-resource.min.js"></script>
+
+    <!-- build:js js/all.min.js -->
+    <script src="components/angular-strap/dist/angular-strap.js"></script>
+    <script src="js/app.js"></script>
+    <!-- endbuild -->
+
+    <script>
+      angular.bootstrap(document.documentElement, ['app']);
+    </script>
 
     <!-- Google Analytics -->
     <script>

@@ -9,10 +9,10 @@ module.exports = function(grunt) {
     // Constants
     dirs: {
       client    : __dirname + '/src/client/',
-      lib       : __dirname + '/components/',
+      components: __dirname + '/components/',
       server    : __dirname + '/src/server/',
-      web       : __dirname + '/public/',
-      build     : __dirname + '/public/build/'
+      public    : __dirname + '/src/public/',
+      dist      : __dirname + '/dist/'
     },
 
     files: {
@@ -32,12 +32,14 @@ module.exports = function(grunt) {
                   '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
                   ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
     },
-    clean:      ['<%= dirs.build %>'],
+    clean:      ['<%= dirs.dist %>'],
     watch:      {
       all:      {
-        files   : ['<%= dirs.server + files.all %>'
-                  ,'<%= dirs.client + files.all %>'],
-        tasks   : ['default', 'express-server', 'reload'],
+        files   : ['grunt.js'
+                  ,'<%= dirs.public + files.all %>'
+                  ,'<%= dirs.server + files.all %>'
+                  ,'<%= dirs.client %>/app/<%= files.all %>'],
+        tasks   : ['lint', 'compile', 'concat:app', 'copy:public', 'copy:app', 'express-server', 'reload'],
         options : { interrupt: true }
       }
     },
@@ -46,7 +48,7 @@ module.exports = function(grunt) {
     lint:       {
       files     : ['grunt.js'
                   ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.client + files.js %>']
+                  ,'<%= dirs.client %>/app/<%= files.js %>']
     },
     jshint:     {
       options:  {
@@ -58,9 +60,8 @@ module.exports = function(grunt) {
     // Compilation
     less:       {
       app:      {
-        src     : ['<%= dirs.lib %>/github-fork-ribbon-css/gh-fork-ribbon.css'
-                  ,'<%= dirs.client %>/less/app.less'],
-        dest    : '<%= dirs.build %>/css/app.css'
+        src     : ['<%= dirs.client %>/app/less/app.less'],
+        dest    : '<%= dirs.dist %>/css/app.css'
       }
     },
     requirejs:  {
@@ -77,43 +78,44 @@ module.exports = function(grunt) {
     copy:       {
       app:      {
         options : {
-          cwd   : '<%= dirs.client %>'
+          cwd   : '<%= dirs.client %>/app'
         },
-        files   : { '<%= dirs.build %>img/': '<%= dirs.client + files.img %>' }
+        files   : { '<%= dirs.dist %>/img/': '<%= dirs.client %>/app/<%= files.img %>' }
       },
-      lib:      {
+      bootstrap : {
         options : {
-          cwd   : '<%= dirs.client %>'
+          cwd   : '<%= dirs.components %>'
         },
-        files   : { '<%= dirs.build %>img/': '<%= dirs.lib %>/bootstrap/<%= files.img %>' }
+        files   : { '<%= dirs.dist %>/img/': '<%= dirs.components %>/bootstrap/<%= files.img %>' }
+      },
+      components: {
+        options : {
+          cwd   : '<%= dirs.components %>',
+        },
+        files : { '<%= dirs.dist %>/components/': '<%= dirs.components + files.all %>' }
+      },
+      public:     {
+        options : {
+          cwd   : '<%= dirs.public %>'
+        },
+        files   : { '<%= dirs.dist %>/' : '<%= dirs.public + files.all %>' }
       }
     },
     ngtemplates:{
       app:      {
         options : {
-          base  : '<%= dirs.client %>'
+          base  : '<%= dirs.client %>/app'
         },
-        src     : ['<%= dirs.client + files.html %>'],
-        dest    : '<%= dirs.build %>/js/templates.js'
+        src     : ['<%= dirs.client %>/app/<%= files.html %>'],
+        dest    : '<%= dirs.dist %>/js/app.templates.js'
       }
     },
     concat:     {
-      angular:  {
-        src     : ['<%= dirs.lib %>/angular-1.0.3/angular.js'
-                  ,'<%= dirs.lib %>/angular-1.0.3/angular-resource.js'],
-        dest    : '<%= dirs.build %>/js/lib/angular.js'
-      },
       app:      {
         src     : ['<banner:meta.banner>'
-                  ,'<%= dirs.client + files.js %>'
+                  ,'<%= dirs.client %>/app/<%= files.js %>'
                   ,'<%= ngtemplates.app.dest %>'],
-        dest    : '<%= dirs.build %>/js/app.js'
-      },
-      all:      {
-        src     : ['<banner:meta.banner>'
-                  ,'<%= concat.angular.dest %>'
-                  ,'<%= concat.app.dest %>'],
-        dest    : '<%= dirs.build %>/js/all.js'
+        dest    : '<%= dirs.dist %>/js/app.js'
       }
     },
 
@@ -126,22 +128,20 @@ module.exports = function(grunt) {
     },
     smushit:    {
       all:      {
-        src     : '<%= dirs.build %>/img'
+        src     : '<%= dirs.dist %>/img'
       }
     },
     min:        {
-      angular:  {
-        src     : '<%= concat.angular.dest %>',
-        dest    : '<%= concat.angular.dest.replace(".js", ".min.js") %>'
-      },
       app:      {
         src     : ['<banner:meta.banner>', '<%= concat.app.dest %>'],
         dest    : '<%= concat.app.dest.replace(".js", ".min.js") %>'
-      },
-      all:      {
-        src     : ['<banner:meta.banner>', '<%= concat.all.dest %>'],
-        dest    : '<%= concat.all.dest.replace(".js", ".min.js") %>'
       }
+    },
+    useminPrepare: {
+      html      : '<%= dirs.dist %>/index.html'
+    },
+    usemin:     {
+      html      : '<%= dirs.dist %>/index.html'
     },
 
     // Live-Reload Reverse-Proxy Server
@@ -178,6 +178,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-smushit');
+  grunt.loadNpmTasks('grunt-usemin');
 
   /**
    * Custom tasks
@@ -189,10 +190,10 @@ module.exports = function(grunt) {
    * Tasks
    */
 
-  grunt.registerTask('default',         ['lint', 'compile', 'concat', 'copy']);
-  grunt.registerTask('compile',         ['less', 'requirejs', 'ngtemplates']);
-  grunt.registerTask('build',           ['clean', 'default', 'minify']);
-  grunt.registerTask('minify',          ['cssmin', 'min', 'smushit']);
-  grunt.registerTask('server',          ['default', 'express-server', 'reload', 'open', 'watch']);
+  grunt.registerTask('default', ['lint', 'compile', 'concat', 'copy']);
+  grunt.registerTask('compile', ['less', 'ngtemplates']);
+  grunt.registerTask('build',   ['clean', 'default', 'minify']);
+  grunt.registerTask('minify',  ['useminPrepare', 'concat', 'min', 'cssmin', 'requirejs', 'usemin', 'smushit']);
+  grunt.registerTask('server',  ['default', 'express-server', 'reload', 'watch']);
 
 };

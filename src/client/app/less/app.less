@@ -2,58 +2,21 @@
  * Bootstrap
  */
 
-// CSS Reset
-@import "../../../components/bootstrap/less/reset.less";
-
-// Core variables and mixins
-@import "../../../components/bootstrap/less/variables.less"; // Modify this for custom colors, font-sizes, etc
-@import "../../../components/bootstrap/less/mixins.less";
-
-// Grid system and page structure
-@import "../../../components/bootstrap/less/scaffolding.less";
-@import "../../../components/bootstrap/less/grid.less";
-@import "../../../components/bootstrap/less/layouts.less";
-
-// Base CSS
-@import "../../../components/bootstrap/less/type.less";
-@import "../../../components/bootstrap/less/code.less";
-
-// Components: common
-@import "../../../components/bootstrap/less/sprites.less";
-
-// Components: Buttons & Alerts
-@import "../../../components/bootstrap/less/buttons.less";
-
-// Components: Nav
-@import "../../../components/bootstrap/less/navs.less";
-
-// Utility classes
-@import "../../../components/bootstrap/less/utilities.less"; // Has to be last to override when necessary
-
-// Responsive
-@import "../../../components/bootstrap/less/responsive.less";
-
-/**
- * Github ribbon
- */
-
-@import "../../../components/github-fork-ribbon-css/gh-fork-ribbon.css";
-
-// Dependencies
-@import "../../../components/bootstrap/less/variables.less";
-
-.github-fork-ribbon-wrapper {
-  pointer-events: visiblePainted;
-}
+@import "../../../../components/bootstrap/less/bootstrap.less";
+@import "../../../../components/bootstrap/less/variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "../../../../components/bootstrap/less/mixins.less";
+@import "../../../../components/bootstrap/less/utilities.less"; // Has to be last to override when necessary
+@import "../../../../components/bootstrap/less/responsive.less";
 
 @fontMultiplier: 2;
 
-#app {
+body {
   background: @gray url("../img/background.jpg") no-repeat top center fixed;
   background-size: cover;
 
-  .wrapper {
+  #app {
     background: transparent url("../img/overlay-dot.png") fixed;
+    padding-top: @baseLineHeight * 2.25;
   }
 }
 
@@ -66,11 +29,27 @@
   }
 }
 
+p.muted {
+  text-align: center;
+}
+
 #about h3 {
   display: none;
 }
 
+h3 {
+  color: @orange;
+}
+
+#features {
+  i {
+    position: relative;
+    top: @baseFontSize * 1.25 * @fontMultiplier / 2 - 7;
+  }
+}
+
 header {
+  text-align: center;
   padding: @baseLineHeight 0;
 
   a:hover {
@@ -82,6 +61,11 @@ section {
   background: @white;
   padding: @baseLineHeight 0;
   border-bottom: 1px solid @grayLighter;
+
+  &:only-child,
+  &:last-child {
+    border-bottom: none;
+  }
 }
 
 footer {
@@ -124,11 +108,14 @@ h6 { font-size: @baseFontSize * 0.85 * @fontMultiplier; } // ~12px
 h1 small { font-size: @baseFontSize * 1.75; } // ~24px
 h2 small { font-size: @baseFontSize * 1.25; } // ~18px
 h3 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
-h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
+h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; line-height: 0; }
 
 
-.masthead h3 {
-  line-height: @baseFontSize * @fontMultiplier;
+h1 {
+  font-size: @baseFontSize * @fontMultiplier * 1.5;
+  line-height: @baseFontSize * 1.5;
+  color: @orange;
+  margin-right: @baseFontSize;
 }
 
 .container-narrow {
@@ -140,16 +127,16 @@ h4 small { font-size: @baseFontSize * @fontMultiplier * 0.75; }
   }
 }
 
+h2 {
+  font-size: @baseFontSize * 8;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 1);
+  color: @white;
+  line-height: 1;
+}
+
 .jumbotron {
   text-align: center;
 
-  h1 {
-    margin: @baseLineHeight * 3 0 @baseLineHeight;
-    font-size: @baseFontSize * 8;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 1);
-    color: @white;
-    line-height: 1;
-  }
 
   .btn {
     font-size: 21px;
