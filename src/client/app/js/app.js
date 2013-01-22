@@ -5,8 +5,6 @@ angular
     'app.templates'
   ])
   .config(['$locationProvider', '$routeProvider', function($location, $router) {
-    $location.html5Mode(true);
-
     $router
       .when('/', {
         redirectTo: '/home'
