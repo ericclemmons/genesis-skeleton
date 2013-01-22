@@ -25,7 +25,3 @@ app.use(app.router);
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
-
-app.get('*', function(req, res) {
-  res.render('index.twig');
-});
