@@ -4,8 +4,8 @@
  */
 
 var express   = require('express');
-var unminify  = require('./lib/unminify');
 var path      = require('path');
+var api       = require('./lib/api');
 var app       = module.exports = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -16,7 +16,7 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
-app.use(unminify(app));
+app.use(api);
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(express.compress());
 app.use(app.router);
@@ -24,7 +24,3 @@ app.use(app.router);
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
-
-app.get('/api/package', function(req, res) {
-  res.send(require('../../package.json'));
-});
