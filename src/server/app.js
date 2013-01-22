@@ -8,7 +8,6 @@ var unminify  = require('./lib/unminify');
 var path      = require('path');
 var app       = module.exports = express();
 
-app.locals.package = require('../../package.json');
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.use(express.favicon());
@@ -26,3 +25,7 @@ app.use(app.router);
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());
 }
+
+app.get('/api/package', function(req, res) {
+  res.send(require('../../package.json'));
+});
