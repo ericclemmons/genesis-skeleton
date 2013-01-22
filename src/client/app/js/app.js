@@ -13,13 +13,9 @@ angular
         controller: 'app.controllers.home',
         templateUrl: 'views/home.html'
       })
-      .when('/error/:url', {
-        controller: 'app.controllers.error',
-        templateUrl: 'views/errors/server-error.html'
-      })
       .otherwise({
         controller: 'app.controllers.error',
-        templateUrl: 'views/errors/not-found.html'
+        templateUrl: 'views/errors/index.html'
       })
     ;
   }])
