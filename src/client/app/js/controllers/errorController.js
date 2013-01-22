@@ -4,7 +4,7 @@ angular
     '$scope',
     '$location',
     function($scope, $location) {
-      $scope.location = $location;
+      $scope.url = $location.url().replace(/^\/error/, '');
     }
   ])
 ;
