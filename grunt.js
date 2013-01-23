@@ -100,7 +100,7 @@ module.exports = function(grunt) {
         options : {
           cwd   : '<%= dirs.components %>'
         },
-        files   : { '<%= dirs.dist %>/img/': '<%= dirs.components %>/bootstrap/<%= files.img %>' }
+        files   : { '<%= dirs.dist %>/img/': '<%= dirs.components %>/bootstrap/img/<%= files.img %>' }
       },
       components: {
         options : {
