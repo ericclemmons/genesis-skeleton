@@ -17,9 +17,9 @@ module.exports = function(grunt) {
 
     files: {
       all       : '**/*',
-      img       : 'img/**/*',
+      img       : '**/*.{png,gif,jpg,jpeg}',
       js        : '**/*.js',
-      less      : 'less/**/*.less',
+      less      : '**/*.less',
       html      : '**/*.html'
     },
 
@@ -34,13 +34,27 @@ module.exports = function(grunt) {
     },
     clean:      ['<%= dirs.dist %>'],
     watch:      {
-      all:      {
+      lint:     {
         files   : ['grunt.js'
-                  ,'<%= dirs.public + files.all %>'
-                  ,'<%= dirs.server + files.all %>'
-                  ,'<%= dirs.client %>/app/<%= files.all %>'],
-        tasks   : ['lint', 'compile', 'concat:app', 'copy:public', 'copy:app', 'express-server', 'reload'],
-        options : { interrupt: true }
+                  ,'<%= dirs.client + files.js %>',
+                  ,'<%= dirs.server + files.js %>'],
+        tasks   : ['lint']
+      },
+      app:      {
+        files   : ['<%= dirs.client + files.js %>'],
+        tasks   : ['ngtemplates', 'concat']
+      },
+      server:   {
+        files   : ['<%= dirs.server + files.all %>'],
+        tasks   : ['express-server', 'livereload']
+      },
+      less:     {
+        files   : ['<%= dirs.client + files.less %>'],
+        tasks   : ['less']
+      },
+      public:   {
+        files   : ['<%= dirs.public + files.all %>'],
+        tasks   : ['copy:public']
       }
     },
 
