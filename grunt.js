@@ -158,23 +158,22 @@ module.exports = function(grunt) {
       html      : '<%= dirs.dist %>/index.html'
     },
 
-    // Live-Reload Reverse-Proxy Server
+    // Server & tools
+    livereload  : {
+      options   : {
+        base    : '<%= dirs.dist %>'
+      },
+      files     : ['<%= dirs.dist %>/!(components)*'
+                  ,'<%= dirs.dist %>/!(components)/**.*']
+    },
     open:       {
       dev:      {
         url     : 'http://localhost:' + (process.env.PORT || 3000) + '/'
       }
     },
-    reload:     {
-      port      : process.env.PORT || 3000, // Browser-targeted port
-
-      proxy:    {
-        host    : 'localhost',
-        port    : 3001 // Source port
-      }
-    },
     server:     {
       script    : '<%= dirs.server %>/server.js',
-      port      : 3001 // Source Port
+      port      : process.env.PORT || 3000
     }
 
   });
@@ -184,13 +183,13 @@ module.exports = function(grunt) {
    */
 
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.loadNpmTasks('grunt-css');
+  grunt.loadNpmTasks('grunt-livereload');
   grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-smushit');
   grunt.loadNpmTasks('grunt-usemin');
 
@@ -208,6 +207,6 @@ module.exports = function(grunt) {
   grunt.registerTask('compile', ['less', 'ngtemplates']);
   grunt.registerTask('build',   ['clean', 'default', 'minify']);
   grunt.registerTask('minify',  ['useminPrepare', 'concat', 'min', 'cssmin', 'requirejs', 'usemin', 'smushit']);
-  grunt.registerTask('server',  ['default', 'express-server', 'reload', 'watch']);
+  grunt.registerTask('server',  ['default', 'express-server', 'livereload', 'watch']);
 
 };
