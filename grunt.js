@@ -36,12 +36,13 @@ module.exports = function(grunt) {
     watch:      {
       lint:     {
         files   : ['grunt.js'
-                  ,'<%= dirs.client + files.js %>',
+                  ,'<%= dirs.client + files.js %>'
                   ,'<%= dirs.server + files.js %>'],
         tasks   : ['lint']
       },
       app:      {
-        files   : ['<%= dirs.client + files.js %>'],
+        files   : ['<%= dirs.client + files.js %>'
+                  ,'<%= dirs.client + files.html %>'],
         tasks   : ['ngtemplates', 'concat']
       },
       server:   {
