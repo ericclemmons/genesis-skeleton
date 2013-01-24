@@ -35,7 +35,6 @@
     "grunt-contrib-clean": "0.3.0",
     "grunt-contrib-requirejs": "~0.3.4",
     "grunt-livereload": "~0.1",
-    "grunt-open": "0.1.0",
     "grunt-smushit": "0.3.8",
     "grunt-usemin": "~0.1.2"
   }
