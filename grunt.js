@@ -17,9 +17,9 @@ module.exports = function(grunt) {
 
     files: {
       all       : '**/*',
-      img       : 'img/**/*',
+      img       : '**/*.{png,gif,jpg,jpeg}',
       js        : '**/*.js',
-      less      : 'less/**/*.less',
+      less      : '**/*.less',
       html      : '**/*.html'
     },
 
@@ -34,13 +34,27 @@ module.exports = function(grunt) {
     },
     clean:      ['<%= dirs.dist %>'],
     watch:      {
-      all:      {
+      lint:     {
         files   : ['grunt.js'
-                  ,'<%= dirs.public + files.all %>'
-                  ,'<%= dirs.server + files.all %>'
-                  ,'<%= dirs.client %>/app/<%= files.all %>'],
-        tasks   : ['lint', 'compile', 'concat:app', 'copy:public', 'copy:app', 'express-server', 'reload'],
-        options : { interrupt: true }
+                  ,'<%= dirs.client + files.js %>',
+                  ,'<%= dirs.server + files.js %>'],
+        tasks   : ['lint']
+      },
+      app:      {
+        files   : ['<%= dirs.client + files.js %>'],
+        tasks   : ['ngtemplates', 'concat']
+      },
+      server:   {
+        files   : ['<%= dirs.server + files.all %>'],
+        tasks   : ['express-server', 'livereload']
+      },
+      less:     {
+        files   : ['<%= dirs.client + files.less %>'],
+        tasks   : ['less']
+      },
+      public:   {
+        files   : ['<%= dirs.public + files.all %>'],
+        tasks   : ['copy:public']
       }
     },
 
@@ -86,7 +100,7 @@ module.exports = function(grunt) {
         options : {
           cwd   : '<%= dirs.components %>'
         },
-        files   : { '<%= dirs.dist %>/img/': '<%= dirs.components %>/bootstrap/<%= files.img %>' }
+        files   : { '<%= dirs.dist %>/img/': '<%= dirs.components %>/bootstrap/img/<%= files.img %>' }
       },
       components: {
         options : {
@@ -144,23 +158,22 @@ module.exports = function(grunt) {
       html      : '<%= dirs.dist %>/index.html'
     },
 
-    // Live-Reload Reverse-Proxy Server
+    // Server & tools
+    livereload  : {
+      options   : {
+        base    : '<%= dirs.dist %>'
+      },
+      files     : ['<%= dirs.dist %>/!(components)*'
+                  ,'<%= dirs.dist %>/!(components)/**.*']
+    },
     open:       {
       dev:      {
         url     : 'http://localhost:' + (process.env.PORT || 3000) + '/'
       }
     },
-    reload:     {
-      port      : process.env.PORT || 3000, // Browser-targeted port
-
-      proxy:    {
-        host    : 'localhost',
-        port    : 3001 // Source port
-      }
-    },
     server:     {
       script    : '<%= dirs.server %>/server.js',
-      port      : 3001 // Source Port
+      port      : process.env.PORT || 3000
     }
 
   });
@@ -170,13 +183,13 @@ module.exports = function(grunt) {
    */
 
   grunt.loadNpmTasks('grunt-angular-templates');
+  grunt.loadNpmTasks('grunt-css');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.loadNpmTasks('grunt-css');
+  grunt.loadNpmTasks('grunt-livereload');
   grunt.loadNpmTasks('grunt-open');
-  grunt.loadNpmTasks('grunt-reload');
   grunt.loadNpmTasks('grunt-smushit');
   grunt.loadNpmTasks('grunt-usemin');
 
@@ -194,6 +207,6 @@ module.exports = function(grunt) {
   grunt.registerTask('compile', ['less', 'ngtemplates']);
   grunt.registerTask('build',   ['clean', 'default', 'minify']);
   grunt.registerTask('minify',  ['useminPrepare', 'concat', 'min', 'cssmin', 'requirejs', 'usemin', 'smushit']);
-  grunt.registerTask('server',  ['default', 'express-server', 'reload', 'watch']);
+  grunt.registerTask('server',  ['default', 'express-server', 'livereload', 'watch']);
 
 };

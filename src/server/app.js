@@ -17,9 +17,9 @@ app.use(express.bodyParser());
 app.use(express.methodOverride());
 app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
+app.use(express.compress());
 app.use(api);
 app.use(express.static(path.join(__dirname, '../../dist')));
-app.use(express.compress());
 app.use(app.router);
 app.use(errors);
 
