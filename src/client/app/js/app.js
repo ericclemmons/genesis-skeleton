@@ -10,7 +10,6 @@ angular
         redirectTo: '/home'
       })
       .when('/home', {
-        controller: 'app.controllers.home',
         templateUrl: 'views/home.html'
       })
       .otherwise({
