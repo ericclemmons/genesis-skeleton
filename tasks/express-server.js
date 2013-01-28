@@ -28,7 +28,7 @@ module.exports = function(grunt) {
     }
 
     process.env.PORT  = grunt.config.get('server.port');
-    server            = require(grunt.config.process('server.script'));
+    server            = require(grunt.config.get('server.script'));
   });
 
 };
