@@ -12,6 +12,10 @@ angular
       .when('/home', {
         templateUrl: 'views/home.html'
       })
+      .when('/guide', {
+        controller: 'app.controllers.guide',
+        templateUrl: 'views/guide.html'
+      })
       .otherwise({
         controller: 'app.controllers.error',
         templateUrl: 'views/errors/index.html'
