@@ -39,9 +39,12 @@ module.exports = function(grunt) {
         tasks   : ['jshint']
       },
       app:      {
-        files   : ['<%= dirs.client + files.js %>'
-                  ,'<%= dirs.client + files.html %>'],
-        tasks   : ['jshint', 'ngtemplates', 'concat', 'livereload']
+        files   : ['<%= dirs.client + files.js %>'],
+        tasks   : ['jshint', 'concat', 'livereload']
+      },
+      partials: {
+        files   : ['<%= dirs.client + files.html %>'],
+        tasks   : ['copy:partials', 'ngtemplates', 'concat', 'livereload']
       },
       server:   {
         files   : ['<%= dirs.server + files.all %>'],
