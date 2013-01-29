@@ -37,7 +37,7 @@
     "grunt-contrib-mincss": "~0.4.0rc7",
     "grunt-contrib-uglify": "0.1.1rc6",
     "grunt-contrib-watch": "~0.2.0rc7",
-    "grunt-livereload": "0.1",
+    "grunt-livereload": "0.1.2",
     "grunt-usemin": "~0.1.4"
   }
 }
