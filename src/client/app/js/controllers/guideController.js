@@ -53,7 +53,7 @@ angular.module('app.controllers.guide', [])
       $scope.template = function() {
         var ids = $parents(this);
 
-        return 'partials/guide/' + ids.join('/') + '.html';
+        return 'app/partials/guide/' + ids.join('/') + '.html';
       };
     }
   ])

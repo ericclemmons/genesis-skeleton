@@ -137,7 +137,7 @@ module.exports = function(grunt) {
     ngtemplates:{
       app:      {
         options : {
-          base  : '<%= dirs.client %>/app'
+          base  : '<%= dirs.client %>'
         },
         src     : ['<%= dirs.client %>/app/<%= files.html %>'],
         dest    : '<%= dirs.dist %>/js/app.templates.js'
