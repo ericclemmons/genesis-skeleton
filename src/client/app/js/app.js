@@ -18,7 +18,7 @@ angular
       })
       .otherwise({
         controller: 'app.controllers.error',
-        templateUrl: 'views/errors/index.html'
+        templateUrl: 'views/error/index.html'
       })
     ;
   }])
