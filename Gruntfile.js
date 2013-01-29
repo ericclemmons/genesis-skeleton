@@ -34,20 +34,18 @@ module.exports = function(grunt) {
     },
     clean:      ['<%= dirs.dist %>'],
     watch:      {
-      lint:     {
-        files   : ['grunt.js'
-                  ,'<%= dirs.client + files.js %>'
-                  ,'<%= dirs.server + files.js %>'],
-        tasks   : ['lint']
+      grunt:    {
+        files   : ['Gruntfile.js'],
+        tasks   : ['jshint']
       },
       app:      {
         files   : ['<%= dirs.client + files.js %>'
                   ,'<%= dirs.client + files.html %>'],
-        tasks   : ['ngtemplates', 'concat']
+        tasks   : ['jshint', 'ngtemplates', 'concat', 'livereload']
       },
       server:   {
         files   : ['<%= dirs.server + files.all %>'],
-        tasks   : ['express-server', 'livereload']
+        tasks   : ['jshint', 'express-server', 'livereload']
       },
       less:     {
         files   : ['<%= dirs.client + files.less %>'],
@@ -60,12 +58,10 @@ module.exports = function(grunt) {
     },
 
     // Code validation
-    lint:       {
+    jshint:     {
       files     : ['grunt.js'
                   ,'<%= dirs.server + files.js %>'
-                  ,'<%= dirs.client %>/app/<%= files.js %>']
-    },
-    jshint:     {
+                  ,'<%= dirs.client %>/app/<%= files.js %>'],
       options:  {
         es5:      true,
         laxcomma: true
