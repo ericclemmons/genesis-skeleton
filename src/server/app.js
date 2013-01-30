@@ -5,7 +5,6 @@
 
 var express   = require('express');
 var path      = require('path');
-var errors    = require('./lib/errors');
 var api       = require('./lib/api');
 var app       = module.exports = express();
 
@@ -21,7 +20,6 @@ app.use(express.compress());
 app.use(api);
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use(app.router);
-app.use(errors);
 
 if ('development' === app.get('env')) {
   app.use(express.errorHandler());

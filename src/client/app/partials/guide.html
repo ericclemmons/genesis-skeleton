@@ -1,0 +1,25 @@
+<section id="guide">
+  <div class="container-narrow">
+    <div class="row-fluid">
+      <div class="well well-small span3">
+
+        <div ng-repeat="section in toc()" ng-include="'app/partials/guide/toc.html'"></div>
+
+      </div>
+
+      <div class="span9">
+
+        <h2>Guide</h2>
+
+        <p>
+          This guide will take you throw the logical steps of how to install
+          Genesis Skeleton, the folder structure &amp; conventions, how to
+          manage both client &amp; server-side dependencies, and more.
+        </p>
+
+        <section ng-repeat="section in toc()" ng-include="'app/partials/guide/section.html'"></section>
+      </div>
+
+    </div>
+  </div>
+</section>
