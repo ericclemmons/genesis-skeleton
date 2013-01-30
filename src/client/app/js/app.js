@@ -10,12 +10,15 @@ angular
         redirectTo: '/home'
       })
       .when('/home', {
-        controller: 'app.controllers.home',
-        templateUrl: 'views/home.html'
+        templateUrl: 'app/partials/home.html'
+      })
+      .when('/guide', {
+        controller: 'app.controllers.guide',
+        templateUrl: 'app/partials/guide.html'
       })
       .otherwise({
         controller: 'app.controllers.error',
-        templateUrl: 'views/errors/index.html'
+        templateUrl: 'app/partials/error/index.html'
       })
     ;
   }])

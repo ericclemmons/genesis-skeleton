@@ -1,7 +1,7 @@
 angular
   .module('app.controllers', [
-    'app.controllers.home',
     'app.controllers.error',
+    'app.controllers.guide',
     'app.services.api'
   ])
   .run(['$rootScope', 'app.services.api', function($root, api) {

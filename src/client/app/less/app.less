@@ -21,9 +21,6 @@ body {
 }
 
 #content {
-  background-color: @bodyBackground;
-  padding: @baseLineHeight 0;
-
   p + h4 {
     margin-top: 28px;
   }
@@ -39,6 +36,11 @@ p.muted {
 
 h3 {
   color: @orange;
+}
+
+section > section {
+  padding-left: @baseLineHeight;
+  border-left: 3px double @grayLighter;
 }
 
 #features {
@@ -127,7 +129,7 @@ h1 {
   }
 }
 
-h2 {
+header h2 {
   font-size: @baseFontSize * 8;
   text-shadow: 0 0 3px rgba(0, 0, 0, 1);
   color: @white;
