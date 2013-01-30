@@ -173,11 +173,15 @@ module.exports = (grunt)->
 
 
   ###
-  # Aliases
+  # Alias Tasks
+  #
+  # - `grunt` for local development
+  # - `grunt build` for deployment
   ###
 
-  grunt.registerTask('default', ['jshint', 'compile', 'concat', 'copy'])
-  grunt.registerTask('compile', ['less', 'ngtemplates'])
-  grunt.registerTask('build',   ['clean', 'default', 'minify'])
-  grunt.registerTask('minify',  ['useminPrepare', 'concat', 'uglify', 'mincss', 'usemin', 'smushit'])
-  grunt.registerTask('server',  ['default', 'express-server', 'livereload', 'watch'])
+  grunt.registerTask('default',   [ 'clean', 'validate', 'prepare', 'express' ])
+  grunt.registerTask('build',     [ 'clean', 'prepare', 'optimize' ])
+  grunt.registerTask('validate',  [ 'jshint' ])
+  grunt.registerTask('prepare',   [ 'less', 'ngtemplates', 'concat', 'copy' ])
+  grunt.registerTask('express',   [ 'express-server', 'livereload', 'watch' ])
+  grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
