@@ -28,7 +28,8 @@ module.exports = (grunt)->
     # Tasks
     ###
 
-    clean:          '<%= dirs.dist %>'
+    clean:
+      dist:         '<%= dirs.dist %>'
 
 
     watch:
