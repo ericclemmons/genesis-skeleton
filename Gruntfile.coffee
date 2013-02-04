@@ -175,11 +175,12 @@ module.exports = (grunt)->
   ###
   # Alias Tasks
   #
-  # - `grunt` for local development
-  # - `grunt build` for deployment
+  # - `grunt server` for local development
+  # - `grunt build` when deploying
   ###
 
-  grunt.registerTask('default',   [ 'clean', 'validate', 'prepare', 'express' ])
+  grunt.registerTask('default',   [ 'validate', 'prepare' ])
+  grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
   grunt.registerTask('build',     [ 'clean', 'prepare', 'optimize' ])
   grunt.registerTask('validate',  [ 'jshint' ])
   grunt.registerTask('prepare',   [ 'less', 'ngtemplates', 'concat', 'copy' ])
