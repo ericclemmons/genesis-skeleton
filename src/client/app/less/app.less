@@ -10,13 +10,42 @@
 
 @fontMultiplier: 2;
 
+@media (min-width: 980px) {
+  /* Fixed navbar needs padding */
+  #app {
+    padding-top: @baseLineHeight * 2;
+  }
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .navbar-fixed-top {
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    padding: 0;
+
+    .navbar-inner {
+      padding: 0;
+    }
+  }
+
+  #content > section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
 body {
   background: @gray url("../img/background.jpg") no-repeat top center fixed;
   background-size: cover;
 
   #app {
     background: transparent url("../img/overlay-dot.png") fixed;
-    padding-top: @baseLineHeight * 2.25;
   }
 }
 
@@ -87,10 +116,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-h3, h4 {
-  margin-bottom: @baseLineHeight;
-}
-
 em {
   font-style: normal;
   color: @orange;
@@ -103,7 +128,7 @@ h3 { line-height: @baseLineHeight * 2 * @fontMultiplier; }
 h1 { font-size: @baseFontSize * 2.75 * @fontMultiplier; } // ~38px
 h2 { font-size: @baseFontSize * 2.25 * @fontMultiplier; } // ~32px
 h3 { font-size: @baseFontSize * 1.75 * @fontMultiplier; } // ~24px
-h4 { font-size: @baseFontSize * 1.25 * @fontMultiplier; } // ~18px
+h4 { font-size: @baseFontSize * 1.25 * @fontMultiplier; line-height: @baseFontSize * 1.25 * @fontMultiplier;} // ~18px
 h5 { font-size: @baseFontSize * @fontMultiplier; }
 h6 { font-size: @baseFontSize * 0.85 * @fontMultiplier; } // ~12px
 
