@@ -11,11 +11,13 @@ Modern application skeleton:
 * [Bootstrap][6]
 * [Bower][8]
 
+**You can always find the latest instructions & guide at [http://genesis-skeleton.com/][0]**
+
 
 Requirements
 ------------
 
-    $ npm install -g grunt-cli
+    $ npm install -g grunt-cli bower
 
 
 Installation
@@ -37,8 +39,8 @@ Start an [Express][3] server with [LiveReload][5]:
 Customize
 ---------
 
-- `src/client/crossdomain.xml`
-- `src/client/humans.txt`
+- `src/public/crossdomain.xml`
+- `src/public/humans.txt`
 
 
 Deployment (with [Heroku][7])
@@ -65,6 +67,7 @@ License
 MIT
 
 
+[0]: http://genesis-skeleton.com/
 [1]: http://html5boilerplate.com/
 [2]: http://angularjs.org/
 [3]: http://expressjs.com/
