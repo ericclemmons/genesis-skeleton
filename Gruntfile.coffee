@@ -162,7 +162,6 @@ module.exports = (grunt)->
   # Dependencies
   ###
 
-  grunt.loadTasks('tasks')
   grunt.loadNpmTasks('grunt-angular-templates')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-concat')
