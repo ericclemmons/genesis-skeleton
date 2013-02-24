@@ -38,6 +38,7 @@
     "grunt-contrib-livereload": "~0.1.1",
     "grunt-contrib-mincss": "~0.4.0rc7",
     "grunt-contrib-uglify": "0.1.1rc6",
+    "grunt-express-server": "~0.1.0",
     "grunt-regarde": "~0.1.1",
     "grunt-usemin": "~0.1.4"
   }
