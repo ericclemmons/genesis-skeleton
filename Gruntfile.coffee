@@ -32,7 +32,7 @@ module.exports = (grunt)->
       dist:         '<%= dirs.dist %>'
 
 
-    watch:
+    regarde:
       app:
         files:      '<%= dirs.client + files.js %>'
         tasks:      [ 'jshint', 'concat', 'livereload' ]
@@ -165,10 +165,10 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-contrib-jshint')
   grunt.loadNpmTasks('grunt-contrib-less')
+  grunt.loadNpmTasks('grunt-contrib-livereload')
   grunt.loadNpmTasks('grunt-contrib-mincss')
   grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-contrib-watch')
-  grunt.loadNpmTasks('grunt-livereload')
+  grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-usemin')
 
 
@@ -184,5 +184,5 @@ module.exports = (grunt)->
   grunt.registerTask('build',     [ 'clean', 'prepare', 'optimize' ])
   grunt.registerTask('validate',  [ 'jshint' ])
   grunt.registerTask('prepare',   [ 'less', 'ngtemplates', 'concat', 'copy' ])
-  grunt.registerTask('express',   [ 'express-server', 'livereload', 'watch' ])
+  grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
   grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
