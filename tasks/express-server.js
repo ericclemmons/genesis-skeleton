@@ -10,25 +10,36 @@ var server  = null; // Store server between live reloads to close/restart expres
 module.exports = function(grunt) {
 
   grunt.registerTask('express-server', 'Start an express web server', function() {
-    // Close pre-existing server
-    if (server) {
-      try {
-        server.close();
-        console.log("Closed existing Express server");
-      } catch (e) {}
 
+    var done = this.async();
+
+    if (server) {
+      console.log("Killing existing Express server");
+
+      server.kill('SIGTERM');
       server = null;
     }
 
-    // Clear require cache
-    for (var key in require.cache) {
-      if (require.cache[key]) {
-        delete require.cache[key];
+    server = grunt.util.spawn({
+      cmd:      process.argv[0],
+      args:     [ grunt.config.get('server.script') ],
+      fallback: function() {
+        // Prevent EADDRINUSE from breaking Grunt
       }
-    }
+    }, function(err, result, code) {
+      // Nothing to do, but callback has to exist
+    });
 
-    process.env.PORT  = grunt.config.get('server.port');
-    server            = require(grunt.config.get('server.script'));
+    server.stdout.on('data', function() {
+      if (done) {
+        done();
+      }
+
+      done = null;
+    });
+
+    server.stdout.pipe(process.stdout);
+    server.stderr.pipe(process.stdout);
   });
 
 };
