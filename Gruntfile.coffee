@@ -171,6 +171,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-livereload')
   grunt.loadNpmTasks('grunt-contrib-mincss')
   grunt.loadNpmTasks('grunt-contrib-uglify')
+  grunt.loadNpmTasks('grunt-express-server')
   grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-usemin')
 
