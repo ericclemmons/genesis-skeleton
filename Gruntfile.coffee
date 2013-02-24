@@ -35,11 +35,11 @@ module.exports = (grunt)->
     regarde:
       app:
         files:      '<%= dirs.client + files.js %>'
-        tasks:      [ 'jshint', 'concat', 'livereload' ]
+        tasks:      [ 'jshint', 'concat' ]
 
       partials:
         files:      '<%= dirs.client + files.html %>'
-        tasks:      [ 'copy:partials', 'ngtemplates', 'concat', 'livereload' ]
+        tasks:      [ 'copy:partials', 'ngtemplates', 'concat' ]
 
       server:
         files:      '<%= dirs.server + files.all %>'
@@ -52,6 +52,10 @@ module.exports = (grunt)->
       public:
         files:      '<%= dirs.public + files.all %>'
         tasks:      [ 'copy:public' ]
+
+      dist:
+        files:      '<%= dirs.dist + files.all %>'
+        tasks:      [ 'livereload' ]
 
 
     jshint:
