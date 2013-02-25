@@ -1,4 +1,4 @@
-var GithubService = require('../services/githubService');
+var GithubService = require('../services/github');
 
 module.exports = angular.module('app.directives.issues', [
   GithubService.name

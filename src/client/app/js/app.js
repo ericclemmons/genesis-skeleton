@@ -1,5 +1,6 @@
 module.exports = angular.module('app', [
-  require('./controllers').name,
+  require('./controllers/guide').name,
+  require('./controllers/error').name,
   require('./directives').name,
 ])
 .config(['$locationProvider', '$routeProvider', function($location, $router) {

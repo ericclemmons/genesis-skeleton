@@ -1,8 +1,8 @@
-var ApiService = require('../services/apiService');
+var ApiService = require('../services/api');
 
 module.exports = angular.module('app.controllers', [
-  require('./errorController').name,
-  require('./guideController').name,
+  require('./error').name,
+  require('./guide').name,
   ApiService.name
 ]).run(['$rootScope', ApiService.name, function($root, api) {
   $root.package = api.get({ entity: 'package' });
