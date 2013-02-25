@@ -1,10 +1,19 @@
-angular
-  .module('app.controllers', [
-    'app.controllers.error',
-    'app.controllers.guide',
-    'app.services.api'
-  ])
-  .run(['$rootScope', 'app.services.api', function($root, api) {
+var ApiService = require('../services/api');
+
+
+module.exports = angular.module('app.controllers', [
+
+  require('./error').name,
+  require('./guide').name,
+  ApiService.name
+
+]).run([
+
+  '$rootScope',
+  ApiService.name,
+
+  function($root, api) {
     $root.package = api.get({ entity: 'package' });
-  }])
-;
+  }
+
+]);

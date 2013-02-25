@@ -1,9 +1,12 @@
-angular
-  .module('app.services.github', [
-    'ngResource'
-  ])
-  .factory('app.services.github', ['$resource', function($resource) {
+module.exports = angular.module('app.services.github', [
 
+  'ngResource'
+
+]).factory('app.services.github', [
+
+  '$resource',
+
+  function($resource) {
     var api = $resource('https://api.github.com/repos/:owner/:repo/:section', {
       owner:        'ericclemmons',
       repo:         'genesis-skeleton'
@@ -19,5 +22,6 @@ angular
     });
 
     return api;
-  }])
-;
+  }
+
+]);

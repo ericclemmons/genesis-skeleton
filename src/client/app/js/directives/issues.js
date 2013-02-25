@@ -1,8 +1,15 @@
-angular
-  .module('app.directives.issues', [
-    'app.services.github'
-  ])
-  .directive('appIssues', ['app.services.github', function(github) {
+var GithubService = require('../services/github');
+
+
+module.exports = angular.module('app.directives.issues', [
+
+  GithubService.name
+
+]).directive('appIssues', [
+
+  GithubService.name,
+
+  function(github) {
     return {
       replace:    false,
       restrict:   'A',
@@ -12,5 +19,6 @@ angular
         $scope.issues = github.query({ section: 'issues'});
       }
     };
-  }])
-;
+  }
+
+]);

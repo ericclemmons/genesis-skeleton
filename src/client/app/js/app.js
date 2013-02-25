@@ -1,10 +1,15 @@
-angular
-  .module('app', [
-    'app.controllers',
-    'app.directives',
-    'app.templates'
-  ])
-  .config(['$locationProvider', '$routeProvider', function($location, $router) {
+module.exports = angular.module('app', [
+
+  require('./controllers/guide').name,
+  require('./controllers/error').name,
+  require('./directives').name,
+
+]).config([
+
+  '$locationProvider',
+  '$routeProvider',
+
+  function($location, $router) {
     $router
       .when('/', {
         redirectTo: '/home'
@@ -21,5 +26,6 @@ angular
         templateUrl: 'app/partials/error/index.html'
       })
     ;
-  }])
-;
+  }
+
+]);
