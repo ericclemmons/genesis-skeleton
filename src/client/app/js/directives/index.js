@@ -1,6 +1,4 @@
-angular
-  .module('app.directives', [
-    '$strap.directives',
-    'app.directives.issues'
-  ])
-;
+module.exports = angular.module('app.directives', [
+  '$strap.directives',
+  require('./issuesDirective').name
+]);

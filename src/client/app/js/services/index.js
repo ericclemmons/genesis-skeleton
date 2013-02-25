@@ -1,6 +1,4 @@
-angular
-  .module('app.services', [
-    'app.services.api',
-    'app.services.githubApi'
-  ])
-;
+module.exports = angular.module('app.services', [
+  require('./apiService').name,
+  require('./githubService').name
+]);

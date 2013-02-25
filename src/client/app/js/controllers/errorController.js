@@ -1,5 +1,4 @@
-angular
-  .module('app.controllers.error', [])
+module.exports = angular.module('app.controllers.error', [])
   .controller('app.controllers.error', [
     '$scope',
     '$location',

@@ -1,4 +1,4 @@
-angular.module('app.controllers.guide', [])
+module.exports = angular.module('app.controllers.guide', [])
   .controller('app.controllers.guide', [
     '$scope',
     function($scope) {
