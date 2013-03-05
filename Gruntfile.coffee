@@ -32,6 +32,12 @@ module.exports = (grunt)->
       dist:         '<%= dirs.dist %>'
 
 
+    verbosity:
+      oneline:
+        options:    [ mode: 'hidden' ]
+        tasks:      [ 'copy' ]
+
+
     regarde:
       app:
         files:      '<%= dirs.client + files.js %>'
@@ -174,6 +180,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-express-server')
   grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-usemin')
+  grunt.loadNpmTasks('grunt-verbosity')
 
 
   ###
@@ -183,7 +190,7 @@ module.exports = (grunt)->
   # - `grunt build` when deploying
   ###
 
-  grunt.registerTask('default',   [ 'validate', 'prepare' ])
+  grunt.registerTask('default',   [ 'validate', 'verbosity', 'prepare' ])
   grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
   grunt.registerTask('build',     [ 'clean', 'prepare', 'optimize' ])
   grunt.registerTask('validate',  [ 'jshint' ])
