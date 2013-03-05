@@ -1,8 +1,7 @@
 angular
   .module('app', [
     'app.controllers',
-    'app.directives',
-    'app.templates'
+    'app.directives'
   ])
   .config(['$locationProvider', '$routeProvider', function($location, $router) {
     $router
