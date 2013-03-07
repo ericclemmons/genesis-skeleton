@@ -33,7 +33,7 @@ module.exports = (grunt)->
 
 
     verbosity:
-      oneline:
+      hidden:
         options:    [ mode: 'hidden' ]
         tasks:      [ 'copy' ]
 
