@@ -179,6 +179,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-express-server')
   grunt.loadNpmTasks('grunt-regarde')
+  grunt.loadNpmTasks('grunt-parallel')
   grunt.loadNpmTasks('grunt-usemin')
   grunt.loadNpmTasks('grunt-verbosity')
 

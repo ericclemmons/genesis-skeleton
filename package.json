@@ -39,6 +39,7 @@
     "grunt-contrib-mincss": "~0.4.0",
     "grunt-contrib-uglify": "~0.1.1",
     "grunt-express-server": "~0.1.0",
+    "grunt-parallel": "0.0.2",
     "grunt-regarde": "~0.1.1",
     "grunt-usemin": "~0.1.4",
     "grunt-verbosity": "~0.1.0"
