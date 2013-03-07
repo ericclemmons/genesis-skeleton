@@ -33,15 +33,19 @@ module.exports = (grunt)->
 
 
     verbosity:
-      oneline:
+      hidden:
         options:    [ mode: 'hidden' ]
         tasks:      [ 'copy' ]
+
+
+    parallel:
+      jshint:       [ grunt: true, args: [ 'jshint' ] ]
 
 
     regarde:
       app:
         files:      '<%= dirs.client + files.js %>'
-        tasks:      [ 'jshint', 'concat' ]
+        tasks:      [ 'parallel:jshint', 'concat' ]
 
       partials:
         files:      '<%= dirs.client + files.html %>'
@@ -49,7 +53,7 @@ module.exports = (grunt)->
 
       server:
         files:      '<%= dirs.server + files.all %>'
-        tasks:      [ 'jshint', 'express-server', 'livereload' ]
+        tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
 
       less:
         files:      '<%= dirs.client + files.less %>'
@@ -179,6 +183,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-express-server')
   grunt.loadNpmTasks('grunt-regarde')
+  grunt.loadNpmTasks('grunt-parallel')
   grunt.loadNpmTasks('grunt-usemin')
   grunt.loadNpmTasks('grunt-verbosity')
 
