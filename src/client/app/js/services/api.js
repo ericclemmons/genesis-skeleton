@@ -1,11 +1,8 @@
 angular
-  .module('app.services.api', [
-    'ngResource'
-  ])
+  .module('app')
   .factory('app.services.api', [
-    '$location',
     '$resource',
-    function($location, $resource) {
+    function($resource) {
       var api = $resource('/api/:entity');
 
       return api;

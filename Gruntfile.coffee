@@ -131,8 +131,9 @@ module.exports = (grunt)->
 
     concat:
       app:
-        src:        [ '<%= dirs.client + files.js %>'
-                      '<%= ngtemplates.app.dest %>' ]
+        src:        [ '<%= dirs.client %>/js/app.js'
+                      ,'<%= dirs.client + files.js %>'
+                      ,'<%= ngtemplates.app.dest %>' ]
         dest:       '<%= dirs.dist %>/js/app.js'
 
 

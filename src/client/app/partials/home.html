@@ -1,21 +1,10 @@
-<header ng-include="'app/partials/header.html'"></header>
+<div class="row-fluid">
+  <h3>Package Contents</h3>
 
-<section id="about">
-  <div class="container-narrow" ng-include="'app/partials/home/about.html'" autoscroll></div>
-</section>
-
-<section id="get-started">
-  <div class="container-narrow" ng-include="'app/partials/home/get-started.html'" autoscroll></div>
-</section>
-
-<section id="features">
-  <div class="container-narrow" ng-include="'app/partials/home/features.html'" autoscroll></div>
-</section>
-
-<section id="technology">
-  <div class="container-narrow" ng-include="'app/partials/home/technology.html'" autoscroll></div>
-</section>
-
-<section id="faq">
-  <div class="container-narrow" ng-include="'app/partials/home/faq.html'" autoscroll></div>
-</section>
+  <table class="table table-hover">
+    <tr ng-repeat="(item, value) in package">
+      <th>{{ item }}</th>
+      <td>{{ value }}</td>
+    </tr>
+  </table>
+</div>
