@@ -13,8 +13,9 @@ module.exports = (grunt)->
     dirs:
       client:       'client/'
       components:   'client/components/'
-      server:       'server/'
       dist:         'dist/'
+      server:       'server/'
+      test:         'test/'
 
     files:
       all:          '**/*'
@@ -45,13 +46,25 @@ module.exports = (grunt)->
         files:      '<%= dirs.server + files.all %>'
         tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
 
+      test:
+        files:      '<%= dirs.test + files.all %>'
+        tasks:      [ 'parallel:jshint', 'karma:app:run']
+
 
     jshint:
       files:        [ '<%= dirs.server + files.js %>'
-                      '<%= dirs.client %>/!(components)/<%= files.js %>' ]
+                      '<%= dirs.client %>/!(components)/<%= files.js %>'
+                      '<%= dirs.test + files.js %>' ]
       options:
         es5:        true
         laxcomma:   true
+
+
+    karma:
+      app:
+        configFile: '<%= dirs.test %>/karma.conf.js'
+        background: true
+        singleRun:  false
 
 
     less:
@@ -132,6 +145,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-mincss')
   grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-express-server')
+  grunt.loadNpmTasks('grunt-karma')
   grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-parallel')
   grunt.loadNpmTasks('grunt-usemin')
@@ -151,3 +165,4 @@ module.exports = (grunt)->
   grunt.registerTask('prepare',   [ 'copy', 'less' ])
   grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
   grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
+  grunt.registerTask('test',      [ 'validate', 'karma', 'regarde' ])

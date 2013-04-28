@@ -1,11 +1,11 @@
 angular
   .module('app')
-  .factory('app.services.api', [
+  .factory('apiService', [
     '$http',
     function($http) {
       return {
-        server: $http.get('/api/package'),
-        client: $http.get('/api/bower')
+        client: $http.get('/api/bower'),
+        server: $http.get('/api/package')
       };
     }
   ])

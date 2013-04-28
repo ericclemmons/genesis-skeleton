@@ -1,8 +1,8 @@
 angular
   .module('app')
-  .controller('app.controllers.home', [
+  .controller('homeController', [
     '$scope',
-    'app.services.api',
+    'apiService',
     function($scope, api) {
       angular.extend($scope, api);
     }
