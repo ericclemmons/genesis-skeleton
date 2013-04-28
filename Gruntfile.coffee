@@ -61,10 +61,10 @@ module.exports = (grunt)->
 
 
     karma:
-      app:
+      options:
         configFile: '<%= dirs.test %>/karma.conf.js'
-        background: true
-        singleRun:  false
+      test:
+        singleRun:  true
 
 
     less:
@@ -165,4 +165,4 @@ module.exports = (grunt)->
   grunt.registerTask('prepare',   [ 'copy', 'less' ])
   grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
   grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
-  grunt.registerTask('test',      [ 'validate', 'karma', 'regarde' ])
+  grunt.registerTask('test',      [ 'validate', 'karma' ])
