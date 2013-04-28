@@ -101,14 +101,6 @@ module.exports = (grunt)->
         ext:        '.min.css'
 
 
-    # uglify:
-    #   app:
-    #     expand:     true
-    #     cwd:        '<%= dirs.dist %>'
-    #     src:        ['<%= files.js %>', '!**/components/<%= files.js %>']
-    #     dest:       '<%= dirs.dist %>'
-    #     ext:        '.min.js'
-
     useminPrepare:
       html:         '<%= dirs.dist %>/index.html'
 
