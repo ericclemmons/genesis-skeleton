@@ -11,10 +11,10 @@ module.exports = (grunt)->
     ###
 
     dirs:
-      client:       __dirname + '/client/'
-      components:   __dirname + '/client/components/'
-      server:       __dirname + '/server/'
-      dist:         __dirname + '/dist/'
+      client:       'client/'
+      components:   'client/components/'
+      server:       'server/'
+      dist:         'dist/'
 
     files:
       all:          '**/*'
