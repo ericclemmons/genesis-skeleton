@@ -6,7 +6,7 @@ angular
     $router
       .when('/', {
         controller:   'app.controllers.home',
-        templateUrl:  'app/partials/home.html'
+        templateUrl:  'app/templates/home.html'
       })
     ;
   }])

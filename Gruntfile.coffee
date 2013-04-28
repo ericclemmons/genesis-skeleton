@@ -11,14 +11,14 @@ module.exports = (grunt)->
     ###
 
     dirs:
-      client:       __dirname + '/src/client/'
-      components:   __dirname + '/components/'
-      server:       __dirname + '/src/server/'
-      public:       __dirname + '/src/public/'
+      client:       __dirname + '/client/'
+      components:   __dirname + '/client/components/'
+      server:       __dirname + '/server/'
       dist:         __dirname + '/dist/'
 
     files:
       all:          '**/*'
+      css:          '**/*.css'
       img:          '**/*.{png,gif,jpg,jpeg}'
       js:           '**/*.js'
       less:         '**/*.less'
@@ -43,34 +43,18 @@ module.exports = (grunt)->
 
 
     regarde:
-      app:
-        files:      '<%= dirs.client + files.js %>'
-        tasks:      [ 'parallel:jshint', 'concat' ]
-
-      partials:
-        files:      '<%= dirs.client + files.html %>'
-        tasks:      [ 'copy:partials', 'ngtemplates', 'concat' ]
+      client:
+        files:      '<%= dirs.client + files.all %>'
+        tasks:      [ 'copy:client', 'parallel:jshint', 'less' ]
 
       server:
-        files:      '<%= dirs.server + files.all %>'
+        files:      '<%= dirs.server %>'
         tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
-
-      less:
-        files:      '<%= dirs.client + files.less %>'
-        tasks:      [ 'less' ]
-
-      public:
-        files:      '<%= dirs.public + files.all %>'
-        tasks:      [ 'copy:public' ]
-
-      dist:
-        files:      '<%= dirs.dist + files.all %>'
-        tasks:      [ 'livereload' ]
 
 
     jshint:
       files:        [ '<%= dirs.server + files.js %>'
-                      '<%= dirs.client %>/app/<%= files.js %>' ]
+                      '<%= dirs.client %>/!(components)/<%= files.js %>' ]
       options:
         es5:        true
         laxcomma:   true
@@ -78,8 +62,11 @@ module.exports = (grunt)->
 
     less:
       app:
-        src:        '<%= dirs.client %>/app/less/app.less'
-        dest:       '<%= dirs.dist %>/css/app.css'
+        expand:     true
+        cwd:        '<%= dirs.dist %>/app/'
+        dest:       '<%= less.app.cwd %>'
+        src:        '<%= files.less %>'
+        ext:        '.css'
 
 
     copy:
@@ -96,64 +83,40 @@ module.exports = (grunt)->
           dest:     '<%= dirs.dist %>'
         ]
 
-      partials:
+      client:
         files:      [
-          expand:   true,
+          expand:   true
           cwd:      '<%= dirs.client %>'
-          src:      '<%= files.html %>'
-          dest:     '<%= dirs.dist %>'
-        ]
-
-      components:
-        files:      [
-          expand:   true
-          cwd:      '<%= dirs.components %>'
-          src:      '<%= files.all %>'
-          dest:     '<%= dirs.dist %>/components'
-        ]
-
-      public:
-        files:      [
-          expand:   true
-          cwd:      '<%= dirs.public %>'
           src:      '<%= files.all %>'
           dest:     '<%= dirs.dist %>'
         ]
-
 
     ngtemplates:
       app:
-        src:        '<%= dirs.client + files.html %>'
-        dest:       '<%= dirs.dist %>/js/app.templates.js'
+        src:        '<%= dirs.dist %>/app/<%= files.html %>'
+        dest:       '<%= dirs.dist %>/app/js/app.templates.js'
         options:
           base:     '<%= dirs.client %>'
 
-
-    concat:
-      app:
-        src:        [ '<%= dirs.client %>/js/app.js'
-                      ,'<%= dirs.client + files.js %>'
-                      ,'<%= ngtemplates.app.dest %>' ]
-        dest:       '<%= dirs.dist %>/js/app.js'
-
-
     mincss:
       app:
-        files:
-          '<%= less.app.dest.replace(".css", ".min.css") %>':
-            '<%= less.app.dest %>'
+        expand:     true
+        cwd:        '<%= dirs.dist %>'
+        src:        ['<%= files.css %>', '!**/components/<%= files.css %>']
+        dest:       '<%= dirs.dist %>'
+        ext:        '.min.css'
 
 
-    uglify:
-      app:
-        files:
-          '<%= concat.app.dest.replace(".js", ".min.js") %>':
-            '<%= concat.app.dest %>'
-
+    # uglify:
+    #   app:
+    #     expand:     true
+    #     cwd:        '<%= dirs.dist %>'
+    #     src:        ['<%= files.js %>', '!**/components/<%= files.js %>']
+    #     dest:       '<%= dirs.dist %>'
+    #     ext:        '.min.js'
 
     useminPrepare:
       html:         '<%= dirs.dist %>/index.html'
-
 
     usemin:
       html:         '<%= dirs.dist %>/index.html'
@@ -198,8 +161,8 @@ module.exports = (grunt)->
 
   grunt.registerTask('default',   [ 'validate', 'verbosity', 'prepare' ])
   grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
-  grunt.registerTask('build',     [ 'clean', 'prepare', 'optimize' ])
+  grunt.registerTask('build',     [ 'clean', 'prepare', 'ngtemplates', 'optimize' ])
   grunt.registerTask('validate',  [ 'jshint' ])
-  grunt.registerTask('prepare',   [ 'less', 'ngtemplates', 'concat', 'copy' ])
+  grunt.registerTask('prepare',   [ 'copy', 'less' ])
   grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
   grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])

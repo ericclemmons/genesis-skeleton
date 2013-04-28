@@ -4,7 +4,8 @@ angular
     '$scope',
     'app.services.api',
     function($scope, Api) {
-      $scope.package = Api.get({ entity: 'package' });
+      $scope.server = Api.serverConfig.get({});
+      $scope.client = Api.clientConfig.get({});
     }
   ])
 ;

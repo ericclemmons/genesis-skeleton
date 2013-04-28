@@ -17,7 +17,7 @@ app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
 app.use(express.compress());
 app.use(api);
-app.use(express.static(path.join(__dirname, '../../dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 app.use(app.router);
 
 if ('development' === app.get('env')) {

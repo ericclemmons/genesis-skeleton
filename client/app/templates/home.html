@@ -1,0 +1,24 @@
+<div class="row-fluid">
+  <span class="span6">
+    <h3>Server Modules</h3>
+
+    <table class="table table-striped">
+      <tr ng-repeat="(module, version) in server.dependencies">
+        <th>{{ module }}</th>
+        <td>{{ version }}</td>
+      </tr>
+    </table>
+  </span>
+
+
+  <span class="span6">
+    <h3>Client Modules</h3>
+
+    <table class="table table-striped">
+      <tr ng-repeat="(module, version) in client.dependencies">
+        <th>{{ module }}</th>
+        <td>{{ version }}</td>
+      </tr>
+    </table>
+  </span>
+</div>
