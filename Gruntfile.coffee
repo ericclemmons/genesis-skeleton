@@ -32,12 +32,6 @@ module.exports = (grunt)->
       dist:         '<%= dirs.dist %>'
 
 
-    verbosity:
-      hidden:
-        options:    [ mode: 'hidden' ]
-        tasks:      [ 'copy' ]
-
-
     parallel:
       jshint:       [ grunt: true, args: [ 'jshint' ] ]
 
@@ -149,7 +143,6 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-parallel')
   grunt.loadNpmTasks('grunt-usemin')
-  grunt.loadNpmTasks('grunt-verbosity')
 
 
   ###
@@ -159,7 +152,7 @@ module.exports = (grunt)->
   # - `grunt build` when deploying
   ###
 
-  grunt.registerTask('default',   [ 'validate', 'verbosity', 'prepare' ])
+  grunt.registerTask('default',   [ 'validate', 'prepare' ])
   grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
   grunt.registerTask('build',     [ 'clean', 'prepare', 'ngtemplates', 'optimize' ])
   grunt.registerTask('validate',  [ 'jshint' ])
