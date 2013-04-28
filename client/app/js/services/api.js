@@ -1,11 +1,11 @@
 angular
   .module('app')
   .factory('app.services.api', [
-    '$resource',
-    function($resource) {
+    '$http',
+    function($http) {
       return {
-        serverConfig: $resource('/api/config/package.json'),
-        clientConfig: $resource('/api/config/component.json')
+        server: $http.get('/api/package'),
+        client: $http.get('/api/bower')
       };
     }
   ])

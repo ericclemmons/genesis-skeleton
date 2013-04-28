@@ -45,10 +45,10 @@ module.exports = (grunt)->
     regarde:
       client:
         files:      '<%= dirs.client + files.all %>'
-        tasks:      [ 'copy:client', 'parallel:jshint', 'less' ]
+        tasks:      [ 'copy:client', 'parallel:jshint', 'less', 'livereload' ]
 
       server:
-        files:      '<%= dirs.server %>'
+        files:      '<%= dirs.server + files.all %>'
         tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
 
 

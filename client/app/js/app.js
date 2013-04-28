@@ -1,7 +1,5 @@
 angular
-  .module('app', [
-    'ngResource'
-  ])
+  .module('app', [])
   .config(['$routeProvider', function($router) {
     $router
       .when('/', {

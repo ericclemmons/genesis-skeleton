@@ -3,12 +3,10 @@ var app       = module.exports = express();
 var fs        = require('fs');
 var path      = require('path');
 
-app.get('/api/config/:filename.json', function(req, res) {
-  var filepath = path.join(__dirname, '../../../' + req.params.filename + '.json');
-  fs.readFile(filepath, 'utf8', function (err, data) {
-    if (err) {
-      res.send({ error: 'file not found' });
-    }
-    res.send(data);
-  });
+app.get('/api/bower', function(req, res) {
+  res.send(fs.readFileSync(__dirname + '/../../../bower.json'));
+});
+
+app.get('/api/package', function(req, res) {
+  res.send(fs.readFileSync(__dirname + '/../../../package.json'));
 });
