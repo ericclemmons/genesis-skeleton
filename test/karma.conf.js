@@ -61,7 +61,7 @@ browsers = ['PhantomJS'];
 
 
 // If browser does not capture in given timeout [ms], kill it
-captureTimeout = 60000;
+captureTimeout = 10 * 1000;
 
 
 // Continuous Integration mode
