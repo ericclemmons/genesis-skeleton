@@ -15,7 +15,6 @@ module.exports = (grunt)->
       components:   'client/components/'
       dist:         'dist/'
       server:       'server/'
-      test:         'test/'
 
     files:
       all:          '**/*'
@@ -38,23 +37,29 @@ module.exports = (grunt)->
 
 
     regarde:
-      client:
-        files:      '<%= dirs.client + files.all %>'
-        tasks:      [ 'copy:client', 'parallel:jshint', 'less', 'livereload' ]
+      dist:
+        files:      '<%= dirs.dist + files.all %>'
+        tasks:      [ 'livereload', 'karma:background:run' ]
+
+      js:
+        files:      '<%= dirs.client %>/!(components)/<%= files.js %>'
+        tasks:      [ 'parallel:jshint', 'copy:js' ]
+
+      less:
+        files:      '<%= dirs.client + files.less %>'
+        tasks:      [ 'less' ]
 
       server:
         files:      '<%= dirs.server + files.all %>'
         tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
 
-      test:
-        files:      '<%= dirs.test + files.all %>'
-        tasks:      [ 'parallel:jshint', 'karma:background:run']
-
+      templates:
+        files:      '<%= dirs.client + files.html %>'
+        tasks:      [ 'copy:templates', 'ngtemplates' ]
 
     jshint:
       files:        [ '<%= dirs.server + files.js %>'
-                      '<%= dirs.client %>/!(components)/<%= files.js %>'
-                      '<%= dirs.test + files.js %>' ]
+                      '<%= dirs.client %>/!(components)/<%= files.js %>' ]
       options:
         es5:        true
         laxcomma:   true
@@ -62,30 +67,22 @@ module.exports = (grunt)->
 
     karma:
       options:
-        browsers:   ['PhantomJS'];
-        configFile: '<%= dirs.test %>/karma.conf.js'
-
-      all:
-        background: true
-        browsers:   ['PhantomJS', '<%= dirs.test %>/browsers.sh']
-        singleRun:  false
+        configFile: 'karma.conf.js'
 
       background:
         background: true
         singleRun:  false
 
-      unit:
-        singleRun:  true
+      browsers:
+        browsers:   [ 'PhantomJS', 'ChromeCanary' ]
+        background: true
+        singleRun:  false
+
+      unit:         {}
 
 
     less:
-      app:
-        expand:     true
-        cwd:        '<%= dirs.dist %>/app/'
-        dest:       '<%= less.app.cwd %>'
-        src:        '<%= files.less %>'
-        ext:        '.css'
-
+      '<%= dirs.dist %>/app/css/app.css': '<%= dirs.client %>/app/less/app.less'
 
     copy:
       images:
@@ -96,8 +93,8 @@ module.exports = (grunt)->
           dest:     '<%= dirs.dist %>/img'
         ,
           expand:   true
-          cwd:      '<%= dirs.client %>/app'
-          src:      '<%= files.img %>'
+          cwd:      '<%= dirs.client %>'
+          src:      [ '<%= files.img %>', '!**/components/<%= files.img %>' ]
           dest:     '<%= dirs.dist %>'
         ]
 
@@ -106,6 +103,22 @@ module.exports = (grunt)->
           expand:   true
           cwd:      '<%= dirs.client %>'
           src:      '<%= files.all %>'
+          dest:     '<%= dirs.dist %>'
+        ]
+
+      js:
+        files:      [
+          expand:   true
+          cwd:      '<%= dirs.client %>'
+          src:      [ '<%= files.js %>', '!**/components/<%= files.js %>' ]
+          dest:     '<%= dirs.dist %>'
+        ]
+
+      templates:
+        files:      [
+          expand:   true
+          cwd:      '<%= dirs.client %>'
+          src:      '<%= files.html %>'
           dest:     '<%= dirs.dist %>'
         ]
 
@@ -169,13 +182,10 @@ module.exports = (grunt)->
   # - `grunt build` when deploying
   ###
 
-  grunt.registerTask('default',   [ 'validate', 'prepare' ])
-  grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
-  grunt.registerTask('build',     [ 'clean', 'prepare', 'ngtemplates', 'optimize' ])
-  grunt.registerTask('validate',  [ 'jshint' ])
-  grunt.registerTask('prepare',   [ 'copy', 'less', 'ngtemplates' ])
-  grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
-  grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
-  grunt.registerTask('test',      [ 'validate', 'karma:unit' ])
-  grunt.registerTask('test:watch',[ 'karma:background', 'regarde' ])
-  grunt.registerTask('test:all',  [ 'karma:all', 'regarde' ])
+  grunt.registerTask('default',       [ 'prepare' ])
+  grunt.registerTask('server',        [ 'prepare', 'livereload-start', 'karma:background', 'express-server', 'regarde' ])
+  grunt.registerTask('build',         [ 'prepare', 'optimize' ])
+  grunt.registerTask('prepare',       [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
+  grunt.registerTask('optimize',      [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
+  grunt.registerTask('test',          [ 'prepare', 'karma:unit' ])
+  grunt.registerTask('test:browsers', [ 'karma:browsers', 'server' ])

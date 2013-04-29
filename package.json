@@ -22,7 +22,7 @@
   "scripts": {
     "start": "./node_modules/.bin/grunt build && node server/server",
     "install": "bower install",
-    "test": "./node_modules/.bin/grunt validate"
+    "test": "./node_modules/.bin/grunt test"
   },
   "dependencies": {
     "express": "3.0.5",

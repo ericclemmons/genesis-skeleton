@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Karma custom browser script for running IE7-10
 #
 # Requirements:
