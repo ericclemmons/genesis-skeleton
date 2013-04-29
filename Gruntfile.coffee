@@ -114,7 +114,7 @@ module.exports = (grunt)->
         src:        '<%= dirs.dist %>/app/<%= files.html %>'
         dest:       '<%= dirs.dist %>/app/js/app.templates.js'
         options:
-          base:     '<%= dirs.client %>'
+          base:     '<%= dirs.dist %>'
 
     mincss:
       app:
