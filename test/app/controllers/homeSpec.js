@@ -21,11 +21,11 @@ describe('homeController', function() {
     });
   });
 
-  it('should set scope.client', function() {
+  it('should set $scope.client', function() {
     expect($scope.client).toBeDefined();
   });
 
-  it('should set scope.server', function() {
+  it('should set $scope.server', function() {
     expect($scope.server).toBeDefined();
   });
 });

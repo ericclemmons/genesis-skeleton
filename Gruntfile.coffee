@@ -48,7 +48,7 @@ module.exports = (grunt)->
 
       test:
         files:      '<%= dirs.test + files.all %>'
-        tasks:      [ 'parallel:jshint', 'karma:app:run']
+        tasks:      [ 'parallel:jshint', 'karma:background:run']
 
 
     jshint:
@@ -62,8 +62,19 @@ module.exports = (grunt)->
 
     karma:
       options:
+        browsers:   ['PhantomJS'];
         configFile: '<%= dirs.test %>/karma.conf.js'
-      test:
+
+      all:
+        background: true
+        browsers:   ['PhantomJS', '<%= dirs.test %>/browsers.sh']
+        singleRun:  false
+
+      background:
+        background: true
+        singleRun:  false
+
+      unit:
         singleRun:  true
 
 
@@ -161,8 +172,9 @@ module.exports = (grunt)->
   grunt.registerTask('default',   [ 'validate', 'prepare' ])
   grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
   grunt.registerTask('build',     [ 'clean', 'prepare', 'ngtemplates', 'optimize' ])
-  grunt.registerTask('validate',  [ 'jshint' ])
+  grunt.registerTask('validate',  [ 'jshint', 'karma:unit' ])
   grunt.registerTask('prepare',   [ 'copy', 'less' ])
   grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
   grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
-  grunt.registerTask('test',      [ 'validate', 'karma' ])
+  grunt.registerTask('test',      [ 'karma:background', 'regarde' ])
+  grunt.registerTask('test:all',  [ 'karma:all', 'regarde' ])
