@@ -154,7 +154,7 @@ module.exports = (grunt)->
       # Changes to app code should be validated and re-copied to the `build`, triggering `regarde:build`
       js:
         files:      '<%= CLIENT_DIR + JS_FILES %>'
-        tasks:      [ 'parallel:jshint', 'copy:js' ]
+        tasks:      [ 'copy:js', 'parallel:jshint' ]
 
       # Changes to app styles should re-compile, triggering `regarde:build`
       less:
