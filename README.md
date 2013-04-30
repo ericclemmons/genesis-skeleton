@@ -1,7 +1,8 @@
 Genesis Skeleton [![Build Status](https://travis-ci.org/ericclemmons/genesis-skeleton.png)](https://travis-ci.org/ericclemmons/genesis-skeleton)
 ================
 
-Modern application skeleton:
+A forkable, opinionated modern application starter kit with a
+robust set of features & the latest technologies:
 
 * [HTML5 Boilerplate][1]
 * [AngularJS][2]
@@ -14,51 +15,39 @@ Modern application skeleton:
 **You can always find the latest instructions & guide at [http://genesis-skeleton.com/][0]**
 
 
-Requirements
-------------
+Download
+--------
 
-    $ npm install -g grunt-cli bower
+#### Zip (Recommended)
+
+> <https://github.com/ericclemmons/genesis-skeleton/archive/master.zip>
+
+#### Git
+
+    git clone https://github.com/ericclemmons/genesis-skeleton.git my-project \
+        --single-branch \
+        --branch=master \
+        --depth=1
+
+*`--single-branch` requires [Git v1.7.10+][9]*
 
 
-Installation
-------------
+Install
+-------
 
-    $ git clone git@github.com:ericclemmons/genesis-skeleton.git my-project
-    $ cd my-project
-    $ npm install
+1. `npm install -g grunt-cli bower`
+2. `cd my-project`
+3. `npm install`
 
 
 Usage
 -----
 
-Start an [Express][3] server with [LiveReload][5]:
-
-    $ grunt server
-
-
-Customize
----------
-
-- `src/public/crossdomain.xml`
-- `src/public/humans.txt`
-
-
-Deployment (with [Heroku][7])
-------------------------
-
-1 - Create the server
-
-    $ heroku create
-    $ heroku config:add NODE_ENV=production
-    $ heroku keys:add ~/.ssh/id_rsa.pub
-
-2 - Deploy
-
-    $ git push heroku master
-
-3 - Profit!
-
-    $ heroku open
+- `grunt server` - Live-reloading development environment
+- `grunt test` - Continuous integration tests (e.g. Travis), also used by `npm test`
+- `grunt test:browsers` - Real-world browser testing (even IE!)
+- `grunt build` - Clean, validate & compile web-accessible resources
+- `grunt optimize` - Optimize the build resources for production
 
 
 License
@@ -76,3 +65,4 @@ MIT
 [6]: http://twitter.github.com/bootstrap/
 [7]: https://toolbelt.heroku.com/
 [8]: http://twitter.github.com/bower/
+[9]: http://gitscm.org/
