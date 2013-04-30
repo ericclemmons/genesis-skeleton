@@ -20,12 +20,11 @@
     "npm": "1.1.x"
   },
   "scripts": {
-    "start": "./node_modules/.bin/grunt build && node src/server/server",
+    "start": "./node_modules/.bin/grunt build optimize && node server/server",
     "install": "bower install",
-    "test": "./node_modules/.bin/grunt build"
+    "test": "./node_modules/.bin/grunt test"
   },
   "dependencies": {
-    "bower": "0.6.8",
     "express": "3.0.5",
     "grunt": "~0.4.0",
     "grunt-cli": "~0.1.6",
@@ -39,9 +38,9 @@
     "grunt-contrib-mincss": "~0.4.0",
     "grunt-contrib-uglify": "~0.1.1",
     "grunt-express-server": "~0.1.0",
+    "grunt-karma": "~0.4.4",
     "grunt-parallel": "0.0.2",
     "grunt-regarde": "~0.1.1",
-    "grunt-usemin": "~0.1.4",
-    "grunt-verbosity": "~0.1.0"
+    "grunt-usemin": "~0.1.4"
   }
 }

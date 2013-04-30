@@ -1,0 +1,47 @@
+<section class="jumbotron">
+  <h1>Welcome!</h1>
+
+  <p class="lead">
+    You're ready to start working on your next great site!
+  </p>
+
+  <a href="http://genesis-skeleton.com/#/guide" class="btn btn-success">View Guide</a>
+</section>
+
+<hr>
+
+<div class="row-fluid">
+  <div class="npm packages span6">
+    <h3><a href="https://npmjs.org/">NPM</a> Packages</h3>
+
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <tbody>
+        <tr ng-repeat="(module, version) in server.data.dependencies | orderBy:module">
+          <th>
+            <a ng-href="https://npmjs.org/package/{{ module }}">{{ module }}</a>
+          </th>
+          <td class="text-right">
+            {{ version }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="bower packages span6">
+    <h3><a href="http://bower.io/">Bower</a> Packages</h3>
+
+    <table class="table table-striped table-bordered table-hover table-condensed">
+      <tbody>
+        <tr ng-repeat="(module, version) in client.data.dependencies">
+          <th>
+            {{ module }}
+          </th>
+          <td class="text-right">
+            {{ version }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

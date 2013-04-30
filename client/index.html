@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Genesis Skeleton</title>
+
+    <meta http-equiv="X-UA-Compatible"  content="IE=edge,chrome=1">
+    <meta name="viewport"               content="width=device-width, initial-scale=1.0">
+    <meta name="description"            content="Modern application skeleton - HTML5 Boilerplate + Angular + Express + Grunt + LiveReload + Bootstrap + Bower">
+    <meta name="author"                 content="Eric Clemmons">
+
+    <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
+
+    <!-- build:css app/css/app.min.css -->
+    <link rel="stylesheet" href="app/css/app.css">
+    <!-- endbuild -->
+
+    <!--[if lt IE 9]>
+    <script src="components/html5shiv-dist/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+  <body ng-app="app">
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+
+    <div class="container-fluid">
+      <header class="masthead">
+        <h3>
+          <a href="http://genesis-skeleton.com/" class="muted">Genesis Skeleton</a> <small>v{{ version }}</small>
+        </h3>
+      </header>
+
+      <hr>
+
+      <noscript>
+        Please enable Javascript to experience this site :)
+      </noscript>
+
+      <div ng-view></div>
+
+      <hr>
+
+      <footer class="muted text-center">
+        &copy; 2013 Genesis Skeleton
+      </footer>
+    </div>
+
+    <!-- build:js app/js/all.min.js -->
+    <script src="components/angular/angular.js"></script>
+    <script src="components/modernizr/modernizr.js"></script>
+
+    <script src="app/js/app.js"></script>
+    <script src="app/js/controllers/home.js"></script>
+    <script src="app/js/services/api.js"></script>
+    <script src="app/js/app.templates.js"></script>
+    <!-- endbuild -->
+
+    <script>
+      angular.bootstrap(document.documentElement, ['app']);
+    </script>
+
+    <!-- Google Analytics -->
+    <script>
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+      g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+      s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  </body>
+</html>
