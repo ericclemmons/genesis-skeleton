@@ -1,5 +1,5 @@
+/build
+/components
+/node_modules
+/npm-debug.log
 .DS_STORE
-build
-components
-node_modules
-npm-debug.log

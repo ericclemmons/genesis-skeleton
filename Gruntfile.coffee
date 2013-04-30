@@ -22,7 +22,7 @@ module.exports = (grunt)->
     # Directory CONSTANTS (see what I did there?)
     BUILD_DIR:      'build/'
     CLIENT_DIR:     'client/'
-    COMPONENTS_DIR: 'client/components/'
+    COMPONENTS_DIR: 'components/'
     SERVER_DIR:     'server/'
 
     # Glob CONSTANTS
@@ -39,7 +39,7 @@ module.exports = (grunt)->
       build:        '<%= BUILD_DIR %>'
 
     copy:
-      # app images, either from Bower `components` or in the `client` directory
+      # App images from Bower `components` & `client`
       images:
         files:      [
           expand:   true,
@@ -49,11 +49,11 @@ module.exports = (grunt)->
         ,
           expand:   true
           cwd:      '<%= CLIENT_DIR %>'
-          src:      [ '<%= IMG_FILES %>', '!**/components/<%= IMG_FILES %>' ]
+          src:      '<%= IMG_FILES %>'
           dest:     '<%= BUILD_DIR %>'
         ]
 
-      # Copy `client` -> `build`, as all served resources are from `build`
+      # Copy `client` -> `build`, as resources are served from `build`
       client:
         files:      [
           expand:   true
@@ -62,12 +62,17 @@ module.exports = (grunt)->
           dest:     '<%= BUILD_DIR %>'
         ]
 
+      # Make components HTTP-accessible
+      components:
+        files:
+          '<%= BUILD_DIR %>': '<%= COMPONENTS_DIR + ALL_FILES %>'
+
       # app (non-Bower) JS in `client`
       js:
         files:      [
           expand:   true
           cwd:      '<%= CLIENT_DIR %>'
-          src:      [ '<%= JS_FILES %>', '!**/components/<%= JS_FILES %>' ]
+          src:      '<%= JS_FILES %>'
           dest:     '<%= BUILD_DIR %>'
         ]
 
@@ -83,7 +88,7 @@ module.exports = (grunt)->
     # Validate app `client` and `server` JS
     jshint:
       files:        [ '<%= SERVER_DIR + JS_FILES %>'
-                      '<%= CLIENT_DIR %>/!(components)/<%= JS_FILES %>' ]
+                      '<%= CLIENT_DIR + JS_FILES %>' ]
       options:
         es5:        true
         laxcomma:   true  # Common in Express-derived libraries
@@ -114,17 +119,16 @@ module.exports = (grunt)->
 
     # Support live-reloading of all non-Bower resources
     livereload:
-      files:        [ '<%= BUILD_DIR %>/!(components)*'
-                      '<%= BUILD_DIR %>/!(components)/**.*' ]
       options:
         base:       '<%= BUILD_DIR %>'
+      files:        '<%= BUILD_DIR + ALL_FILES %>'
 
     # Minify app `.css` resources -> `.min.css`
     mincss:
       app:
         expand:     true
         cwd:        '<%= BUILD_DIR %>'
-        src:        ['<%= CSS_FILES %>', '!**/components/<%= CSS_FILES %>']
+        src:        '<%= CSS_FILES %>'
         dest:       '<%= BUILD_DIR %>'
         ext:        '.min.css'
 
@@ -149,7 +153,7 @@ module.exports = (grunt)->
 
       # Changes to app code should be validated and re-copied to the `build`, triggering `regarde:build`
       js:
-        files:      '<%= CLIENT_DIR %>/!(components)/<%= JS_FILES %>'
+        files:      '<%= CLIENT_DIR + JS_FILES %>'
         tasks:      [ 'parallel:jshint', 'copy:js' ]
 
       # Changes to app styles should re-compile, triggering `regarde:build`
