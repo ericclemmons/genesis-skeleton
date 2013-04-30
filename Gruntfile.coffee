@@ -10,7 +10,7 @@ module.exports = (grunt)->
   grunt.registerTask('test:browsers', [ 'karma:browsers', 'server' ])
 
   # Clean, validate & compile web-accessible resources
-  grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
+  grunt.registerTask('build', [ 'clean', 'jshint', 'coffeelint', 'copy', 'coffee', 'ngtemplates', 'less' ])
 
   # Optimize pre-built, web-accessible resources for production, primarily `usemin`
   grunt.registerTask('optimize', [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
@@ -27,6 +27,7 @@ module.exports = (grunt)->
 
     # Glob CONSTANTS
     ALL_FILES:      '**/*'
+    COFFEE_FILES:   '**/*.coffee'
     CSS_FILES:      '**/*.css'
     HTML_FILES:     '**/*.html'
     IMG_FILES:      '**/*.{png,gif,jpg,jpeg}'
@@ -37,6 +38,20 @@ module.exports = (grunt)->
     # Wipe the `build` directory
     clean:
       build:        '<%= BUILD_DIR %>'
+
+    # Compile CoffeeScript files as .js in build directory
+    coffee:
+      files:
+        bare:       true
+        expand:     true
+        cwd:        '<%= CLIENT_DIR %>'
+        src:        '<%= COFFEE_FILES %>'
+        dest:       '<%= BUILD_DIR %>'
+        ext:        '.js'
+
+    # Lint CoffeeScript files
+    coffeelint:
+      files:        '<%= coffee.files %>'
 
     copy:
       # App images from Bower `components` & `client`
@@ -142,6 +157,7 @@ module.exports = (grunt)->
 
     # Ability to run `jshint` without errors terminating the development server
     parallel:
+      coffeelint:   [ grunt: true, args: [ 'coffeelint' ] ]
       jshint:       [ grunt: true, args: [ 'jshint' ] ]
 
     # "watch" distinct types of files and re-prepare accordingly
@@ -150,6 +166,11 @@ module.exports = (grunt)->
       build:
         files:      '<%= BUILD_DIR + ALL_FILES %>'
         tasks:      [ 'livereload', 'karma:background:run' ]
+
+      # Changes to coffee code should be validated and re-compiled to the `build`, triggering `regarde:build`
+      coffee:
+        files:      '<%= CLIENT_DIR + COFFEE_FILES %>'
+        tasks:      [ 'parallel:coffeelint', 'coffee' ]
 
       # Changes to app code should be validated and re-copied to the `build`, triggering `regarde:build`
       js:
@@ -187,7 +208,9 @@ module.exports = (grunt)->
 
   # Dependencies
   grunt.loadNpmTasks('grunt-angular-templates')
+  grunt.loadNpmTasks('grunt-coffeelint');
   grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-concat')
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-contrib-jshint')
