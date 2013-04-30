@@ -22,7 +22,7 @@
     <script src="components/html5shiv-dist/html5shiv.js"></script>
     <![endif]-->
   </head>
-  <body>
+  <body ng-app="app">
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
@@ -30,7 +30,7 @@
     <div class="container-fluid">
       <header class="masthead">
         <h3>
-          <a href="http://genesis-skeleton.com/" class="muted">Genesis Skeleton</a>
+          <a href="http://genesis-skeleton.com/" class="muted">Genesis Skeleton</a> <small>v{{ version }}</small>
         </h3>
       </header>
 
@@ -40,7 +40,7 @@
         Please enable Javascript to experience this site :)
       </noscript>
 
-      <div ng-app="app" ng-view></div>
+      <div ng-view></div>
 
       <hr>
 
