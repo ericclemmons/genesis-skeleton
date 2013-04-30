@@ -1,0 +1,13 @@
+{
+  "name": "genesis-skeleton",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.0.6",
+    "angular-mocks": "~1.0.6",
+    "angular-scenario": "~1.0.6",
+    "angular-strap": "~0.7.3",
+    "bootstrap": "~2.3.1",
+    "html5shiv-dist": "~3.6.1",
+    "modernizr": "~2.6.2"
+  }
+}

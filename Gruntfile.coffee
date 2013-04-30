@@ -1,177 +1,191 @@
 module.exports = (grunt)->
 
-  ###
-  # Configuration
-  ###
+  # Run `grunt server` for live-reloading development environment
+  grunt.registerTask('server', [ 'build', 'livereload-start', 'karma:background', 'express-server', 'regarde' ])
 
+  # Run `grunt test` (used by `npm test`) for continuous integration (e.g. Travis)
+  grunt.registerTask('test', [ 'build', 'karma:unit' ])
+
+  # Run `grunt test:browsers` for real-world browser testing
+  grunt.registerTask('test:browsers', [ 'karma:browsers', 'server' ])
+
+  # Clean, validate & compile web-accessible resources
+  grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
+
+  # Optimize pre-built, web-accessible resources for production, primarily `usemin`
+  grunt.registerTask('optimize', [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
+
+
+  # Configuration
   grunt.config.init
 
-    ###
-    # Constants
-    ###
+    # Directory CONSTANTS (see what I did there?)
+    BUILD_DIR:      'build/'
+    CLIENT_DIR:     'client/'
+    COMPONENTS_DIR: 'components/'
+    SERVER_DIR:     'server/'
 
-    dirs:
-      client:       __dirname + '/src/client/'
-      components:   __dirname + '/components/'
-      server:       __dirname + '/src/server/'
-      public:       __dirname + '/src/public/'
-      dist:         __dirname + '/dist/'
+    # Glob CONSTANTS
+    ALL_FILES:      '**/*'
+    CSS_FILES:      '**/*.css'
+    HTML_FILES:     '**/*.html'
+    IMG_FILES:      '**/*.{png,gif,jpg,jpeg}'
+    JS_FILES:       '**/*.js'
+    LESS_FILES:     '**/*.less'
 
-    files:
-      all:          '**/*'
-      img:          '**/*.{png,gif,jpg,jpeg}'
-      js:           '**/*.js'
-      less:         '**/*.less'
-      html:         '**/*.html'
 
-    ###
-    # Tasks
-    ###
-
+    # Wipe the `build` directory
     clean:
-      dist:         '<%= dirs.dist %>'
-
-
-    verbosity:
-      hidden:
-        options:    [ mode: 'hidden' ]
-        tasks:      [ 'copy' ]
-
-
-    parallel:
-      jshint:       [ grunt: true, args: [ 'jshint' ] ]
-
-
-    regarde:
-      app:
-        files:      '<%= dirs.client + files.js %>'
-        tasks:      [ 'parallel:jshint', 'concat' ]
-
-      partials:
-        files:      '<%= dirs.client + files.html %>'
-        tasks:      [ 'copy:partials', 'ngtemplates', 'concat' ]
-
-      server:
-        files:      '<%= dirs.server + files.all %>'
-        tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
-
-      less:
-        files:      '<%= dirs.client + files.less %>'
-        tasks:      [ 'less' ]
-
-      public:
-        files:      '<%= dirs.public + files.all %>'
-        tasks:      [ 'copy:public' ]
-
-      dist:
-        files:      '<%= dirs.dist + files.all %>'
-        tasks:      [ 'livereload' ]
-
-
-    jshint:
-      files:        [ '<%= dirs.server + files.js %>'
-                      '<%= dirs.client %>/app/<%= files.js %>' ]
-      options:
-        es5:        true
-        laxcomma:   true
-
-
-    less:
-      app:
-        src:        '<%= dirs.client %>/app/less/app.less'
-        dest:       '<%= dirs.dist %>/css/app.css'
-
+      build:        '<%= BUILD_DIR %>'
 
     copy:
+      # App images from Bower `components` & `client`
       images:
         files:      [
           expand:   true,
-          cwd:      '<%= dirs.components %>/bootstrap/img'
-          src:      '<%= files.img %>'
-          dest:     '<%= dirs.dist %>/img'
+          cwd:      '<%= COMPONENTS_DIR %>/bootstrap/img'
+          src:      '<%= IMG_FILES %>'
+          dest:     '<%= BUILD_DIR %>/img'
         ,
           expand:   true
-          cwd:      '<%= dirs.client %>/app'
-          src:      '<%= files.img %>'
-          dest:     '<%= dirs.dist %>'
+          cwd:      '<%= CLIENT_DIR %>'
+          src:      '<%= IMG_FILES %>'
+          dest:     '<%= BUILD_DIR %>'
         ]
 
-      partials:
+      # Copy `client` -> `build`, as resources are served from `build`
+      client:
         files:      [
-          expand:   true,
-          cwd:      '<%= dirs.client %>'
-          src:      '<%= files.html %>'
-          dest:     '<%= dirs.dist %>'
+          expand:   true
+          cwd:      '<%= CLIENT_DIR %>'
+          src:      '<%= ALL_FILES %>'
+          dest:     '<%= BUILD_DIR %>'
         ]
 
+      # Make components HTTP-accessible
       components:
+        files:
+          '<%= BUILD_DIR %>': '<%= COMPONENTS_DIR + ALL_FILES %>'
+
+      # app (non-Bower) JS in `client`
+      js:
         files:      [
           expand:   true
-          cwd:      '<%= dirs.components %>'
-          src:      '<%= files.all %>'
-          dest:     '<%= dirs.dist %>/components'
+          cwd:      '<%= CLIENT_DIR %>'
+          src:      '<%= JS_FILES %>'
+          dest:     '<%= BUILD_DIR %>'
         ]
 
-      public:
+      # app (non-Bower) HTML in `client`
+      templates:
         files:      [
           expand:   true
-          cwd:      '<%= dirs.public %>'
-          src:      '<%= files.all %>'
-          dest:     '<%= dirs.dist %>'
+          cwd:      '<%= CLIENT_DIR %>'
+          src:      '<%= HTML_FILES %>'
+          dest:     '<%= BUILD_DIR %>'
         ]
 
+    # Validate app `client` and `server` JS
+    jshint:
+      files:        [ '<%= SERVER_DIR + JS_FILES %>'
+                      '<%= CLIENT_DIR + JS_FILES %>' ]
+      options:
+        es5:        true
+        laxcomma:   true  # Common in Express-derived libraries
 
-    ngtemplates:
-      app:
-        src:        '<%= dirs.client + files.html %>'
-        dest:       '<%= dirs.dist %>/js/app.templates.js'
-        options:
-          base:     '<%= dirs.client %>'
+    # Browser-based testing
+    karma:
+      options:
+        configFile: 'karma.conf.js'
 
+      # Used for running tests while the server is running
+      background:
+        background: true
+        singleRun:  false
 
-    concat:
-      app:
-        src:        [ '<%= dirs.client + files.js %>'
-                      '<%= ngtemplates.app.dest %>' ]
-        dest:       '<%= dirs.dist %>/js/app.js'
+      # Used for testing site across several browser profiles
+      browsers:
+        browsers:   [ 'PhantomJS' ] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', 'bin/browsers.sh'
+        background: true
+        singleRun:  false
 
+      # Used for one-time validation (e.g. `grunt test`, `npm test`)
+      unit:
+        singleRun:  true
 
+    # Compile `app.less` -> `app.css`
+    less:
+      '<%= BUILD_DIR %>/app/css/app.css': '<%= CLIENT_DIR %>/app/less/app.less'
+
+    # Support live-reloading of all non-Bower resources
+    livereload:
+      options:
+        base:       '<%= BUILD_DIR %>'
+      files:        '<%= BUILD_DIR + ALL_FILES %>'
+
+    # Minify app `.css` resources -> `.min.css`
     mincss:
       app:
-        files:
-          '<%= less.app.dest.replace(".css", ".min.css") %>':
-            '<%= less.app.dest %>'
+        expand:     true
+        cwd:        '<%= BUILD_DIR %>'
+        src:        '<%= CSS_FILES %>'
+        dest:       '<%= BUILD_DIR %>'
+        ext:        '.min.css'
 
-
-    uglify:
+    # Convert Angular `.html` templates to `.js` in the `app` module
+    ngtemplates:
       app:
-        files:
-          '<%= concat.app.dest.replace(".js", ".min.js") %>':
-            '<%= concat.app.dest %>'
+        src:        '<%= BUILD_DIR %>/app/<%= HTML_FILES %>'
+        dest:       '<%= BUILD_DIR %>/app/js/app.templates.js'
+        options:
+          base:     '<%= BUILD_DIR %>'
 
+    # Ability to run `jshint` without errors terminating the development server
+    parallel:
+      jshint:       [ grunt: true, args: [ 'jshint' ] ]
 
-    useminPrepare:
-      html:         '<%= dirs.dist %>/index.html'
+    # "watch" distinct types of files and re-prepare accordingly
+    regarde:
+      # Any public-facing changes should reload the browser & re-run tests (which may depend on those resources)
+      build:
+        files:      '<%= BUILD_DIR + ALL_FILES %>'
+        tasks:      [ 'livereload', 'karma:background:run' ]
 
+      # Changes to app code should be validated and re-copied to the `build`, triggering `regarde:build`
+      js:
+        files:      '<%= CLIENT_DIR + JS_FILES %>'
+        tasks:      [ 'copy:js', 'parallel:jshint' ]
 
-    usemin:
-      html:         '<%= dirs.dist %>/index.html'
+      # Changes to app styles should re-compile, triggering `regarde:build`
+      less:
+        files:      '<%= CLIENT_DIR + LESS_FILES %>'
+        tasks:      [ 'less' ]
 
-    livereload:
-      files:        [ '<%= dirs.dist %>/!(components)*'
-                      '<%= dirs.dist %>/!(components)/**.*' ]
-      options:
-        base:       '<%= dirs.dist %>'
+      # Changes to server-side code should validate, restart the server, & refresh the browser
+      server:
+        files:      '<%= SERVER_DIR + ALL_FILES %>'
+        tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
 
+      # Changes to app templates should re-copy & re-compile them, triggering `regarde:build`
+      templates:
+        files:      '<%= CLIENT_DIR + HTML_FILES %>'
+        tasks:      [ 'copy:templates', 'ngtemplates' ]
+
+    # Express requires `server.script` to reload from changes
     server:
-      script:       '<%= dirs.server %>/server.js'
+      script:       '<%= SERVER_DIR %>/server.js'
       port:         process.env.PORT || 3000
 
+    # Output for optimized app index
+    usemin:
+      html:         '<%= BUILD_DIR %>/index.html'
 
-  ###
+    # Input for optimized app index
+    useminPrepare:
+      html:         '<%= BUILD_DIR %>/index.html'
+
+
   # Dependencies
-  ###
-
   grunt.loadNpmTasks('grunt-angular-templates')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-concat')
@@ -182,23 +196,7 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-mincss')
   grunt.loadNpmTasks('grunt-contrib-uglify')
   grunt.loadNpmTasks('grunt-express-server')
+  grunt.loadNpmTasks('grunt-karma')
   grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-parallel')
   grunt.loadNpmTasks('grunt-usemin')
-  grunt.loadNpmTasks('grunt-verbosity')
-
-
-  ###
-  # Alias Tasks
-  #
-  # - `grunt server` for local development
-  # - `grunt build` when deploying
-  ###
-
-  grunt.registerTask('default',   [ 'validate', 'verbosity', 'prepare' ])
-  grunt.registerTask('server',    [ 'clean', 'default', 'express' ])
-  grunt.registerTask('build',     [ 'clean', 'prepare', 'optimize' ])
-  grunt.registerTask('validate',  [ 'jshint' ])
-  grunt.registerTask('prepare',   [ 'less', 'ngtemplates', 'concat', 'copy' ])
-  grunt.registerTask('express',   [ 'livereload-start', 'express-server', 'regarde' ])
-  grunt.registerTask('optimize',  [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
