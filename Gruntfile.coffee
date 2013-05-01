@@ -130,7 +130,7 @@ module.exports = (grunt)->
 
     # Compile `app.less` -> `app.css`
     less:
-      '<%= BUILD_DIR %>/app/css/app.css': '<%= CLIENT_DIR %>/app/less/app.less'
+      '<%= BUILD_DIR %>/app/styles/app.css': '<%= CLIENT_DIR %>/app/styles/app.less'
 
     # Support live-reloading of all non-Bower resources
     livereload:
@@ -151,7 +151,7 @@ module.exports = (grunt)->
     ngtemplates:
       app:
         src:        '<%= BUILD_DIR %>/app/<%= HTML_FILES %>'
-        dest:       '<%= BUILD_DIR %>/app/js/app.templates.js'
+        dest:       '<%= BUILD_DIR %>/app/scripts/app.templates.js'
         options:
           base:     '<%= BUILD_DIR %>'
 

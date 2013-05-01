@@ -5,7 +5,7 @@ files = [
   JASMINE_ADAPTER,
   'components/angular/angular.js',
   'components/angular-mocks/angular-mocks.js',
-  'build/app/js/**/*.js',
+  'build/app/scripts/**/*.js',
   'build/app/test/unit/**/*Spec.js'
 ];
 
