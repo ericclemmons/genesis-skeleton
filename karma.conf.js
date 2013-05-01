@@ -5,8 +5,8 @@ files = [
   JASMINE_ADAPTER,
   'components/angular/angular.js',
   'components/angular-mocks/angular-mocks.js',
-  'client/app/js/**/*.js',
-  'client/app/test/unit/**/*Spec.js'
+  'build/app/js/**/*.js',
+  'build/app/test/unit/**/*Spec.js'
 ];
 
 reporters       = [ 'dots' ];       // 'dots', 'progress', 'junit'
