@@ -1,7 +1,7 @@
 module.exports = (grunt)->
 
   # Run `grunt server` for live-reloading development environment
-  grunt.registerTask('server', [ 'build', 'livereload-start', 'karma:background', 'express-server', 'regarde' ])
+  grunt.registerTask('server', [ 'build', 'livereload-start', 'karma:background', 'regarde' ])
 
   # Run `grunt test` (used by `npm test`) for continuous integration (e.g. Travis)
   grunt.registerTask('test', [ 'build', 'karma:unit' ])
@@ -23,7 +23,6 @@ module.exports = (grunt)->
     BUILD_DIR:      'build/'
     CLIENT_DIR:     'client/'
     COMPONENTS_DIR: 'components/'
-    SERVER_DIR:     'server/'
 
     # Glob CONSTANTS
     ALL_FILES:      '**/*'
@@ -85,10 +84,9 @@ module.exports = (grunt)->
           dest:     '<%= BUILD_DIR %>'
         ]
 
-    # Validate app `client` and `server` JS
+    # Validate app `client` JS
     jshint:
-      files:        [ '<%= SERVER_DIR + JS_FILES %>'
-                      '<%= CLIENT_DIR + JS_FILES %>' ]
+      files:        ['<%= CLIENT_DIR + JS_FILES %>' ]
       options:
         es5:        true
         laxcomma:   true  # Common in Express-derived libraries
@@ -161,20 +159,10 @@ module.exports = (grunt)->
         files:      '<%= CLIENT_DIR + LESS_FILES %>'
         tasks:      [ 'less' ]
 
-      # Changes to server-side code should validate, restart the server, & refresh the browser
-      server:
-        files:      '<%= SERVER_DIR + ALL_FILES %>'
-        tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
-
       # Changes to app templates should re-copy & re-compile them, triggering `regarde:build`
       templates:
         files:      '<%= CLIENT_DIR + HTML_FILES %>'
         tasks:      [ 'copy:templates', 'ngtemplates' ]
-
-    # Express requires `server.script` to reload from changes
-    server:
-      script:       '<%= SERVER_DIR %>/server.js'
-      port:         process.env.PORT || 3000
 
     # Output for optimized app index
     usemin:
@@ -195,7 +183,6 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-contrib-livereload')
   grunt.loadNpmTasks('grunt-contrib-mincss')
   grunt.loadNpmTasks('grunt-contrib-uglify')
-  grunt.loadNpmTasks('grunt-express-server')
   grunt.loadNpmTasks('grunt-karma')
   grunt.loadNpmTasks('grunt-regarde')
   grunt.loadNpmTasks('grunt-parallel')
