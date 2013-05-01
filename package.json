@@ -41,6 +41,7 @@
     "grunt-karma": "~0.4.4",
     "grunt-parallel": "0.0.2",
     "grunt-regarde": "~0.1.1",
-    "grunt-usemin": "~0.1.4"
+    "grunt-usemin": "~0.1.4",
+    "phantom": "~0.4.2"
   }
 }
