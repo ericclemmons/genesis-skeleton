@@ -4,8 +4,8 @@ angular
     '$http',
     function($http) {
       return {
-        client: $http.get('/api/bower'),
-        server: $http.get('/api/package')
+        client: $http.get('../bower.json'),
+        server: $http.get('../package.json')
       };
     }
   ])
