@@ -1,11 +1,17 @@
 angular
   .module('app', [])
-  .config(['$routeProvider', function($router) {
-    $router
-      .when('/', {
-        controller:   'homeController',
-        templateUrl:  'app/templates/home.html'
-      })
-    ;
-  }])
+  .config([
+    '$locationProvider',
+    '$routeProvider',
+    function($location, $router) {
+      $location.hashPrefix('!');
+
+      $router
+        .when('/', {
+          controller:   'homeController',
+          templateUrl:  'app/templates/home.html'
+        })
+      ;
+    }
+  ])
 ;
