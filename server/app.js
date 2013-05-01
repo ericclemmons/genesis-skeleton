@@ -6,6 +6,7 @@
 var express   = require('express');
 var path      = require('path');
 var api       = require('./lib/api');
+var seo       = require('./lib/seo');
 var app       = module.exports = express();
 
 app.set('port', process.env.PORT || 3000);
@@ -17,6 +18,7 @@ app.use(express.cookieParser('change this value to something unique'));
 app.use(express.cookieSession());
 app.use(express.compress());
 app.use(api);
+app.use(seo);
 app.use(express.static(path.join(__dirname, '../build')));
 app.use(app.router);
 
