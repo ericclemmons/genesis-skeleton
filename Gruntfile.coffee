@@ -127,12 +127,7 @@ module.exports = (grunt)->
 
     # Minify app `.css` resources -> `.min.css`
     mincss:
-      app:
-        expand:     true
-        cwd:        '<%= BUILD_DIR %>'
-        src:        '<%= CSS_FILES %>'
-        dest:       '<%= BUILD_DIR %>'
-        ext:        '.min.css'
+      app:          {}
 
     # Convert Angular `.html` templates to `.js` in the `app` module
     ngtemplates:
@@ -179,7 +174,7 @@ module.exports = (grunt)->
 
     # Input for optimized app index
     useminPrepare:
-      html:         [ '<%= BUILD_DIR %>/index.html', '<%= BUILD_DIR %>/404.html' ]
+      html:         [ '<%= BUILD_DIR %>/index.html' ]
 
 
   # Dependencies
