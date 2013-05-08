@@ -148,11 +148,6 @@ module.exports = (grunt)->
 
     # "watch" distinct types of files and re-prepare accordingly
     regarde:
-      # Any public-facing changes should reload the browser & re-run tests (which may depend on those resources)
-      build:
-        files:      '<%= BUILD_DIR + ALL_FILES %>'
-        tasks:      [ 'livereload', 'karma:background:run' ]
-
       # Changes to app code should be validated and re-copied to the `build`, triggering `regarde:build`
       js:
         files:      '<%= CLIENT_DIR + JS_FILES %>'
