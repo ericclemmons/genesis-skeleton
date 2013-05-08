@@ -20,9 +20,9 @@ module.exports = (grunt)->
   grunt.config.init
 
     # Directory CONSTANTS (see what I did there?)
-    BUILD_DIR:      'build/'
-    CLIENT_DIR:     'client/'
-    COMPONENTS_DIR: 'components/'
+    BUILD_DIR:      './'
+    CLIENT_DIR:     '_client/'
+    COMPONENTS_DIR: '_components/'
 
     # Glob CONSTANTS
     ALL_FILES:      '**/*'
@@ -103,7 +103,7 @@ module.exports = (grunt)->
 
       # Used for testing site across several browser profiles
       browsers:
-        browsers:   [ 'PhantomJS' ] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', 'bin/browsers.sh'
+        browsers:   [ 'PhantomJS' ] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', '_bin/browsers.sh'
         background: true
         singleRun:  false
 

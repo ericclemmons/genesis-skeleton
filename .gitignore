@@ -1,5 +1,5 @@
-/build
-/components
+/_build
+/_components
 /node_modules
 /npm-debug.log
 .DS_STORE

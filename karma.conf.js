@@ -3,10 +3,10 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'components/angular/angular.js',
-  'components/angular-mocks/angular-mocks.js',
-  'build/app/scripts/**/*.js',
-  'build/app/test/unit/**/*Spec.js'
+  '_components/angular/angular.js',
+  '_components/angular-mocks/angular-mocks.js',
+  'app/scripts/**/*.js',
+  'app/test/unit/**/*Spec.js'
 ];
 
 reporters       = [ 'dots' ];       // 'dots', 'progress', 'junit'
