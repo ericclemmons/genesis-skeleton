@@ -142,6 +142,7 @@ module.exports = (grunt)->
 
     # Ability to run `jshint` without errors terminating the development server
     parallel:
+      less:         [ grunt: true, args: [ 'less' ] ]
       jshint:       [ grunt: true, args: [ 'jshint' ] ]
 
     # "watch" distinct types of files and re-prepare accordingly
@@ -159,7 +160,7 @@ module.exports = (grunt)->
       # Changes to app styles should re-compile, triggering `regarde:build`
       less:
         files:      '<%= CLIENT_DIR + LESS_FILES %>'
-        tasks:      [ 'less' ]
+        tasks:      [ 'parallel:less' ]
 
       # Changes to server-side code should validate, restart the server, & refresh the browser
       server:
