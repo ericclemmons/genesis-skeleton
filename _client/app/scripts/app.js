@@ -1,11 +1,19 @@
 angular
   .module('app', [])
-  .config(['$routeProvider', function($router) {
-    $router
-      .when('/', {
-        controller:   'homeController',
-        templateUrl:  'app/templates/home.html'
-      })
-    ;
-  }])
+  .config([
+    '$locationProvider',
+    '$routeProvider',
+    function($location, $router) {
+      $location
+        .html5Mode(true)
+        .hashPrefix('#!')
+      ;
+      $router
+        .otherwise({
+          controller:   'homeController',
+          templateUrl:  'app/templates/home.html'
+        })
+      ;
+    }
+  ])
 ;
