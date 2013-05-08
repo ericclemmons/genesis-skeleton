@@ -9,8 +9,8 @@ module.exports = (grunt)->
   # Run `grunt test:browsers` for real-world browser testing
   grunt.registerTask('test:browsers', [ 'karma:browsers', 'server' ])
 
-  # Clean, validate & compile web-accessible resources
-  grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
+  # Validate & compile web-accessible resources
+  grunt.registerTask('build', [ 'jshint', 'copy', 'ngtemplates', 'less' ])
 
   # Optimize pre-built, web-accessible resources for production, primarily `usemin`
   grunt.registerTask('optimize', [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
@@ -32,10 +32,6 @@ module.exports = (grunt)->
     JS_FILES:       '**/*.js'
     LESS_FILES:     '**/*.less'
 
-
-    # Wipe the `build` directory
-    clean:
-      build:        '<%= BUILD_DIR %>'
 
     copy:
       # App images from Bower `components` & `client`
@@ -175,7 +171,6 @@ module.exports = (grunt)->
 
   # Dependencies
   grunt.loadNpmTasks('grunt-angular-templates')
-  grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-concat')
   grunt.loadNpmTasks('grunt-contrib-copy')
   grunt.loadNpmTasks('grunt-contrib-jshint')
