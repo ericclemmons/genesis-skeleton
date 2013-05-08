@@ -56,6 +56,9 @@ module.exports = (grunt)->
           cwd:      '<%= CLIENT_DIR %>'
           src:      '<%= ALL_FILES %>'
           dest:     '<%= BUILD_DIR %>'
+        ,
+          src:      '<%= CLIENT_DIR %>/index.html'
+          dest:     '<%= CLIENT_DIR %>/404.html'
         ]
 
       # Make components HTTP-accessible
@@ -79,6 +82,9 @@ module.exports = (grunt)->
           cwd:      '<%= CLIENT_DIR %>'
           src:      '<%= HTML_FILES %>'
           dest:     '<%= BUILD_DIR %>'
+        ,
+          src:      '<%= CLIENT_DIR %>/index.html'
+          dest:     '<%= CLIENT_DIR %>/404.html'
         ]
 
     # Validate app `client` and `server` JS
@@ -174,11 +180,11 @@ module.exports = (grunt)->
 
     # Output for optimized app index
     usemin:
-      html:         '<%= BUILD_DIR %>/index.html'
+      html:         [ '<%= BUILD_DIR %>/index.html', '<%= BUILD_DIR %>/404.html' ]
 
     # Input for optimized app index
     useminPrepare:
-      html:         '<%= BUILD_DIR %>/index.html'
+      html:         [ '<%= BUILD_DIR %>/index.html', '<%= BUILD_DIR %>/404.html' ]
 
 
   # Dependencies
