@@ -58,7 +58,7 @@ module.exports = (grunt)->
           dest:     '<%= BUILD_DIR %>'
         ,
           src:      '<%= CLIENT_DIR %>/index.html'
-          dest:     '<%= CLIENT_DIR %>/404.html'
+          dest:     '<%= BUILD_DIR %>/404.html'
         ]
 
       # Make components HTTP-accessible
