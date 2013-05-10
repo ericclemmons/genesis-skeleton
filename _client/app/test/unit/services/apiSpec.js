@@ -8,8 +8,8 @@ describe('apiService', function() {
   // Mock `$httpBackend` requests and store locally with `apiService`
   beforeEach(inject(function($injector) {
     $httpBackend = $injector.get('$httpBackend');
-    $httpBackend.expectGET('../bower.json').respond({});
-    $httpBackend.expectGET('../package.json').respond({});
+    $httpBackend.expectGET('/bower.json').respond({});
+    $httpBackend.expectGET('/package.json').respond({});
 
     apiService = $injector.get('apiService');
 
