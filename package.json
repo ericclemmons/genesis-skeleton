@@ -20,7 +20,7 @@
     "npm": "1.1.x"
   },
   "scripts": {
-    "start": "./node_modules/.bin/grunt build optimize && node server/server",
+    "start": "./node_modules/.bin/grunt build optimize && node _server/server",
     "install": "bower install",
     "test": "./node_modules/.bin/grunt test"
   },
