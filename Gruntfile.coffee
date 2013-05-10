@@ -1,7 +1,7 @@
 module.exports = (grunt)->
 
   # Run `grunt server` for live-reloading development environment
-  grunt.registerTask('server', [ 'build', 'livereload-start', 'karma:background', 'express-server', 'regarde' ])
+  grunt.registerTask('server', [ 'build', 'livereload-start', 'karma:background', 'express', 'regarde' ])
 
   # Run `grunt test` (used by `npm test`) for continuous integration (e.g. Travis)
   grunt.registerTask('test', [ 'build', 'karma:unit' ])
@@ -165,7 +165,7 @@ module.exports = (grunt)->
       # Changes to server-side code should validate, restart the server, & refresh the browser
       server:
         files:      '<%= SERVER_DIR + ALL_FILES %>'
-        tasks:      [ 'parallel:jshint', 'express-server', 'livereload' ]
+        tasks:      [ 'parallel:jshint', 'express', 'livereload' ]
 
       # Changes to app templates should re-copy & re-compile them, triggering `regarde:build`
       templates:
@@ -173,9 +173,10 @@ module.exports = (grunt)->
         tasks:      [ 'copy:templates', 'ngtemplates' ]
 
     # Express requires `server.script` to reload from changes
-    server:
-      script:       '<%= SERVER_DIR %>/server.js'
-      port:         process.env.PORT || 3000
+    express:
+      server:
+        options:
+          script:   '<%= SERVER_DIR %>/server.js'
 
     # Output for optimized app index
     usemin:
