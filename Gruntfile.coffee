@@ -147,12 +147,12 @@ module.exports = (grunt)->
       # Changes to app code should be validated and re-copied to the `build`, triggering `regarde:build`
       js:
         files:      '<%= CLIENT_DIR + JS_FILES %>'
-        tasks:      [ 'copy:js', 'parallel:jshint' ]
+        tasks:      [ 'copy:js', 'parallel:jshint', 'livereload' ]
 
       # Changes to app styles should re-compile, triggering `regarde:build`
       less:
         files:      '<%= CLIENT_DIR + LESS_FILES %>'
-        tasks:      [ 'parallel:less' ]
+        tasks:      [ 'parallel:less', 'livereload' ]
 
       # Changes to server-side code should validate, restart the server, & refresh the browser
       server:
@@ -162,7 +162,7 @@ module.exports = (grunt)->
       # Changes to app templates should re-copy & re-compile them, triggering `regarde:build`
       templates:
         files:      '<%= CLIENT_DIR + HTML_FILES %>'
-        tasks:      [ 'copy:templates', 'ngtemplates' ]
+        tasks:      [ 'copy:templates', 'ngtemplates', 'livereload' ]
 
     # Express requires `server.script` to reload from changes
     express:
