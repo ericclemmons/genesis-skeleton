@@ -1,17 +1,4 @@
 <!doctype html>
-<!--
-
-  Instructions:
-
-  - Save this file.
-  - Replace "USER" with your GitHub username.
-  - Replace "REPO" with your GitHub repo name.
-  - Replace "Genesis Skeleton" with Genesis Skeleton name.
-  - Upload this file (or commit to GitHub Pages).
-
-  Customize as you see fit!
-
--->
 <html>
 <head>
   <meta charset='utf-8'>
@@ -19,6 +6,8 @@
   <meta name="viewport" content="width=device-width">
 
   <title>Genesis Skeleton</title>
+
+  <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
 
   <!-- Flatdoc -->
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -28,6 +17,7 @@
   <!-- Flatdoc theme -->
   <link  href='http://rstacruz.github.io/flatdoc/v/0.8.0/theme-white/style.css' rel='stylesheet'>
   <script src='http://rstacruz.github.io/flatdoc/v/0.8.0/theme-white/script.js'></script>
+  <link  href='http://ricostacruz.com/flatdoc/support/theme.css' rel='stylesheet'>
 
   <!-- Meta -->
   <meta content="Genesis Skeleton" property="og:title">
@@ -39,8 +29,68 @@
       fetcher: Flatdoc.github('ericclemmons/genesis-skeleton')
     });
   </script>
+
+  <style>
+    body {
+      background: #555 url(http://genesis-skeleton.com/img/background.jpg) no-repeat top center fixed;
+      background-size: cover;
+    }
+
+    .content h1,
+    .content h1:first-child,
+    .content h2 {
+      font-family: "Wire One", "Open Sans", sans-serif;
+      font-weight: normal;
+      color: #f89406;
+      font-size: 49px;
+      font-weight: 400;
+      -webkit-font-smoothing: auto;
+    }
+
+    .title-card {
+      background: transparent url(http://genesis-skeleton.com/img/overlay-dot.png);
+    }
+
+    .title-card .in {
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .title-card h1 {
+      font-family: "Wire One", "Open Sans", sans-serif;
+      font-size: 112px;
+      text-shadow: 0 0 3px #000;
+      color: #fff;
+      line-height: 1;
+    }
+
+    .title-card p {
+      font-family: "Open Sans", sans-serif;
+      font-weight: normal;
+    }
+
+    .title-card h5 {
+      margin: 3em 0;
+    }
+
+    .content-root {
+      background: #fff;
+    }
+
+  </style>
 </head>
-<body role='flatdoc'>
+<body role='flatdoc' class='big-h3 large-brief'>
+
+  <div class="title-area title-card">
+    <div class="in">
+      <div class="headline">
+        <h1>Genesis Skeleton</h1>
+        <p>
+          Modern application skeleton - HTML5 Boilerplate + Angular + Express + Grunt + LiveReload + Bootstrap + Bower
+        </p>
+        <h5><span><a href="#content">Get Started</a></span></h5>
+      </div>
+    </div>
+  </div>
 
   <div class='header'>
     <div class='left'>
@@ -52,11 +102,12 @@
     </div>
     <div class='right'>
       <!-- GitHub buttons: see http://ghbtns.com -->
-      <iframe src="http://ghbtns.com/github-btn.html?user=USER&amp;repo=REPO&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=ericclemmons&amp;type=follow&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=ericclemmons&amp;repo=genesis-skeleton&amp;type=watch&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110" height="20"></iframe>
     </div>
   </div>
 
-  <div class='content-root'>
+  <div class='content-root' id="content">
     <div class='menubar'>
       <div class='menu section' role='flatdoc-menu'></div>
     </div>
