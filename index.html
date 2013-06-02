@@ -36,8 +36,8 @@
       background-size: cover;
     }
 
-    body:not(.no-literate) .content-root {
-      background-color: rgba(100%, 100%, 100%, 0.95);
+    .menubar {
+      background: #fdfdfd;
     }
 
     .content h1,
@@ -76,10 +76,23 @@
       margin: 3em 0;
     }
 
+    .title-card a {
+      color: #f89406;
+    }
+
+    .title-card a:hover {
+      color: #ffa618;
+    }
+
     .content-root {
       background: #fff;
     }
 
+    @media (min-width: 1180px) {
+      body:not(.no-literate) .content-root {
+        background-color: rgba(100%, 100%, 100%, 0.95);
+      }
+    }
   </style>
 </head>
 <body role='flatdoc' class='big-h3 large-brief'>
