@@ -1,6 +1,7 @@
 {
   "title": "Genesis Skeleton",
   "name": "genesis-skeleton",
+  "subdomain": "genesis-skeleton",
   "description": "Modern application skeleton - HTML5 Boilerplate + Angular + Express + Grunt + LiveReload + Bootstrap + Bower",
   "version": "0.0.1",
   "author": {
@@ -16,11 +17,12 @@
     }
   ],
   "engines": {
-    "node": "0.10.x",
+    "node": "0.8.x",
     "npm": "1.2.x"
   },
   "scripts": {
-    "start": "./node_modules/.bin/grunt build optimize && node server/server",
+    "prestart": "./node_modules/.bin/grunt build optimize",
+    "start": "node server/server.js",
     "postinstall": "./node_modules/.bin/bower --quiet install",
     "test": "./node_modules/.bin/grunt test"
   },
