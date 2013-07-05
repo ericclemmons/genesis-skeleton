@@ -3,8 +3,8 @@ basePath = '';
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'components/angular/angular.js',
-  'components/angular-mocks/angular-mocks.js',
+  'bower_components/angular/angular.js',
+  'bower_components/angular-mocks/angular-mocks.js',
   'build/app/scripts/**/*.js',
   'build/app/test/unit/**/*Spec.js'
 ];
