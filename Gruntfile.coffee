@@ -13,7 +13,7 @@ module.exports = (grunt)->
   grunt.registerTask('test:unit', [ 'build', 'karma:unit' ])
 
   # Run `grunt test:browsers` for real-world browser testing
-  grunt.registerTask('test:e2e', [ 'karma:e2e' ])
+  grunt.registerTask('test:e2e', [ 'build', 'karma:e2e' ])
 
   # Clean, validate & compile web-accessible resources
   grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
