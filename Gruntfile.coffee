@@ -16,7 +16,7 @@ module.exports = (grunt)->
   grunt.registerTask('test:e2e', [ 'build', 'karma:e2e' ])
 
   # Clean, validate & compile web-accessible resources
-  grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
+  grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'browserify', 'less' ])
 
   # Optimize pre-built, web-accessible resources for production, primarily `usemin`
   grunt.registerTask('optimize', [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
@@ -37,8 +37,17 @@ module.exports = (grunt)->
     HTML_FILES:     '**/*.html'
     IMG_FILES:      '**/*.{png,gif,jpg,jpeg}'
     JS_FILES:       '**/*.js'
+    JSX_FILES:      '**/*.jsx'
     LESS_FILES:     '**/*.less'
 
+
+    # Compile client-side Javascript using CommonJS
+    browserify:
+      options:
+        transform:  [ require('grunt-react').browserify ]
+      app:
+        src:        '<%= CLIENT_DIR %>/app/scripts/main.js'
+        dest:       '<%= BUILD_DIR %>/app/scripts/all.js'
 
     # Wipe the `build` directory
     clean:
@@ -79,6 +88,15 @@ module.exports = (grunt)->
           expand:   true
           cwd:      '<%= CLIENT_DIR %>'
           src:      '<%= JS_FILES %>'
+          dest:     '<%= BUILD_DIR %>'
+        ]
+
+      # app (non-Bower) JSX in `client`
+      jsx:
+        files:      [
+          expand:   true
+          cwd:      '<%= CLIENT_DIR %>'
+          src:      '<%= JSX_FILES %>'
           dest:     '<%= BUILD_DIR %>'
         ]
 
@@ -137,14 +155,6 @@ module.exports = (grunt)->
         dest:       '<%= BUILD_DIR %>'
         ext:        '.min.css'
 
-    # Convert Angular `.html` templates to `.js` in the `app` module
-    ngtemplates:
-      app:
-        src:        '<%= BUILD_DIR %>/app/<%= HTML_FILES %>'
-        dest:       '<%= BUILD_DIR %>/app/scripts/app.templates.js'
-        options:
-          base:     '<%= BUILD_DIR %>'
-
     # Output for optimized app index
     usemin:
       html:         '<%= BUILD_DIR %>/index.html'
@@ -167,7 +177,11 @@ module.exports = (grunt)->
       # Changes to app code should be validated and re-copied to the `build`, triggering `watch:build`
       js:
         files:      '<%= CLIENT_DIR + JS_FILES %>'
-        tasks:      [ 'copy:js', 'jshint' ]
+        tasks:      [ 'copy:js', 'jshint', 'browserify' ]
+
+      jsx:
+        files:      '<%= CLIENT_DIR + JSX_FILES %>'
+        tasks:      [ 'browserify' ]
 
       # Changes to app styles should re-compile, triggering `watch:build`
       less:
@@ -182,7 +196,7 @@ module.exports = (grunt)->
       # Changes to app templates should re-copy & re-compile them, triggering `watch:build`
       templates:
         files:      '<%= CLIENT_DIR + HTML_FILES %>'
-        tasks:      [ 'copy:templates', 'ngtemplates' ]
+        tasks:      [ 'copy:templates' ]
 
       # Changes to app code should be validated and re-copied to the `build`, triggering `watch:build`
       unit:
@@ -191,7 +205,7 @@ module.exports = (grunt)->
 
 
   # Dependencies
-  grunt.loadNpmTasks('grunt-angular-templates')
+  grunt.loadNpmTasks('grunt-browserify')
   grunt.loadNpmTasks('grunt-contrib-clean')
   grunt.loadNpmTasks('grunt-contrib-concat')
   grunt.loadNpmTasks('grunt-contrib-copy')
