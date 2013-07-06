@@ -162,7 +162,7 @@ module.exports = (grunt)->
 
       # Any public-facing changes should reload the browser & re-run tests (which may depend on those resources)
       build:
-        files:      '<%= BUILD_DIR + ALL_FILES %>'
+        files:      [ '<%= BUILD_DIR + ALL_FILES %>', '!**/<%= BOWER_DIR %>/**' ]
 
       # Changes to app code should be validated and re-copied to the `build`, triggering `watch:build`
       js:
