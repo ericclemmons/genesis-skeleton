@@ -4,7 +4,13 @@
 
 var Column = React.createClass({
   getClassName: function() {
-    return [this.props.className, 'span' + this.props.cols].join(' ');
+    var classes = [this.props.className];
+
+    if (this.props.cols) {
+      classes.push('span' + this.props.cols);
+    }
+
+    return classes.join(' ');
   },
 
   render: function() {

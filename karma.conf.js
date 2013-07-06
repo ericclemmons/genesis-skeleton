@@ -1,23 +1,86 @@
-basePath = '';
+// Karma configuration
+// Generated on Fri Jul 05 2013 16:53:11 GMT-0500 (CDT)
 
-files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'bower_components/modernizr/modernizr.js',
-  'bower_components/jquery/jquery.js',
-  'bower_components/lodash/dist/lodash.js',
-  'bower_components/backbone/backbone.js',
-  'bower_components/react/react.js',
-  'build/app/scripts/**/all.js',
-  'build/app/test/unit/**/*Spec.js'
-];
+module.exports = function(karma) {
+  karma.set({
 
-reporters       = [ 'dots' ];       // 'dots', 'progress', 'junit'
-port            = 9876;
-runnerPort      = 9100;
-colors          = true;
-logLevel        = LOG_INFO;         // LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-autoWatch       = false;            // Watch for file changes
-browsers        = [ ];  // Chrome, ChromeCanary, Firefox, Opera, Safari (only Mac), PhantomJS, IE (only Windows)
-captureTimeout  = 120 * 1000;
-singleRun       = true;             // Exit upon completion
+    // base path, that will be used to resolve files and exclude
+    basePath: '',
+
+
+    // frameworks to use
+    frameworks: ['jasmine', 'browserify'],
+
+
+    // list of files / patterns to load in the browser
+    files: [
+      'bower_components/react/react.js',
+      'client/app/test/**/*Spec.js'
+    ],
+
+
+    // list of files to exclude
+    exclude: [
+
+    ],
+
+
+    // test results reporter to use
+    // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
+    reporters: ['progress'],
+
+
+    // web server port
+    port: 9876,
+
+
+    // cli runner port
+    runnerPort: 9100,
+
+
+    // enable / disable colors in the output (reporters and logs)
+    colors: true,
+
+
+    // level of logging
+    // possible values: karma.LOG_DISABLE || karma.LOG_ERROR || karma.LOG_WARN || karma.LOG_INFO || karma.LOG_DEBUG
+    logLevel: karma.LOG_INFO,
+
+
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: true,
+
+
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    browsers: ['ChromeCanary'],
+
+
+    // If browser does not capture in given timeout [ms], kill it
+    captureTimeout: 60000,
+
+
+    // Continuous Integration mode
+    // if true, it capture browsers, run tests and exit
+    singleRun: false,
+
+    // Browserify config (all optional)
+    browserify: {
+      // extension: ['.coffee'],
+      // ignore: [],
+      transform:  [require('grunt-react').browserify],
+      watch: true
+    },
+
+    // Add browserify to preprocessors
+    preprocessors: {
+      'client/app/test/**/*Spec.js': 'browserify'
+    }
+  });
+};

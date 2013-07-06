@@ -4,13 +4,13 @@ module.exports = (grunt)->
   grunt.registerTask('server', [ 'build', 'express', 'watch' ])
 
   # Run `grunt server:unit` for live-reloading unit testing environment
-  grunt.registerTask('server:unit', [ 'build', 'karma:background', 'watch:unit' ])
+  grunt.registerTask('server:unit', [ 'karma:background', 'watch:unit' ])
 
   # Run `grunt test` (used by `npm test`) for continuous integration (e.g. Travis)
   grunt.registerTask('test', [ 'test:unit' ])
 
   # Run `grunt test:unit` for single-run unit testing
-  grunt.registerTask('test:unit', [ 'build', 'karma:unit' ])
+  grunt.registerTask('test:unit', [ 'karma:unit' ])
 
   # Run `grunt test:browsers` for real-world browser testing
   grunt.registerTask('test:e2e', [ 'build', 'karma:e2e' ])
@@ -126,6 +126,7 @@ module.exports = (grunt)->
     # Browser-based testing
     karma:
       options:
+        browsers:   ['ChromeCanary'] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', 'bin/browsers.sh'
         configFile: 'karma.conf.js'
 
       # Used for running tests while the server is running
@@ -135,7 +136,6 @@ module.exports = (grunt)->
 
       # Used for testing site across several browser profiles
       e2e:
-        browsers:   [ 'PhantomJS' ] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', 'bin/browsers.sh'
         singleRun:  true
 
       # Used for one-time validation (e.g. `grunt test`, `npm test`)
@@ -200,8 +200,8 @@ module.exports = (grunt)->
 
       # Changes to app code should be validated and re-copied to the `build`, triggering `watch:build`
       unit:
-        files:      '<%= CLIENT_DIR + JS_FILES %>'
-        tasks:      [ 'copy:js', 'jshint', 'karma:background:run' ]
+        files:      [ '<%= CLIENT_DIR + JS_FILES %>', '<%= CLIENT_DIR + JSX_FILES %>' ]
+        tasks:      [ 'karma:background:run' ]
 
 
   # Dependencies
