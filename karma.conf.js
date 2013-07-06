@@ -15,7 +15,8 @@ module.exports = function(karma) {
     // list of files / patterns to load in the browser
     files: [
       'bower_components/react/react.js',
-      'client/app/test/**/*.spec.js'
+      'client/app/test/**/*.spec.js',
+      'client/app/test/**/*.spec.jsx'
     ],
 
 
@@ -80,7 +81,8 @@ module.exports = function(karma) {
 
     // Add browserify to preprocessors
     preprocessors: {
-      'client/app/test/**/*.spec.js': 'browserify'
+      'client/app/test/**/*.spec.js':   'browserify',
+      'client/app/test/**/*.spec.jsx':  'browserify'
     }
   });
 };
