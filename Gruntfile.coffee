@@ -4,7 +4,7 @@ module.exports = (grunt)->
   grunt.registerTask('server', [ 'build', 'express', 'watch' ])
 
   # Run `grunt server:unit` for live-reloading unit testing environment
-  grunt.registerTask('server:unit', [ 'karma:background', 'watch:unit' ])
+  grunt.registerTask('server:unit', [ 'karma:watch' ])
 
   # Run `grunt test` (used by `npm test`) for continuous integration (e.g. Travis)
   grunt.registerTask('test', [ 'test:unit' ])
@@ -130,8 +130,8 @@ module.exports = (grunt)->
         configFile: 'karma.conf.js'
 
       # Used for running tests while the server is running
-      background:
-        background: true
+      watch:
+        autoWatch:  true
         singleRun:  false
 
       # Used for testing site across several browser profiles
@@ -197,11 +197,6 @@ module.exports = (grunt)->
       templates:
         files:      '<%= CLIENT_DIR + HTML_FILES %>'
         tasks:      [ 'copy:templates' ]
-
-      # Changes to app code should be validated and re-copied to the `build`, triggering `watch:build`
-      unit:
-        files:      [ '<%= CLIENT_DIR + JS_FILES %>', '<%= CLIENT_DIR + JSX_FILES %>' ]
-        tasks:      [ 'karma:background:run' ]
 
 
   # Dependencies
