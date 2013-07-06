@@ -1,8 +1,20 @@
-var Components = Backbone.Model.extend({
+var Component = require('./Component');
+
+
+var Components = Backbone.Collection.extend({
   url: '/api/bower',
 
+  model: Component,
+
   parse: function(response) {
-    return response.dependencies;
+    var models = _.map(response.dependencies, function(value, key) {
+      return {
+        name:     key,
+        version:  value
+      };
+    });
+
+    return models;
   }
 });
 

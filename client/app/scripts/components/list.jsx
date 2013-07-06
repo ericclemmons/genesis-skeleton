@@ -2,26 +2,28 @@
  * @jsx React.DOM
  */
 
-var Helpers = require('../mixins/helpers.jsx');
-
 var List = React.createClass({
-  mixins: [Helpers],
-
   render: function() {
     return (
       <table class="table table-striped table-bordered table-hover table-condensed">
         <tbody>
-          {this.repeat(this.props.collection.attributes, this.renderRow)}
+          {this.props.collection.map(this.renderRow)}
         </tbody>
       </table>
     );
   },
 
-  renderRow: function(value, key) {
+  renderRow: function(model) {
+    var link = model.urlRoot ? <a href={model.url()}>{model.get('name')}</a> : model.get('name');
+
     return (
       <tr>
-        <td>{key}</td>
-        <td>{value}</td>
+        <td>
+          {link}
+        </td>
+        <td>
+          {model.get('version')}
+        </td>
       </tr>
     );
   }

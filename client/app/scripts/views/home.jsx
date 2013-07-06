@@ -14,8 +14,8 @@ var components  = new Components();
 
 var HomeView = React.createClass({
   componentDidMount: function() {
-    this.state.packages.on('change', this.forceUpdate.bind(this));
-    this.state.components.on('change', this.forceUpdate.bind(this));
+    this.state.packages.on('add remove reset', this.forceUpdate.bind(this));
+    this.state.components.on('add remove reset', this.forceUpdate.bind(this));
   },
 
   componentWillMount: function() {
