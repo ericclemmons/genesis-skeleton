@@ -766,6 +766,21 @@ a.big.button:hover:visited {
   font-size: 0.9em;
   padding-left: 10px;
 }
+.menu a.level-4 {
+  font-weight: normal;
+  font-size: 0.9em;
+  padding-left: 20px;
+}
+.menu a.level-5 {
+  font-weight: normal;
+  font-size: 0.9em;
+  padding-left: 30px;
+}
+.menu a.level-6 {
+  font-weight: normal;
+  font-size: 0.9em;
+  padding-left: 30px;
+}
 .menu a.active {
   font-weight: bold !important;
 }
