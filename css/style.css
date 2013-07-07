@@ -206,6 +206,11 @@ a:hover {
   background: #f3f6fb;
   padding: 1px 3px;
   font-size: 0.95em;
+  border: solid 1px #e7eaee;
+  border-top: solid 1px #dbdde2;
+  border-left: solid 1px #e2e5e9;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 .content pre > code {
   display: block;
