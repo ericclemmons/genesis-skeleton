@@ -10,14 +10,14 @@
   <link href='http://fonts.googleapis.com/css?family=Wire+One' rel='stylesheet' type='text/css'>
 
   <!-- Flatdoc -->
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src='http://rstacruz.github.io/flatdoc/v/0.8.0/legacy.js'></script>
-  <script src='http://rstacruz.github.io/flatdoc/v/0.8.0/flatdoc.js'></script>
+  <script src="/js/jquery.min.js"></script>
+  <script src='/js/legacy.js'></script>
+  <script src='/js/flatdoc.js'></script>
+  <script src='/js/script.js'></script>
 
   <!-- Flatdoc theme -->
-  <link  href='http://rstacruz.github.io/flatdoc/v/0.8.0/theme-white/style.css' rel='stylesheet'>
-  <script src='http://rstacruz.github.io/flatdoc/v/0.8.0/theme-white/script.js'></script>
-  <link  href='http://ricostacruz.com/flatdoc/support/theme.css' rel='stylesheet'>
+  <link  href='/css/style.css' rel='stylesheet'>
+  <link  href='/css/theme.css' rel='stylesheet'>
 
   <!-- Meta -->
   <meta content="Genesis Skeleton" property="og:title">
@@ -26,7 +26,9 @@
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      fetcher: Flatdoc.github('ericclemmons/genesis-skeleton')
+      fetcher: ('localhost' === window.location.hostname)
+        ? Flatdoc.file('/README.md')
+        : Flatdoc.github('ericclemmons/genesis-skeleton')
     });
   </script>
 
