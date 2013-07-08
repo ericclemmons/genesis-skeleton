@@ -2,28 +2,24 @@
  * @jsx React.DOM
  */
 
-var NPM = Backbone.Model.extend({
-  url: '/api/package'
-});
 
+var NPM = require('../models/npm');
 
 var Version = React.createClass({
   componentWillMount: function() {
     var npm = new NPM();
 
-    npm.fetch().then(this.handleResponse.bind(this));
+    npm.fetch().then(function(response) {
+      this.setState({
+        version: response.version
+      })
+    }.bind(this));
   },
 
   getInitialState: function() {
     return {
       version: null
     };
-  },
-
-  handleResponse: function(response) {
-    this.setState({
-      version: response.version
-    });
   },
 
   render: function() {
