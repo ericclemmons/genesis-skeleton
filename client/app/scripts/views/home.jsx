@@ -6,27 +6,24 @@ var Header      = require('../components/header.jsx');
 var Row         = require('../components/row.jsx');
 var Column      = require('../components/column.jsx');
 var List        = require('../components/list.jsx');
-var Packages    = require('../models/packages');
-var Components  = require('../models/components');
-
-var packages    = new Packages();
-var components  = new Components();
+var NPM         = require('../models/npm');
+var Bower       = require('../models/bower');
 
 var HomeView = React.createClass({
   componentDidMount: function() {
-    this.state.packages.on('add remove reset', this.forceUpdate.bind(this));
-    this.state.components.on('add remove reset', this.forceUpdate.bind(this));
+    this.state.npm.on('change', this.forceUpdate.bind(this));
+    this.state.bower.on('change', this.forceUpdate.bind(this));
   },
 
   componentWillMount: function() {
-    this.state.packages.fetch();
-    this.state.components.fetch();
+    this.state.npm.fetch();
+    this.state.bower.fetch();
   },
 
   getInitialState: function() {
     return {
-      packages:   new Packages(),
-      components: new Components()
+      npm:    new NPM(),
+      bower:  new Bower()
     };
   },
 
@@ -41,12 +38,12 @@ var HomeView = React.createClass({
           <Column class="npm packages" cols="6">
             <h3><a href="https://npmjs.org/">NPM</a> Packages</h3>
 
-            <List collection={this.state.packages} />
+            <List collection={this.state.npm.get('dependencies')} />
           </Column>
           <Column class="bower packages" cols="6">
             <h3><a href="http://bower.io/">Bower</a> Packages</h3>
 
-            <List collection={this.state.components} />
+            <List collection={this.state.bower.get('dependencies')} />
           </Column>
         </Row>
       </div>

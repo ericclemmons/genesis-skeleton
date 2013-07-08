@@ -3,6 +3,12 @@
  */
 
 var List = React.createClass({
+  componentWillMount: function() {
+    if (!this.props.collection instanceof Backbone.Collection) {
+      throw new Error('this.props.collection must be instance of Backbone.Collection');
+    }
+  },
+
   render: function() {
     return (
       <table class="table table-striped table-bordered table-hover table-condensed">
@@ -18,12 +24,8 @@ var List = React.createClass({
 
     return (
       <tr>
-        <td>
-          {link}
-        </td>
-        <td>
-          {model.get('version')}
-        </td>
+        <td>{link}</td>
+        <td>{model.get('version')}</td>
       </tr>
     );
   }

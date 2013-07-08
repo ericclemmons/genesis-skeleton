@@ -28,13 +28,17 @@
     <div class="container-fluid">
       <header class="masthead">
         <h3>
-          <a href="http://genesis-skeleton.com/" class="muted">Genesis Skeleton</a> <small>v{{ version }}</small>
+          <a href="http://genesis-skeleton.com/" class="muted">
+            Genesis Skeleton
+          </a>
+
+          <small data-react="version"></small>
         </h3>
       </header>
 
       <hr>
 
-      <div id="app">
+      <div data-react="view">
         <noscript>
           Please enable Javascript to experience this site :)
         </noscript>
@@ -52,6 +56,7 @@
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/lodash/dist/lodash.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
+    <script src="bower_components/backbone-relational/backbone-relational.js"></script>
     <script src="bower_components/react/react.js"></script>
 
     <script src="app/scripts/all.js"></script>

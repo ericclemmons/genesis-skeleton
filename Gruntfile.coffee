@@ -46,7 +46,7 @@ module.exports = (grunt)->
       options:
         transform:  [ require('grunt-react').browserify ]
       app:
-        src:        '<%= CLIENT_DIR %>/app/scripts/main.js'
+        src:        '<%= CLIENT_DIR %>/app/scripts/app.js'
         dest:       '<%= BUILD_DIR %>/app/scripts/all.js'
 
     # Wipe the `build` directory
