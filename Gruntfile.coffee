@@ -126,7 +126,7 @@ module.exports = (grunt)->
     # Browser-based testing
     karma:
       options:
-        browsers:   ['ChromeCanary'] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', 'bin/browsers.sh'
+        browsers:   ['PhantomJS'] # 'Chrome', 'ChromeCanary', 'Firefox', 'Opera', 'Safari', 'IE', 'bin/browsers.sh'
         configFile: 'karma.conf.js'
 
       # Used for running tests while the server is running
