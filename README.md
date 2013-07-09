@@ -1,5 +1,7 @@
 # Genesis Skeleton
 
+*v0.4.0*
+
 Modern, opinionated, full-stack starter kit for rapid, streamlined application development.
 
 - API-ready server powered by Express
@@ -30,62 +32,17 @@ From within any new or existing project directory:
 
 - `yo genesis`
 
-*You may be prompted to create a `package.json` first.*
+> [![Screenshot of `yo genesis`][1]][1]
 
-Yeoman should do this for you, but be sure are project
-dependencies have been installed:
-
-- `npm install`
+There will likely be some conflicts as dependencies are automatically
+merged in with your new or existing `package.json` file.  In which case,
+it is recommended to simply *overwite* the existing file and review changes
+with `git diff`, rather than using Yeoman's built-in diff tool.
 
 This will create the example Genesis Skeleton project
-powered by AngularJS.
+powered by AngularJS:
 
-
-## Variants
-
-Genesis supports several variants of the same workflow,
-such as AngularJS, CoffeeScript, SEO, & ReactJS.
-
-To install one of these variants, simply specify the `--variant`
-when starting your project.
-
-*You can find a complete list of variants in the Github repository
-with the `variant/` branch prefix*
-
-
-### AngularJS (Default)
-
-AngularJS is the primary frontend framework for Genesis Skeleton and
-is installed by default:
-
-- `yo genesis`
-
-### AngularJS SEO
-
-The SEO variant adds PhantomJS on the server for `escape_fragment`
-support, which allows your front-end app to be indexed by search engines.
-
-- `yo genesis --variant=seo`
-
-
-### ReactJS
-
-The React variant utlizes Browserify to manage application structure
-& dependencies, since it lacks a module system like AngularJS.
-
-This works in testing, as well!
-
-- `yo genesis --variant=react`
-
-
-### CoffeeScript
-
-The CoffeeScript variant allows the front-end portion of your app to be
-written in CoffeeScript rather than Javascript.
-
-- `yo genesis --variant=coffeescript`
-
-*Server-side support is in the works.*
+> [![Screenshot of Genesis Skeleton Website][2]][2]
 
 
 ## Local Development
@@ -97,6 +54,8 @@ The following will compile your assets, setup your build environment,
 start your server, and livereload any changes you make:
 
 - `grunt server`
+
+> [![Screenshot of `grunt server`][3]][3]
 
 Now visit [http://localhost:3000/](http://localhost:3000/) to see everything
 in motion!
@@ -119,6 +78,8 @@ AngularJS across multiple browsers, **including Internet Explorer**:
 For TravisCI & other continuous-integration tools:
 
 - `grunt test:unit`
+
+> [![Screenshot of `grunt test:unit`][4]][4]
 
 
 ### Test-Driven Development
@@ -361,7 +322,59 @@ You can test out this configuration alone by running:
 - `karma start`
 
 
+## Variants
+
+Genesis supports several variants of the same workflow,
+such as AngularJS, CoffeeScript, SEO, & ReactJS.
+
+To install one of these variants, simply specify the `--variant`
+when starting your project.
+
+*You can find a complete list of variants in the Github repository
+with the `variant/` branch prefix*
+
+
+### AngularJS (Default)
+
+AngularJS is the primary frontend framework for Genesis Skeleton and
+is installed by default:
+
+- `yo genesis`
+
+### AngularJS SEO
+
+The SEO variant adds PhantomJS on the server for `escape_fragment`
+support, which allows your front-end app to be indexed by search engines.
+
+- `yo genesis --variant=seo`
+
+
+### ReactJS
+
+The React variant utlizes Browserify to manage application structure
+& dependencies, since it lacks a module system like AngularJS.
+
+This works in testing, as well!
+
+- `yo genesis --variant=react`
+
+
+### CoffeeScript
+
+The CoffeeScript variant allows the front-end portion of your app to be
+written in CoffeeScript rather than Javascript.
+
+- `yo genesis --variant=coffeescript`
+
+*Server-side support is in the works.*
+
+
 ## License
 
 MIT
 
+
+[1]: /img/screenshots/yo-genesis.png
+[2]: /img/screenshots/localhost.png
+[3]: /img/screenshots/grunt-server.png
+[4]: /img/screenshots/grunt-test-unit.png
