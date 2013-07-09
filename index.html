@@ -26,9 +26,7 @@
   <!-- Initializer -->
   <script>
     Flatdoc.run({
-      fetcher: ('localhost' === window.location.hostname)
-        ? Flatdoc.file('/README.md')
-        : Flatdoc.github('ericclemmons/genesis-skeleton')
+      fetcher: Flatdoc.file('/README.md')
     });
   </script>
 
