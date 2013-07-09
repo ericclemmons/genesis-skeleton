@@ -43,7 +43,7 @@
         if (windowWidth < 480) {
           $card.css('height', '');
         } else {
-          var height = $window.height() * 0.66;
+          var height = $window.height() * 0.5;
           $card.css('height', height - headerHeight);
         }
       })

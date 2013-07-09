@@ -1,7 +1,6 @@
 # Genesis Skeleton
 
-> Modern, opinionated, full-stack starter kit for rapid, streamlined application development.
-
+Modern, opinionated, full-stack starter kit for rapid, streamlined application development.
 
 - API-ready server powered by Express
 - Streamlined workflow using GruntJS
@@ -16,7 +15,7 @@
 
 ## Dependencies
 
-1. NodeJS *~v0.10x*
+1. NodeJS
 2. Yeoman
 3. Bower
 4. Grunt
