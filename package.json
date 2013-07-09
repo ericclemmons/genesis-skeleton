@@ -3,7 +3,7 @@
   "name": "genesis-skeleton",
   "subdomain": "genesis-skeleton",
   "description": "Modern application skeleton - HTML5 Boilerplate + Angular + Express + Grunt + LiveReload + Bootstrap + Bower",
-  "version": "0.0.1",
+  "version": "0.4.0",
   "author": {
     "name": "Eric Clemmons",
     "email": "eric@smarterspam"

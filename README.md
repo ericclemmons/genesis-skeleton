@@ -1,5 +1,7 @@
 # Genesis Skeleton
 
+*v0.4.0*
+
 Modern, opinionated, full-stack starter kit for rapid, streamlined application development.
 
 - API-ready server powered by Express
