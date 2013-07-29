@@ -11,8 +11,8 @@ var Bower       = require('../models/bower');
 
 var HomeView = React.createClass({
   componentDidMount: function() {
-    this.state.npm.on('change', this.forceUpdate.bind(this));
-    this.state.bower.on('change', this.forceUpdate.bind(this));
+    this.state.npm.on('change', function() { this.forceUpdate(); }.bind(this));
+    this.state.bower.on('change', function() { this.forceUpdate(); }.bind(this));
   },
 
   componentWillMount: function() {
