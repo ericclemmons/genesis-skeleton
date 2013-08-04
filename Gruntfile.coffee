@@ -164,7 +164,7 @@ module.exports = (grunt)->
       options:
         debounceDelay:  200
         livereload:     true
-        nospawn:        true
+        spawn:          false
 
       # Any public-facing changes should reload the browser & re-run tests (which may depend on those resources)
       build:
