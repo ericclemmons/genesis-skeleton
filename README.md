@@ -34,6 +34,10 @@ latest documentation & features!
 
 ## Installation
 
+If necessary, first install the [Yeoman generator for Genesis Skeleton](https://github.com/ericclemmons/generator-genesis):
+
+- `npm install -g generator-genesis`
+
 From within any new or existing project directory:
 
 - `yo genesis`
