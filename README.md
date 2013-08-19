@@ -154,7 +154,7 @@ This folder **is not versioned** (*unless you're deploying to Nodejitsu*),
 but is simply the "public" folder in which all compiled front-end assets
 are served from.
 
-This is primarily to allow separation of orignal resources (e.g. `.less`, `.coffee` files)
+This is primarily to allow separation of original resources (e.g. `.less`, `.coffee` files)
 from their compiled counterparts (e.g. `.css` & `.js`, respectively).
 
 This folder is monitored by the `watch:build` task in your Gruntfile for
