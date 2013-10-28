@@ -1,5 +1,7 @@
 # Genesis Skeleton
 
+![dependency overview](https://david-dm.org/ericclemmons/genesis-skeleton.png)
+
 *v0.4.0*
 
 Modern, opinionated, full-stack starter kit for rapid, streamlined application development.
