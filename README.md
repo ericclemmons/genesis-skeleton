@@ -1,5 +1,7 @@
 # Genesis Skeleton
 
+![dependency overview](https://david-dm.org/ericclemmons/genesis-skeleton.png)
+
 *v0.4.0*
 
 [![Dependencies](https://david-dm.org/ericclemmons/genesis-skeleton.png)](https://david-dm.org/ericclemmons/genesis-skeleton)
@@ -39,6 +41,10 @@ latest documentation & features!
 
 ## Installation
 
+If necessary, first install the [Yeoman generator for Genesis Skeleton](https://github.com/ericclemmons/generator-genesis):
+
+- `npm install -g generator-genesis`
+
 From within any new or existing project directory:
 
 - `yo genesis`
@@ -56,4 +62,8 @@ documentation.
 ## License
 
 MIT
+
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/ericclemmons/genesis-skeleton/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
