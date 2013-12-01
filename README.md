@@ -2,6 +2,11 @@
 
 *v0.4.0*
 
+[![Dependencies](https://david-dm.org/ericclemmons/genesis-skeleton.png)](https://david-dm.org/ericclemmons/genesis-skeleton)
+[![devDependencies](https://david-dm.org/ericclemmons/genesis-skeleton/dev-status.png)](https://david-dm.org/ericclemmons/genesis-skeleton#info=devDependencies&view=table)
+
+- - -
+
 Modern, opinionated, full-stack starter kit for rapid, streamlined application development.
 
 - API-ready server powered by Express
