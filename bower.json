@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "~1.2",
-    "angular-route": "~1.2",
-    "bootstrap": "~3.0",
+    "angular-ui-router": "0.2.x",
+    "bootstrap": "~3.x",
     "html5shiv-dist": "~3.6.2",
     "modernizr": "~2.6.2"
   }
