@@ -1,6 +1,6 @@
 angular
   .module('app')
-  .controller('homeController', [
+  .controller('app:controllers.home', [
     '$rootScope',
     '$scope',
     'apiService',
