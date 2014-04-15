@@ -1,0 +1,7 @@
+# editorconfig.org
+root = true
+
+# Indentation override for all JS
+[*.js]
+indent_style = space
+indent_size = 2
