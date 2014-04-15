@@ -1,11 +1,13 @@
 angular
-  .module('app', [])
-  .config(['$routeProvider', function($router) {
-    $router
-      .when('/', {
-        controller:   'homeController',
-        templateUrl:  'app/templates/home.html'
+  .module('app', ['ui.router'])
+  .config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider
+      .state('home', {
+        url: '/',
+        controller: 'app:controllers.home',
+        templateUrl: 'app/templates/home.html'
       })
     ;
-  }])
+  })
 ;
