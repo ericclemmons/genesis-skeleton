@@ -19,7 +19,7 @@ module.exports = (grunt)->
   grunt.registerTask('build', [ 'clean', 'jshint', 'copy', 'ngtemplates', 'less' ])
 
   # Optimize pre-built, web-accessible resources for production, primarily `usemin`
-  grunt.registerTask('optimize', [ 'useminPrepare', 'concat', 'uglify', 'mincss', 'usemin' ])
+  grunt.registerTask('optimize', [ 'useminPrepare', 'concat', 'ngmin:all', 'uglify', 'mincss', 'usemin' ])
 
 
   # Configuration
@@ -136,6 +136,12 @@ module.exports = (grunt)->
         src:        '<%= CSS_FILES %>'
         dest:       '<%= BUILD_DIR %>'
         ext:        '.min.css'
+        
+    # Add ngmin to the build process. 
+    ngmin:
+      all:
+        src:['<%= BUILD_DIR %>/app/scripts/all.min.js']
+        dest: '<%= BUILD_DIR %>/app/scripts/all.min.js'
 
     # Convert Angular `.html` templates to `.js` in the `app` module
     ngtemplates:
@@ -158,7 +164,7 @@ module.exports = (grunt)->
       options:
         debounceDelay:  200
         livereload:     true
-        nospawn:        true
+        spawn:          false
 
       # Any public-facing changes should reload the browser & re-run tests (which may depend on those resources)
       build:
@@ -203,3 +209,4 @@ module.exports = (grunt)->
   grunt.loadNpmTasks('grunt-express-server')
   grunt.loadNpmTasks('grunt-karma')
   grunt.loadNpmTasks('grunt-usemin')
+  grunt.loadNpmTasks('grunt-ngmin')
